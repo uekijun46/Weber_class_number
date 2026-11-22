@@ -1,0 +1,51 @@
+# 文献照合（2026-11-22）
+
+到達できた文献の範囲での結果。「読んで確認」と「推論」を区別して書く。
+
+## 合成層 $\mathbb{Q}(m)$ の類数 1
+
+| $m$（導手） | 状況 | 根拠 |
+|---|---|---|
+| 6 (72) | 既知・無条件 | Masley 1978 Thm 4.5、van der Linden 1982 Thm 3、Miller 2014 Thm 1.1 から降下 |
+| 12 (144) | 既知・無条件 | van der Linden Thm 3、Miller Thm 1.1 から降下 |
+| 10 (200) | 既知・無条件 | Miller 2014 §7 / Table 1（$h^+_{200}\le1$）から降下。van der Linden は GRH 下 |
+| 18 (216) | 既知・無条件 | Miller §7 / Table 1 から降下 |
+| 24 (288) | 既知・無条件 | Miller Prop. 7.11 から降下 |
+| 15 (225), 14 (392), 20 (400), 21 (441), 22 (968), 26 (1352), 28 (784), 36 (432) | GRH 下のみ | LMFDB に「(GRH)」付きの記載。Miller 2014 の範囲（$\varphi(f)\le116$）の外 |
+
+降下：$\mathbb{Q}(\zeta_f)^+/\mathbb{Q}(m)$ に不分岐な部分拡大がないので、$h(\mathbb{Q}(\zeta_f)^+)=1$ なら $h(\mathbb{Q}(m))=1$。13 体すべてで計算により確認した。
+
+## 類数が 1 でない既知の例
+
+Gras（arXiv:2009.05278）の脚注と Fukuda のスライド（2018）による一覧。
+
+- Horie 2001：$31\mid h(\mathbb{Q}(2\cdot31))$、$73\mid h(\mathbb{Q}(3\cdot73))$。
+- Fukuda–Komatsu 2011：上の 2 例と $1546463\mid h(\mathbb{Q}(2\cdot1546463))$。
+- Fukuda–Komatsu–Morisawa 2011：$18433\mid h(\mathbb{Q}(2^8\cdot18433))$、$114689\mid h(\mathbb{Q}(2^{10}\cdot114689))$、$487\mid h(\mathbb{Q}(3^4\cdot487))$、$238627\mid h(\mathbb{Q}(3^4\cdot238627))$、$2251\mid h(\mathbb{Q}(5^2\cdot2251))$。
+- Aoki–Fukuda：$107\mid h(\mathbb{Q}(2\cdot53))$。$p\nmid m$ 型の唯一の既知例。
+
+既知の最小次数は 62、次が 106、219。$m<62$ の例は見つかっていない。
+
+## 背景
+
+- Coates の問い：J. Coates, "The enigmatic Tate–Shafarevich group", Fifth ICCM, AMS/IP Stud. Adv. Math. 51 (2012), §3。$\mathbb{Q}(N)$ の類群が自明か、少なくとも極めて稀か。
+- Fukuda–Komatsu, "Weber's class number problem in the cyclotomic $\mathbb{Z}_2$-extension of $\mathbb{Q}$, III", Int. J. Number Theory 7 (2011)：$\ell<10^9$ は $h(B_{2,n})$ を割らない（吉崎サーベイ arXiv:2211.15201 と Miller の引用で確認）。
+- Buhler–Pomerance–Robertson, Fields Inst. Commun. 41 (2004)：有限個の $(p,n)$ を除き $h(\mathbb{Q}(\zeta_{p^{n+1}})^+)=h(\mathbb{Q}(\zeta_{p^n})^+)$ という発見的予想（Miller arXiv:1410.2921 の記述による）。
+
+## 主な文献
+
+- J. M. Masley, Compositio Math. 37 (1978) 297–319。
+- F. J. van der Linden, Math. Comp. 39 (1982)。
+- J. C. Miller, "Class numbers of real cyclotomic fields of composite conductor", LMS J. Comput. Math. 17 (2014) 404–417, doi:10.1112/S1461157014000382。
+- J. C. Miller, "Class numbers in cyclotomic $\mathbb{Z}_p$-extensions", arXiv:1410.2921。
+- K. Horie, "A note on the $\mathbb{Z}_p\times\mathbb{Z}_q$-extension over $\mathbb{Q}$", Proc. Japan Acad. 77A (2001) 84–86, doi:10.3792/pjaa.77.84。
+- G. Gras, "Weber's class number problem and p-rationality in the cyclotomic $\hat{\mathbb{Z}}$-extension of $\mathbb{Q}$", arXiv:2009.05278。
+- M. Aoki, T. Fukuda, LNCS 4076 (ANTS VII, 2006) 56–71, doi:10.1007/11792086_5。
+- T. Fukuda, Bordeaux seminar slides (2018), https://lfant.math.u-bordeaux.fr/seminar/slides/2018-03-06T10:00--Takashi_Fukuda.pdf
+
+## 未確認
+
+- Horie 2001、Coates 2012、Buhler–Pomerance–Robertson、Fukuda–Komatsu III の原論文は読めていない（bot チェックなど）。
+- Masley の導手 72 と van der Linden の範囲（$\varphi(f)\le72$）は、スキャンが不鮮明なため一部推論。
+- LMFDB で「(GRH)」の印がないことを無条件と解釈している（$m=6,10,12$）。
+- Horie、Morisawa の $\mathbb{Z}_p\times\mathbb{Z}_q$ 塔の論文は未読。8 体について無条件証明が他にないとは言い切れない。

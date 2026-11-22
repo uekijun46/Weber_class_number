@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+bnf*.bin
+log_w*.txt
+rig_log_*.txt
+.DS_Store

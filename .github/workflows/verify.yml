@@ -1,0 +1,33 @@
+name: verify-composite
+# Re-verifies all composite-layer certificates with the rigorous verifier (no PARI). About 3 minutes.
+on:
+  push:
+    paths:
+      - 'composite/**'
+      - '.github/workflows/verify.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint
+      - name: Verify
+        run: |
+          cd composite
+          sh rig_run_all.sh
+          n=$(grep -c ' PASS' rig_results.txt || true)
+          total=$(ls rig_cert_*.txt | wc -l)
+          echo "PASS: $n / $total"
+          test "$n" = "$total"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verify-logs
+          path: |
+            composite/rig_results.txt
+            composite/rig_log_*.txt

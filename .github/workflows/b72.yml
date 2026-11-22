@@ -1,0 +1,84 @@
+name: b72-certificates
+# Generates principality certificates for split primes of B_{7,2} in parallel jobs and commits them to B72/.
+# Manual start only.  Each job spends about 5 minutes on setup (bnfinit) before it produces certificates.
+# A private repository has a monthly quota of Actions minutes: workers x (seconds/60 + 6) minutes per run.
+on:
+  workflow_dispatch:
+    inputs:
+      hi:
+        description: 'certify split primes up to this bound'
+        default: '500000'
+      workers:
+        description: 'number of parallel jobs (1-20)'
+        default: '2'
+      seconds:
+        description: 'time limit per job in seconds (max 19000)'
+        default: '900'
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      idx: ${{ steps.m.outputs.idx }}
+    steps:
+      - id: m
+        env:
+          W: ${{ inputs.workers }}
+        run: echo "idx=$(python3 -c "import os,json;print(json.dumps(list(range(max(1,min(20,int(os.environ['W'])))))))")" >> "$GITHUB_OUTPUT"
+  gen:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        i: ${{ fromJson(needs.plan.outputs.idx) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install cypari2
+      - name: Generate
+        env:
+          HI: ${{ inputs.hi }}
+          W: ${{ inputs.workers }}
+          SEC: ${{ inputs.seconds }}
+          I: ${{ matrix.i }}
+        run: |
+          cd B72
+          python3 gen_cert.py 2 "$HI" "cert_gha_${GITHUB_RUN_ID}_${I}.txt" "$SEC" "$W" "$I"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cert-${{ matrix.i }}
+          path: B72/cert_gha_*.txt
+          if-no-files-found: ignore
+  collect:
+    needs: gen
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: B72
+          pattern: cert-*
+          merge-multiple: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint
+      - name: Verify everything collected so far
+        run: |
+          cd B72
+          python3 verify_cert.py cert*.txt | tee verify_summary.txt
+      - name: Commit new certificates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add B72/cert_gha_*.txt || true
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "B72: certificates from Actions run ${GITHUB_RUN_ID}"
+          git pull --rebase
+          git push

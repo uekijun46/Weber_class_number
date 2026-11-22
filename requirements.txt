@@ -1,0 +1,5 @@
+python-flint
+cypari2
+numpy
+scipy
+sympy
