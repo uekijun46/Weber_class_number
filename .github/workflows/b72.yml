@@ -39,6 +39,7 @@ jobs:
           python-version: '3.12'
       - run: pip install cypari2
       - name: Generate
+        timeout-minutes: 335
         env:
           HI: ${{ inputs.hi }}
           W: ${{ inputs.workers }}
@@ -48,6 +49,7 @@ jobs:
           cd B72
           python3 gen_cert.py 2 "$HI" "cert_gha_${GITHUB_RUN_ID}_${I}.txt" "$SEC" "$W" "$I"
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: cert-${{ matrix.i }}
           path: B72/cert_gha_*.txt
@@ -65,14 +67,6 @@ jobs:
           path: B72
           pattern: cert-*
           merge-multiple: true
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: pip install python-flint
-      - name: Verify everything collected so far
-        run: |
-          cd B72
-          python3 verify_cert.py cert*.txt | tee verify_summary.txt
       - name: Commit new certificates
         run: |
           git config user.name "github-actions[bot]"
@@ -82,3 +76,12 @@ jobs:
           git commit -m "B72: certificates from Actions run ${GITHUB_RUN_ID}"
           git pull --rebase
           git push
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint
+      - name: Verify everything collected so far
+        continue-on-error: true
+        run: |
+          cd B72
+          python3 verify_cert.py cert*.txt | tee verify_summary.txt
