@@ -1,11 +1,15 @@
 # Independent verifier for the certificate of h(B_{7,2}) = 1.  Uses only python-flint (exact integers + ball arithmetic).
 # It does NOT trust PARI: the field, every norm, and the analytic bound are recomputed here.
 # Usage: python3 verify_cert.py CERT_FILE [CERT_FILE ...]
-import sys, time
+import sys, time, math
 from flint import fmpz, fmpz_poly, arb, acb, ctx
 M=343; DEG=49
+def need(cond,msg):                # explicit check (not `assert`, which `python3 -O` would remove)
+    if not cond: raise SystemExit("FAILED: "+str(msg))
+def up(x,k): return (math.floor(float(x)*10**k)+1)/10**k      # decimal upper bound with k digits
+def down(x,k): return (math.ceil(float(x)*10**k)-1)/10**k    # decimal lower bound with k digits
 Phi=fmpz_poly([1 if k%49==0 else 0 for k in range(295)])   # 1+x^49+...+x^294
-H=[x for x in range(1,M) if pow(x,6,M)==1]; assert len(H)==6
+H=[x for x in range(1,M) if pow(x,6,M)==1]; need(len(H)==6,"H")
 E=fmpz_poly([1 if k in H else 0 for k in range(M)]) % Phi   # theta = sum_{h in H} zeta^h  (a Gaussian period)
 def mulmod(a,b): return (a*b)%Phi
 def eval_at_theta(coeffs):            # Horner in Z[zeta]/(Phi)
@@ -21,27 +25,27 @@ def build_T():
         v=mulmod(E,fmpz_poly([0]*k+[1])); c=v.coeffs()+[0]*n; rows.append(c[:n])
     cp=fmpz_mat(rows).charpoly()
     fac=cp.factor()[1]
-    assert len(fac)==1 and fac[0][1]==6 and fac[0][0].degree()==DEG, "unexpected factorization"
+    need(len(fac)==1 and fac[0][1]==6 and fac[0][0].degree()==DEG, "unexpected factorization")
     return fac[0][0]
 def check_rows(fns):
     T=build_T()
-    assert eval_at_theta([int(c) for c in T.coeffs()])==0          # T(theta)=0 exactly; T irreducible of degree 49
+    need(eval_at_theta([int(c) for c in T.coeffs()])==0,"T(theta) != 0")         # T(theta)=0 exactly; T irreducible of degree 49
     primes=[]; t0=time.time()
     import itertools
     for line in itertools.chain.from_iterable(open(fn) for fn in fns):
         if not line.strip(): continue
         if line.startswith("#T"):                                    # optional header: generator's polynomial, low degree first
-            assert [int(x) for x in line[2:].split()]==[int(x) for x in T.coeffs()], "generator used a different polynomial"
+            need([int(x) for x in line[2:].split()]==[int(x) for x in T.coeffs()], "generator used a different polynomial")
             continue
         ps,Ds,cs=line.split(";"); p=int(ps); D=int(Ds); a=[int(x) for x in cs.split()]
-        assert len(a)==DEG and D>0
-        assert fmpz(p).is_prime() and pow(p,6,M)==1, f"{p}: not a split prime"
+        need(len(a)==DEG and D>0, f"{p}: malformed row")
+        need(fmpz(p).is_prime() and pow(p,6,M)==1, f"{p}: not a split prime")
         A=eval_at_theta(a)                                           # D*alpha as an element of Z[zeta_343]
         co=[int(x) for x in A.coeffs()]
-        assert all(x%D==0 for x in co), f"{p}: alpha is not integral"
+        need(all(x%D==0 for x in co), f"{p}: alpha is not integral")
         A=fmpz_poly([x//D for x in co])                              # alpha in Z[zeta_343], and alpha lies in K
         R=abs(int(Phi.resultant(A)))                                 # = |N_{Q(zeta)/Q}(alpha)| = |N_{K/Q}(alpha)|^6
-        assert R==p**6, f"{p}: norm check failed"
+        need(R==p**6, f"{p}: norm check failed")
         primes.append(p)
     return T,sorted(set(primes)),time.time()-t0
 def bound(primes,c):
@@ -71,7 +75,7 @@ if __name__=="__main__":
     best=None
     for c in (40,50,60,80,100,150):
         I_up,S_low,B,hb=bound(primes,c)
-        print(f"c={c}: integral <= {float(I_up):.8f}, prime sum >= {float(S_low):.8f}, B >= {float(B):.6f}"+("" if hb is None else f", h < {float(hb):.2f}"))
+        print(f"c={c}: integral <= {up(I_up,10):.10f}, prime sum >= {down(S_low,10):.10f}, B >= {down(B,7):.7f}"+("" if hb is None else f", h < {up(hb,4):.4f}"))   # printed values are rounded in the safe direction
         if hb is not None and (best is None or hb<best): best=hb
     if best is None: print("B is not yet positive: more primes are needed")
     elif best<197: print("VERDICT: PASS -- h(B_{7,2}) = 1  (bound below 197, no further input needed)")

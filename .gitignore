@@ -4,3 +4,9 @@ bnf*.bin
 log_w*.txt
 rig_log_*.txt
 .DS_Store
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
