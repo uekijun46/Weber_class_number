@@ -48,7 +48,7 @@ and it is proved under the generalized Riemann hypothesis for
 \[
 p^n \in \{2^7,\ 3^4,\ 23,\ 29,\ 31\};
 \]
-these results are due to Weber, Cohn, Bauer, Masley, van der Linden, Coates, Liang, Mih\u{a}ilescu, and Miller; see \cite[Table 1, Theorem 1.8, and Table 2]{Mi15b} and \cite{Co60, Ba69, Ma78, vdL82, Co12, Mi14, Mi14b}.
+these results are due to Weber, Cohn, Bauer, Masley, van der Linden, Coates, Liang, Mih\u{a}ilescu, and Miller; see \cite[Table 1, Theorem 7, and Table 2]{Mi15b} and \cite{Co60, Ba69, Ma78, vdL82, Co12, Mi14, Mi14b}.
 For a fixed prime number $\ell$, the question whether $\ell$ divides $h(k_{p^n})$ for some $n$ has been studied by Horie and Horie \cite{HH09}, Fukuda and Komatsu \cite{FK11}, and Morisawa and Okazaki \cite{MO13}, among others.
 An unconditional proof of $h(k_{23}) = 1$ by the same method is claimed in \cite{Ch26}; to our knowledge, it has not yet appeared in a refereed publication.
 
@@ -58,7 +58,7 @@ The purpose of this note is to add one field to the first list.
 The class number of $k_{7^2}$ is $1$.
 \end{theorem}
 
-The proof follows the method of Miller \cite{Mi15a, Mi15b}.
+The proof follows the method of Miller \cite{Mi14, Mi15b}.
 It has three steps.
 First, an analytic inequality gives an upper bound for the class number, provided that sufficiently many prime ideals of degree one are known to be principal.
 Second, a result of Masley shows that the class number is either $1$ or at least $197$.
@@ -116,7 +116,7 @@ By the conductor-discriminant formula, the discriminant of $K$ is $7^{2 \cdot 6 
 \subsection{An upper bound for class numbers}
 
 Let $\gamma$ denote Euler's constant.
-The following is \cite[Lemma 2.2]{Mi15b}; see also \cite[Lemma 3.1]{Mi15a}.
+The following is \cite[Lemma 1]{Mi15b}, which is taken from \cite{Mi14}.
 
 \begin{proposition}[Miller] \label{prop:miller}
 Let $L$ be a totally real number field of degree $N$, and let $c$ be a positive real number.
@@ -145,7 +145,7 @@ Every term of the double sum is positive, so that a lower bound for $B$ is obtai
 
 \subsection{A divisibility result}
 
-The following is the general form of \cite[Corollary 2.15]{Ma78}.
+The following is a consequence of \cite[Theorems 6 and 8]{vdL82}; it is the general form of the rank corollary of Masley \cite[Corollary 2.15]{Ma78}.
 We include a proof for the convenience of the reader.
 
 \begin{proposition}[Masley] \label{prop:masley}
@@ -183,6 +183,7 @@ The order of every finite module over this ring is a power of $q^f$.
 
 \begin{proof}
 (1) The field $k_7$ is the subfield of degree $7$ of $\mathbb{Q}(e^{2\pi i/49})$. Its class number was determined by Bauer \cite{Ba69}; see \cite[Table 1]{Mi15b}.
+The assertion is also a special case of \cite[Theorem 1]{vdL82}, since the conductor $49$ of $k_7$ is a prime power with $\varphi(49) = 42 \le 66$.
 We also verified it with the function \texttt{bnfcertify} of PARI/GP \cite{PARI}, which does not assume any hypothesis.
 
 (2) The extension $k_{7^2}/\mathbb{Q}$ is a Galois extension whose degree is a power of $7$, and $7$ is the only place of $\mathbb{Q}$ that ramifies in it.
@@ -371,11 +372,9 @@ Without the hypothesis, the fields $k_{29}$, $k_{3^4}$, and $k_{31}$ seem to be 
 
 \bibitem{Ma78} J.~M.~Masley, Class numbers of real cyclic number fields with small conductor, Compositio Math. \textbf{37} (1978), 297--319.
 
-\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--397.
+\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--398.
 
 \bibitem{Mi14b} J.~C.~Miller, Class numbers of real cyclotomic fields of composite conductor, LMS J. Comput. Math. \textbf{17} (2014), suppl. A, 404--417.
-
-\bibitem{Mi15a} J.~C.~Miller, Real cyclotomic fields of prime conductor and their class numbers, Math. Comp. \textbf{84} (2015), 2459--2469.
 
 \bibitem{Mi15b} J.~C.~Miller, Class numbers in cyclotomic $\mathbb{Z}_p$-extensions, J. Number Theory \textbf{150} (2015), 47--73.
 

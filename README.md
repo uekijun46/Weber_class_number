@@ -106,6 +106,6 @@ $m=6,10,12,14,15,18,20,21,22,24,26,28,36$ で、`composite/` の検証器が $h(
 ## 未確認の点
 
 - 新規性は、到達できた文献の範囲での確認。Hakkarainen の表、Horie と Morisawa の $\mathbb{Z}_p\times\mathbb{Z}_q$ 拡大の論文は未読。
-- Masley、Miller、Poitou、Bauer の原典は、要約や ar5iv 経由で読んだだけで、PDF を直接は確認していない。van der Linden (1982) の本文も未読。
+- van der Linden (1982) と Miller (J. Number Theory 2015) は原論文の PDF で確認した（`docs/literature.md`）。Masley、Poitou、Bauer、Miller の他の論文は、要約やレビュー経由で読んだだけ。
 - $k_{3^4}$：範囲ファイル 82 個のうち 75 個の行は、Actions 上での `verify.py` の合格に頼っている（別の実装による全行の再検証は未実施）。
 - すべて未査読。

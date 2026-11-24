@@ -207,3 +207,4 @@ REST API で 7 個をダウンロードした。sha256 はすべて `relations/k
 - 対応していない点：重複した行の受理（無害）、指数 0 のときのエラーメッセージ。
 - 残っている信頼は §5 のとおり。偽の要約（行がないのに合格と書いたもの）で個数が正しい場合は、`aggregate.py` では検出できない。検出にはリリースの行に対する `verify.py --range` の再実行が要る。
 - 修正後の `verify.py`、`aggregate.py` は再監査を受けていない。修正後に実行し直したもの：`cert_k7_2.txt`、`k3_4/base_cert.txt --complete`、区間 $[10^7,1.2\cdot10^7)$、§4 の改竄した入力。
+- 追記（同日）：利用者から受け取った van der Linden (1982) の PDF で確認した。Theorem 1 は「素数冪導手 $q$ で $\varphi(q)\le66$ なら $h(K)=1$」（無条件）で、導手 81 を含む。§1.3 の「出典の穴」は、典拠を van der Linden の Theorem 1 に替えれば埋まる。§1.6 の階数定理の一般形は、同じ論文の Theorems 6, 8 にある。詳細は `docs/literature.md`。
