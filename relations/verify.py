@@ -15,12 +15,19 @@
 #        check: the 0/1 vectors of all conjugates span Z^N  =>  every prime above q0 is principal.
 #   "q | c | i:a ... | r^e ..."    |N(alpha)| = prod r^e, q || N(alpha), every r != q is p, a non-split prime, or certified by an earlier line
 #        =>  (alpha) = Q * (principal ideal) with Q a prime above q  =>  every prime above q is principal (Galois conjugates).
-import sys, math
+import sys
 from flint import fmpz, fmpz_mat, nmod_poly, arb, acb, ctx
 def need(cond,msg):
     if not cond: raise SystemExit("FAILED: "+str(msg))
-def up(x,k): return (math.floor(float(x)*10**k)+1)/10**k
-def down(x,k): return (math.ceil(float(x)*10**k)-1)/10**k
+# Decimal strings for printed bounds and for the summaries, computed with integers only (no floating point):
+#   up(x,k) is greater than every point of the ball x, down(x,k) is less than every point of the ball x; k digits after the point.
+def _frac(x):                                         # exact value of an arb of radius 0, as (numerator, denominator)
+    m,e=x.man_exp(); m,e=int(m),int(e)
+    return (m<<e,1) if e>=0 else (m,1<<(-e))
+def _dec(n,k):
+    s="%0*d"%(k+1,abs(n)); return ("-" if n<0 else "")+s[:-k]+"."+s[-k:]
+def up(x,k): a,b=_frac(arb(x).upper()); return _dec(a*10**k//b+1,k)
+def down(x,k): a,b=_frac(arb(x).lower()); return _dec(-((-a*10**k)//b)-1,k)
 def is_prime(x): return x>1 and bool(fmpz(x).is_prime())
 class K:
     def __init__(self,p,n):
@@ -112,7 +119,7 @@ def split_primes(F,A,B):                         # proven split primes q with A 
                 if is_prime(q): res.append(q)
                 q+=M
     return sorted(res)
-def partial_sums(F,primes,cs):                  # rigorous lower bounds of the sums over the given primes
+def partial_sums(F,primes,cs):                  # rigorous lower bounds of the sums over the given primes, as decimal strings
     ctx.prec=200; out={}
     for c in cs:
         ca=arb(c); S=arb(0)
@@ -175,8 +182,8 @@ def main():
     print("field k_{%d^%d}: degree %d, discriminant %d^%d, least possible class number > 1 (rank theorem, given class number 1 for proper subfields, p excluded by Iwasawa): %d"%(F.p,F.n,F.N,F.p,ex,hm))
     for c in cs:
         I_up,S_low,B,hb=bound(F,S,c)
-        print("c=%d: integral <= %.10f, prime sum >= %.10f, B >= %.7f"%(c,up(I_up,10),down(S_low,10),down(B,7))+("" if hb is None else ", h < %.4f"%up(hb,4)))
+        print("c=%d: integral <= %s, prime sum >= %s, B >= %s"%(c,up(I_up,10),down(S_low,10),down(B,7))+("" if hb is None else ", h < %s"%up(hb,4)))
         if hb is not None and (best is None or hb<best): best=hb
-    if best is not None and best<hm: print("VERDICT: PASS  (h < %.4f < %d)"%(up(best,4),hm))
+    if best is not None and best<hm: print("VERDICT: PASS  (h < %s < %d)"%(up(best,4),hm))
     else: print("VERDICT: bound not below %d"%hm)
 if __name__=="__main__": main()

@@ -1,0 +1,11 @@
+# python3 -O aggregate.py k3_4 2      (2026-11-24, python-flint 0.9.0; about 2.5 minutes with 2 processes)
+field k_{3^4}; 83 ranges covering [0, 30000000000)
+split primes below 30000000000, each with a verified row according to the summaries: 16049777 (number recomputed here); rows: 16050316
+prime sums: recomputed here from the list of split primes
+c=60: integral <= 1.2660224223, prime sum >= 0.8355826772, B >= 0.0047699, h < 550.5021
+c=80: integral <= 1.2651137825, prime sum >= 0.8611113518, B >= 0.0312072, h < 112.1901
+c=100: integral <= 1.2646927462, prime sum >= 0.8733014006, B >= 0.0438183, h < 99.8767
+c=150: integral <= 1.2642766179, prime sum >= 0.8855807997, B >= 0.0565138, h < 116.1599
+c=200: integral <= 1.2641309048, prime sum >= 0.8899359318, B >= 0.0610147, h < 143.4550
+degree 81, discriminant 3^364, least possible class number > 1: 163
+VERDICT: PASS  (h < 99.8767 < 163)

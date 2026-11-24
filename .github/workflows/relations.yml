@@ -34,7 +34,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install python-flint cypari2 mpmath
+      - run: pip install python-flint==0.9.0 cypari2 mpmath
       - name: Generate and verify one range
         env:
           P: ${{ inputs.p }}
@@ -43,25 +43,35 @@ jobs:
           HI: ${{ inputs.hi }}
           J: ${{ inputs.jobs }}
           I: ${{ matrix.i }}
+        shell: bash
         run: |
+          set -euo pipefail
           cd relations
           read A B < <(python3 -c "import os;lo,hi,j,i=[int(os.environ[k]) for k in ('LO','HI','J','I')];w=-(-(hi-lo)//j);a=lo+i*w;print(a,min(hi,a+w))")
           echo "range [$A, $B)"
           python3 gen_range.py "$P" "$N" "$A" "$B" "rows_${A}_${B}.txt" "$(nproc)"
           python3 verify.py "rows_${A}_${B}.txt" --range "$A" "$B" --c 60,80,100,150,200 | tee out.txt
-          grep "^RANGE PASS " out.txt | sed 's/^RANGE PASS //' > "summary_${A}_${B}.json"
-          test -s "summary_${A}_${B}.json"
+          grep "^RANGE PASS " out.txt | sed 's/^RANGE PASS //' > pass.json
+          test -s pass.json
+          # the summary also records which run and which version of the verifier produced it
+          python3 -c "import json,os,hashlib,sys;s=json.load(open('pass.json'));s['run']=os.environ['GITHUB_RUN_ID'];s['commit']=os.environ['GITHUB_SHA'];s['verify_sha256']=hashlib.sha256(open('verify.py','rb').read()).hexdigest();json.dump(s,open(sys.argv[1],'w'))" "summary_${A}_${B}.json"
           sha256sum "rows_${A}_${B}.txt" > "rows_${A}_${B}.sha256"
           gzip -9 "rows_${A}_${B}.txt"
+      # A summary is uploaded only if every step above succeeded.
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: range-${{ matrix.i }}
           path: |
             relations/rows_*.txt.gz
-            relations/rows_*.txt
             relations/rows_*.sha256
             relations/summary_*.json
+          if-no-files-found: error
+      # After a failure, the rows are kept for inspection under another name; the job "collect" does not read them.
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: failed-range-${{ matrix.i }}
+          path: relations/rows_*.txt
           if-no-files-found: ignore
   collect:
     needs: gen
@@ -79,7 +89,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install python-flint
+      - run: pip install python-flint==0.9.0
       - name: Commit summaries and publish the rows as release assets
         env:
           P: ${{ inputs.p }}

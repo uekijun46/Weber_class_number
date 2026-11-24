@@ -63,7 +63,7 @@ VPN なしで到達できる範囲（arXiv、ar5iv、出版社の公開ページ
 | $k_{2^3}$ | なし | Cohn (1960) |
 | $k_{2^4}$、$k_{3^2}$、$k_5$、$k_7$ | なし | Bauer (1969) |
 | $k_{2^5}$ | なし | van der Linden (1982) |
-| $k_{3^3}$ | なし | Masley (1978) |
+| $k_{3^3}$ | なし | Miller の表では Masley (1978)。ただし下の 2026-11-24 夜の追記を参照 |
 | $k_{2^6}$ | なし | Miller（Acta Arith. 2014） |
 | $k_{5^2}$、$k_{11}$ | なし | Miller（LMS J. Comput. Math. 2014） |
 | $k_{13}$、$k_{17}$、$k_{19}$ | なし | Miller（J. Number Theory 2015, Theorem 1.8） |
@@ -128,3 +128,10 @@ VPN 経由で MathSciNet を使った確認。記号は現在のもの。
   - Bernstein, "Fast norm computation in smooth-degree Abelian number fields", Res. Number Theory 9 (2023), Paper No. 82：次数が滑らかなアーベル体でのノルムの高速計算。
   - Gras, J. Number Theory 228 (2021), 219–252（arXiv:2009.05278 の出版版。題名は "Tate–Shafarevich groups in the cyclotomic $\hat{\mathbb{Z}}$-extension and Weber's class number problem"）。
 - 確認できなかったもの：Johansson の ICMS 2018 の論文は MathSciNet の検索に出ず、ページ番号は未確認のまま。Hakkarainen の表の原本の目視も未実施。
+
+## 追記（2026-11-24 夜）：$k_{3^3}$ の典拠
+
+- 監査（`docs/audit_relations.md` §1.3）の指摘。Miller の Table 1 は $h(k_{3^3})=1$（導手 81）の典拠を Masley (1978) としているが、不正確。
+- MathSciNet のレビュー（MR0511747）で確認：Masley が $h=1$ を示したのは、素数冪導手 **70 未満**の実巡回体。100 まで延ばせることは予想として書かれている。
+- van der Linden (1982) のレビュー（MR0669662）：Masley の結果と方法を延ばして、導手 200 以下のほとんどの実アーベル体と、導手 256、243 の場合を扱う。一部は GRH を仮定。導手 81 が無条件の側に入っているかは、本文を読めていないので未確認（AMS のページは自動閲覧の確認画面で止まる）。
+- 対処：文献に頼らない証明を用意した。`python3 relations/subfields.py 3 4` は、素数を使わない Miller の補題で $h(k_3)<1.3455$、$h(k_{3^2})<1.3314$、$h(k_{3^3})<5.9601$ を出す。階数定理の閾値は 4、19、109 で、岩澤の定理と合わせて 3 個とも類数 1。$k_7$ も同じ方法で $h<4.8022<8$（`subfields.py 7 2`）。
