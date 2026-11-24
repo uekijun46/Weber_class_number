@@ -75,13 +75,13 @@ Second, a result on the action of the Galois group on the class group shows that
 Third, we show that the prime ideals above the following prime numbers are principal: every prime number $q < 3 \cdot 10^{10}$ that splits completely in $k_{3^4}$, every prime number $q \le 2.2 \cdot 10^7$ that splits completely in $k_{7^2}$, and every prime number $q < 4 \cdot 10^9$ that splits completely in $k_{29}$.
 With these prime ideals, the upper bound in the first step is smaller than $t$.
 
-The new ingredient is the third step.
-In \cite{Mi15b}, a generator is given for each prime ideal.
+The third step differs from \cite{Mi15b}, where a generator is given for each prime ideal.
 Here we do not compute generators.
 We use elements $\alpha$ of the form $c + \sum_i a_i \eta_i$, where the $\eta_i$ are Gaussian periods and $c$ and the $a_i$ are small integers.
 If a prime number $q$ divides the norm of $\alpha$ exactly once, and if the prime ideals above the other prime factors of the norm are already known to be principal, then the prime ideals above $q$ are principal.
 For each prime number $q$, such an element is found by lattice reduction, and the assertions on $\alpha$ are verified with exact integer arithmetic.
 The same principle underlies the algorithms that compute class groups by collecting relations.
+Relations of this form are also used in \cite{Ch26} for the field $k_{23}$; there, the elements are found by an exhaustive search over the elements with coefficients in $\{-1, 0, 1\}$.
 Since the upper bound for $h(K)$ comes from the analytic inequality, we need neither the unit group nor the regulator of $K$.
 
 The lists of elements are too large to be printed.
