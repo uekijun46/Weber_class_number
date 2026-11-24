@@ -19,12 +19,12 @@ pari("y=polrootsreal(Q)[1]; v0=subst(a0,x,y); k0=-1; for(k=0,N-1, if(abs(v0-per(
 if bool(pari("k0<0 || s==0")): raise SystemExit("automorphism not found")
 pari("et=vector(N); et[1]=Mod(a0,Q); for(i=2,N, et[i]=subst(lift(et[i-1]),x,Mod(s,Q)));")
 pari("A=matrix(N,N,i,j, if(i==1, j==1, polcoeff(lift(et[i-1]),j-1))); Ai=A^(-1);")
-pari("gen(q)={my(pr=idealprimedec(bnf,q)[1],r=bnfisprincipal(bnf,pr),a,v,c); if(r[1]!=0*r[1], return(0)); a=lift(nfbasistoalg(bnf,r[2])); if(abs(norm(Mod(a,Q)))!=q, return(0)); v=vector(N,j,polcoeff(a,j-1)); c=v*Ai; if(denominator(c)!=1, return(0)); c};")
+pari("gen(q)={my(pr=idealprimedec(bnf,q)[1],r=bnfisprincipal(bnf,pr),a,v,c); if(r[1]!=0*r[1], return([])); a=lift(nfbasistoalg(bnf,r[2])); if(abs(norm(Mod(a,Q)))!=q, return([])); v=vector(N,j,polcoeff(a,j-1)); c=v*Ai; if(denominator(c)!=1, return([])); c};")
 f=open(out,"w"); f.write("# field %d 1\n"%p); n=0; t1=time.time()
 for q in range(2,Y):
-    if not (F.split(q) and bool(pari.isprime(q))): continue
+    if not (F.split(q) and bool(pari("isprime(%d)"%q))): continue
     c=pari("gen(%d)"%q)
-    if str(pari.type(c))!="t_VEC": print("no generator for",q,flush=True); continue
+    if len(c)==0: print("no generator for",q,flush=True); continue
     c=[int(x) for x in c]; coef=" ".join("%d:%d"%(i,c[i+1]) for i in range(N-1) if c[i+1])
     f.write("%d | %d | %s | %d^1\n"%(q,c[0],coef,q)); f.flush(); n+=1
     print("%d: max |coefficient| has %d digits (%.0fs)"%(q,len(str(max(abs(x) for x in c))),time.time()-t1),flush=True)

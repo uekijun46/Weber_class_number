@@ -1,0 +1,52 @@
+name: pari-base
+# For the first layer k_p: PARI's class group computation (bnfinit, which assumes GRH internally) is used only to find, for every
+# split prime q < Y, an element whose norm has absolute value q.  The elements are then checked by relations/verify.py with exact
+# arithmetic, and the verified rows are committed to relations/k{p}_1/.  One job; it may run for several hours.
+# Manual start only.  Public repository: no cost.
+on:
+  workflow_dispatch:
+    inputs:
+      p: {description: 'prime p', default: '37'}
+      y: {description: 'bound Y: all split primes below Y', default: '5100'}
+jobs:
+  base:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint==0.9.0 cypari2==2.2.4
+      - name: Compute the elements with PARI and verify them
+        env:
+          P: ${{ inputs.p }}
+          Y: ${{ inputs.y }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          d="relations/k${P}_1"; mkdir -p "$d"
+          (cd explore/k29 && python3 base_pari.py "$P" "$Y" "../../$d/base_cert.txt") | tee pari_log.txt
+          (cd relations && python3 verify.py "../$d/base_cert.txt" --complete "$Y") | tee out.txt
+          grep "^BASE PASS " out.txt | sed 's/^BASE PASS //' > "$d/summary_0_${Y}.json"; test -s "$d/summary_0_${Y}.json"
+          grep -v "max |coefficient|" pari_log.txt > "$d/pari_log.txt" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pari-base-${{ inputs.p }}
+          path: |
+            pari_log.txt
+            relations/k${{ inputs.p }}_1/
+          if-no-files-found: ignore
+      - name: Commit the verified rows
+        env:
+          P: ${{ inputs.p }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "relations/k${P}_1"
+          if ! git diff --cached --quiet; then git commit -m "k_${P}: elements of norm q for the smallest split primes (PARI, verified), Actions run ${GITHUB_RUN_ID}"; git pull --rebase; git push; fi
