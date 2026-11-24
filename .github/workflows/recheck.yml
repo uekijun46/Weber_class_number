@@ -51,14 +51,16 @@ jobs:
           set -euo pipefail
           A="${R%_*}"; B="${R#*_}"; f="rows_${A}_${B}.txt"; d="relations/k${P}_${N}"
           mkdir dl; found=0
-          for tag in $(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate --jq '.[].tag_name' | grep "^k${P}_${N}-rows-"); do
+          # a range file may also be kept in the repository itself (small ranges computed locally)
+          if test -f "$d/$f" && test "$(cut -d' ' -f1 "$d/rows_${A}_${B}.sha256")" = "$(sha256sum "$d/$f" | cut -d' ' -f1)"; then cp "$d/$f" "dl/$f"; found=1; echo "from the repository; checksum agrees"; fi
+          if test "$found" = 0; then for tag in $(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate --jq '.[].tag_name' | grep "^k${P}_${N}-rows-"); do
             rm -f "dl/$f.gz" "dl/$f"
             if gh release download "$tag" -p "$f.gz" -D dl 2>/dev/null; then
               gunzip "dl/$f.gz"
               # a release may hold another file of the same name (a repeated run): take the one with the committed checksum
               if test "$(cut -d' ' -f1 "$d/rows_${A}_${B}.sha256")" = "$(sha256sum "dl/$f" | cut -d' ' -f1)"; then found=1; echo "from release $tag; checksum agrees"; break; fi
             fi
-          done
+          done; fi
           test "$found" = 1
           python3 audit/relations_recheck.py "$P" "$N" "dl/$f" "$A" "$B" "$(nproc)" | tee out1.txt
           (cd relations && python3 verify.py "../dl/$f" --range "$A" "$B" --c 60,80,100,150,200) | tee out2.txt

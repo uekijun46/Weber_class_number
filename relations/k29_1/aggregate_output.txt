@@ -1,0 +1,11 @@
+# python3 -O aggregate.py k29_1 2 29 1 4000000000      (2026-11-24, python-flint 0.9.0)
+field k_{29^1}; 82 ranges covering [0, 4000000000)
+split primes below 4000000000, each with a verified row according to the summaries: 6549261 (number recomputed here); rows: 6549261
+prime sums: recomputed here from the list of split primes
+c=60: integral <= 1.2660224223, prime sum >= 2.5675506639, B >= 0.1713472, h < 42.8037
+c=80: integral <= 1.2651137825, prime sum >= 2.6238431599, B >= 0.2285484, h < 42.7877
+c=100: integral <= 1.2646927462, prime sum >= 2.6505824088, B >= 0.2557087, h < 47.8037
+c=150: integral <= 1.2642766179, prime sum >= 2.6774279523, B >= 0.2829703, h < 64.7974
+c=200: integral <= 1.2641309048, prime sum >= 2.6869279270, B >= 0.2926160, h < 83.5486
+degree 29, discriminant 29^56, least possible class number > 1: 59
+VERDICT: PASS  (h < 42.7877 < 59)
