@@ -9,22 +9,23 @@ F=Field(p,n); N=F.N
 rows=pickle.load(open("rows_%d_%d.pkl"%(p,n),"rb"))
 extra=pickle.load(open("targeted_%d_%d.pkl"%(p,n),"rb")) if os.path.exists("targeted_%d_%d.pkl"%(p,n)) else []
 rows=rows+[(c,coef,fac) for (q,c,coef,fac) in extra]
-# --- lattice block for the seed prime q0: elements with norm p^a q0^k lying in exactly k distinct primes above q0
-R=F.periods_mod(q0)
-pure=sorted(set((c,tuple(coef),tuple(fac)) for (c,coef,fac) in rows if all(r in (p,q0) for r,e in fac) and any(r==q0 for r,e in fac)),key=lambda t:len(t[1]))
-block=[]; mat=[]
-def hnf_is_identity(mat):
-    Hn=flint.fmpz_mat(len(mat),N,[x for row in mat for x in row]).hnf()
-    return all(int(Hn[i,j])==(1 if i==j else 0) for i in range(N) for j in range(N))
-for (c,coef,fac) in pure:
-    pat=[1 if (c+sum(a*R[(i+j)%N] for i,a in coef))%q0==0 else 0 for j in range(N)]
-    if sum(pat)!=dict(fac)[q0]: continue                       # some valuation exceeds 1: skip
-    block.append((c,coef)); mat+= [pat[s:]+pat[:s] for s in range(N)]
-    if len(block)>=3 and hnf_is_identity(mat): break
-assert hnf_is_identity(mat), "lattice block for the seed prime not found"
-print("lattice block for %d: %d elements"%(q0,len(block)))
+block=[]
+if q0:
+    R=F.periods_mod(q0)
+    pure=sorted(set((c,tuple(coef),tuple(fac)) for (c,coef,fac) in rows if all(r in (p,q0) for r,e in fac) and any(r==q0 for r,e in fac)),key=lambda t:len(t[1]))
+    block=[]; mat=[]
+    def hnf_is_identity(mat):
+        Hn=flint.fmpz_mat(len(mat),N,[x for row in mat for x in row]).hnf()
+        return all(int(Hn[i,j])==(1 if i==j else 0) for i in range(N) for j in range(N))
+    for (c,coef,fac) in pure:
+        pat=[1 if (c+sum(a*R[(i+j)%N] for i,a in coef))%q0==0 else 0 for j in range(N)]
+        if sum(pat)!=dict(fac)[q0]: continue                       # some valuation exceeds 1: skip
+        block.append((c,coef)); mat+= [pat[s:]+pat[:s] for s in range(N)]
+        if len(block)>=3 and hnf_is_identity(mat): break
+    assert hnf_is_identity(mat), "lattice block for the seed prime not found"
+    print("lattice block for %d: %d elements"%(q0,len(block)))
 # --- rows needed for the split primes <= X, with their dependencies, in an order in which every dependency comes first
-cert,order=peel(F,rows,[q0])
+cert,order=peel(F,rows,[q0] if q0 else [])
 sv=bytearray([1])*(X+1)
 for i in range(2,int(X**.5)+1):
     if sv[i]: sv[i*i::i]=bytearray(len(sv[i*i::i]))
@@ -39,7 +40,7 @@ while stack:
         if r!=q and F.split(r) and r not in needed: stack.append(r)
 out=open("cert_k%d_%d.txt"%(p,n),"w")
 out.write("# field %d %d\n"%(p,n))
-out.write("L %d | %s\n"%(q0," ; ".join("%d,%s"%(c," ".join("%d:%d"%ia for ia in coef)) for c,coef in block)))
+if q0: out.write("L %d | %s\n"%(q0," ; ".join("%d,%s"%(c," ".join("%d:%d"%ia for ia in coef)) for c,coef in block)))
 cnt=0
 for q in order:
     if q in needed:

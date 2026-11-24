@@ -49,7 +49,7 @@ def targeted(q,maxcand=400,maxl1=16):
         if all(r==q or r==F.p or (not F.split(r)) or r in _cert for r,e in fac): return (q,c,coef,fac)
     return (q,None,None,tried)
 if __name__=="__main__":
-    p,n,X,limit=int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]); seeds=[int(x) for x in sys.argv[5].split(",")] if len(sys.argv)>5 else []
+    p,n,X,limit=int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]); seeds=[int(x) for x in sys.argv[5].split(",") if x and int(x)] if len(sys.argv)>5 else []
     F=Field(p,n); t0=time.time()
     rows=pickle.load(open("rows_%d_%d.pkl"%(p,n),"rb"))
     extra=pickle.load(open("targeted_%d_%d.pkl"%(p,n),"rb")) if os.path.exists("targeted_%d_%d.pkl"%(p,n)) else []

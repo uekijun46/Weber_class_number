@@ -1,0 +1,100 @@
+name: relations-ranges
+# For every split prime q in [lo, hi) of k_{p^n}, finds an element whose norm is q times smaller split primes (and p, non-split primes),
+# verifies each range with the rigorous verifier, and collects the summaries.  Manual start only.  Public repository: no cost.
+on:
+  workflow_dispatch:
+    inputs:
+      p: {description: 'prime p', default: '3'}
+      n: {description: 'exponent n', default: '4'}
+      lo: {description: 'lower end (the base certificate must cover [0, lo))', default: '10000000'}
+      hi: {description: 'upper end', default: '30000000000'}
+      jobs: {description: 'number of ranges (at most 250)', default: '60'}
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      idx: ${{ steps.m.outputs.idx }}
+    steps:
+      - id: m
+        env:
+          J: ${{ inputs.jobs }}
+        run: echo "idx=$(python3 -c "import os,json;print(json.dumps(list(range(max(1,min(250,int(os.environ['J'])))))))")" >> "$GITHUB_OUTPUT"
+  gen:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        i: ${{ fromJson(needs.plan.outputs.idx) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: relations
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint cypari2 mpmath
+      - name: Generate and verify one range
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+          LO: ${{ inputs.lo }}
+          HI: ${{ inputs.hi }}
+          J: ${{ inputs.jobs }}
+          I: ${{ matrix.i }}
+        run: |
+          cd relations
+          read A B < <(python3 -c "import os;lo,hi,j,i=[int(os.environ[k]) for k in ('LO','HI','J','I')];w=-(-(hi-lo)//j);a=lo+i*w;print(a,min(hi,a+w))")
+          echo "range [$A, $B)"
+          python3 gen_range.py "$P" "$N" "$A" "$B" "rows_${A}_${B}.txt" "$(nproc)"
+          python3 verify.py "rows_${A}_${B}.txt" --range "$A" "$B" --c 60,80,100,150,200 | tee out.txt
+          grep "^RANGE PASS " out.txt | sed 's/^RANGE PASS //' > "summary_${A}_${B}.json"
+          test -s "summary_${A}_${B}.json"
+          sha256sum "rows_${A}_${B}.txt" > "rows_${A}_${B}.sha256"
+          gzip -9 "rows_${A}_${B}.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: range-${{ matrix.i }}
+          path: |
+            relations/rows_*.txt.gz
+            relations/rows_*.txt
+            relations/rows_*.sha256
+            relations/summary_*.json
+          if-no-files-found: ignore
+  collect:
+    needs: gen
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: incoming
+          pattern: range-*
+          merge-multiple: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint
+      - name: Commit summaries and publish the rows as release assets
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          d="relations/k${P}_${N}"; mkdir -p "$d"
+          cp incoming/summary_*.json incoming/rows_*.sha256 "$d"/ 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$d"
+          if ! git diff --cached --quiet; then git commit -m "k_{${P}^${N}}: range summaries from Actions run ${GITHUB_RUN_ID}"; git pull --rebase; git push; fi
+          tag="k${P}_${N}-rows-${GITHUB_RUN_ID}"
+          if ls incoming/rows_*.txt.gz >/dev/null 2>&1; then
+            gh release create "$tag" --title "Rows for k_{${P}^${N}} (run ${GITHUB_RUN_ID})" --notes "Certificate rows by range; each file was verified by relations/verify.py in range mode. Checksums of the uncompressed files are in ${d}."
+            for f in incoming/rows_*.txt.gz; do gh release upload "$tag" "$f"; done
+          fi
+          (cd relations && python3 aggregate.py "k${P}_${N}") || true

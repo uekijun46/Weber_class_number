@@ -102,19 +102,30 @@ def bound(F,primes,c):
         for m in range(1,9): S+=2*lq/arb(q)**(arb(m)/2)*Fn(m*lq)
     S_low=S.lower(); B=(pi/2+gam+(8*pi).log()-logrd-I_up+S_low).lower()
     return I_up,S_low,B,((2*c*pi.sqrt()/(F.N*B)).upper() if B>0 else None)
-def main():
-    fn=sys.argv[1]; cs=[int(x) for x in sys.argv[2].split(",")] if len(sys.argv)>2 else [60,80,100,150]
-    F=None; cert=set(); nrows=0
+def split_primes(F,A,B):                         # proven split primes q with A <= q < B
+    M=F.M; res=[]
+    for r in range(M):
+        if r%F.p and pow(r,F.p-1,M)==1:
+            q=A-(A%M)+r
+            if q<A: q+=M
+            while q<B:
+                if is_prime(q): res.append(q)
+                q+=M
+    return sorted(res)
+def partial_sums(F,primes,cs):                  # rigorous lower bounds of the sums over the given primes
+    ctx.prec=200; out={}
+    for c in cs:
+        ca=arb(c); S=arb(0)
+        for q in primes:
+            lq=arb(q).log()
+            for m in range(1,9): S+=2*lq/arb(q)**(arb(m)/2)*((-(m*lq/ca)**2).exp()/(m*lq/2).cosh())
+        out[c]=down(S.lower(),13)
+    return out
+def read_rows(F,fn):
     for line in open(fn):
         line=line.strip()
-        if not line: continue
-        if line.startswith("# field"):
-            _,_,p,n=line.split(); F=K(int(p),int(n)); continue
-        need(F is not None,"missing field line")
-        if line.startswith("L "):
-            head,body=line[2:].split("|"); q0=int(head)
-            elems=[(int(e.split(",")[0]),parse_coef(e.split(",")[1])) for e in body.split(";")]
-            lattice_block(F,q0,elems); cert.add(q0); print("lattice block: the primes above %d are principal (%d elements)"%(q0,len(elems)),flush=True); continue
+        if not line or line.startswith("#"): continue
+        if line.startswith("L "): yield ("L",line); continue
         qs,cs_,coefs,facs=line.split("|"); q=int(qs); c=int(cs_); coef=parse_coef(coefs)
         fac=[(int(t.split("^")[0]),int(t.split("^")[1])) for t in facs.split()]
         need(all(0<=i<F.N and a!=0 for i,a in coef) and len(set(i for i,a in coef))==len(coef),"%d: coefficients"%q)
@@ -123,11 +134,43 @@ def main():
             need(e>=1 and is_prime(r),"%d: factor %d is not prime"%(q,r)); prod*=r**e
         need(len(set(r for r,e in fac))==len(fac) and F.norm(c,coef)==prod,"%d: norm"%q)
         need(F.split(q) and dict(fac).get(q)==1,"%d: q must be a split prime dividing the norm exactly once"%q)
-        for r,e in fac:
-            need(r==q or r==F.p or (not F.split(r)) or r in cert,"%d: prime factor %d is not known to be principal"%(q,r))
+        yield (q,fac)
+def main():
+    import json
+    args=sys.argv[1:]; fn=args[0]; opt={args[i]:args[i+1:i+3] for i in range(1,len(args)) if args[i].startswith("--")}
+    cs=[int(x) for x in opt["--c"][0].split(",")] if "--c" in opt else [60,80,100,150,200]
+    first=open(fn).readline().split(); need(first[:2]==["#","field"],"missing field line"); F=K(int(first[2]),int(first[3]))
+    cert=set(); nrows=0
+    if "--range" in opt:
+        # Rule for this mode: every split prime factor r != q of the norm satisfies r < q.  Together with completeness
+        # (every split prime in [A,B) has a row) and the same statement for all split primes < A, induction on q shows
+        # that every prime above a split prime < B is principal.
+        A,B=int(opt["--range"][0]),int(opt["--range"][1])
+        for item in read_rows(F,fn):
+            need(item[0]!="L","lattice blocks are not allowed in range mode")
+            q,fac=item; need(A<=q<B,"%d: outside the range"%q)
+            for r,e in fac: need(r==q or r==F.p or (not F.split(r)) or r<q,"%d: split prime factor %d is not smaller than q"%(q,r))
+            cert.add(q); nrows+=1
+        sp=split_primes(F,A,B); miss=[q for q in sp if q not in cert]
+        need(not miss,"range [%d,%d): %d split primes without a row, e.g. %s"%(A,B,len(miss),miss[:5]))
+        need(len(cert)==len(sp),"rows for primes outside the list of split primes")
+        res={"field":[F.p,F.n],"range":[A,B],"rows":nrows,"split_primes":len(sp),"sums":partial_sums(F,sp,cs)}
+        print("RANGE PASS "+json.dumps(res)); return
+    for item in read_rows(F,fn):
+        if item[0]=="L":
+            head,body=item[1][2:].split("|"); q0=int(head)
+            elems=[(int(e.split(",")[0]),parse_coef(e.split(",")[1])) for e in body.split(";")]
+            lattice_block(F,q0,elems); cert.add(q0); print("lattice block: the primes above %d are principal (%d elements)"%(q0,len(elems)),flush=True); continue
+        q,fac=item
+        for r,e in fac: need(r==q or r==F.p or (not F.split(r)) or r in cert,"%d: prime factor %d is not known to be principal"%(q,r))
         cert.add(q); nrows+=1
-    S=sorted(cert); X=None
+    S=sorted(cert)
     print("rows verified: %d; split primes proved principal: %d (largest %d)"%(nrows,len(S),S[-1]))
+    if "--complete" in opt:
+        A=int(opt["--complete"][0]); sp=split_primes(F,0,A); miss=[q for q in sp if q not in cert]
+        need(not miss,"%d split primes below %d without a row, e.g. %s"%(len(miss),A,miss[:5]))
+        res={"field":[F.p,F.n],"range":[0,A],"rows":nrows,"split_primes":len(sp),"sums":partial_sums(F,sp,cs)}
+        print("BASE PASS "+json.dumps(res)); return
     logrd,ex=F.logrd(); hm=F.hmin(); best=None
     print("field k_{%d^%d}: degree %d, discriminant %d^%d, least possible class number > 1 (rank theorem, given class number 1 for proper subfields, p excluded by Iwasawa): %d"%(F.p,F.n,F.N,F.p,ex,hm))
     for c in cs:
