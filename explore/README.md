@@ -13,6 +13,7 @@
 | `weber_wieferich.py` | 必要条件 $\ell\mid B_{1,\psi\omega^{-1}}$ が成り立つ $(\ell,\psi)$ の探索 |
 | `norm_yield.py` | 小さい元 $c+\sum a_i\eta_i$（$\eta_i$ は Gauss 周期）のノルムの大きさと、小さい分解素数だけで割り切れる割合の測定。使い方：`python3 norm_yield.py "[(7,2,40000),(3,4,30000)]"` |
 | `pari_probe.py` | PARI の `bnfinit` が $k_p$ で通るかの試験。$k_{37}$ は 2 コアの環境で 9 分半では終わらなかった |
+| `relations_k49/` | 小さい元の関係式から素イデアルの単項性を導く試作（$k_{7^2}$）。詳細はその中の README |
 | `fig8_tower.py` | 8 の字結び目のオービフォールド塔の計算 |
 
 `comp_run.py` と `genus_scan.py` は `compos2.py` と `feas.py` を import するので、このディレクトリで実行する。
