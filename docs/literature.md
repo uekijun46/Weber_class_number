@@ -107,3 +107,24 @@ VPN なしで到達できる範囲（arXiv、ar5iv、出版社の公開ページ
 - MathSciNet と zbMATH での被引用文献の確認（VPN が必要）。
 - Hakkarainen の表の原本の目視。
 - Masley、Bauer、Cohn の原論文の本文。
+
+## 追記（2026-11-24 夕方）：MathSciNet での確認
+
+VPN 経由で MathSciNet を使った確認。記号は現在のもの。
+
+- **重要な言い換え**：$k_{3^4}=\mathbb{Q}(\zeta_{243})^+$ である（$(\mathbb{Z}/243)^\times/\{\pm1\}$ が位数 81 の巡回群なので）。したがって $h(k_{3^4})=1$ は「導手 243 の実円分体の類数が 1」と同じ主張。同様に $k_{3^n}=\mathbb{Q}(\zeta_{3^{n+1}})^+$。一方 $k_{7^2}$ は $\mathbb{Q}(\zeta_{343})^+$（147 次）の真部分体。
+- Miller, J. Number Theory 150 (2015), 47–73（MR3304606）。ページ番号を確認。レビューにある既知の結果の一覧は、上の表と一致。$k_{3^4}$（$\mathbb{B}_{3,4}$）は「GRH 下で van der Linden」とされている。
+- 被引用文献の確認：
+  - MR3304606（Miller, JNT 2015）を引用する 5 件
+  - MR3244941（Miller, Acta Arith. 2014）を引用する 21 件
+  - MR3240817（Miller, LMS JCM 2014）または MR3356035（Miller, Math. Comp. 2015）を引用する 25 件
+  - MR0669662（van der Linden 1982）を引用する 2015 年以降の 15 件
+  
+  題名と、関係しそうなもののレビューを見た範囲で、$k_{7^2}$ または $k_{3^4}$（導手 343、243）の類数 1 を無条件で証明したものは見つからなかった。
+- キーワード検索（"class number" cyclotomic 243、同 343、"Z_3-extension"）でも該当なし。
+- 関連する文献（文章化のときに引用の候補）：
+  - Fukuda–Komatsu–Morisawa, "Weber's class number one problem", Iwasawa theory 2012, 221–226, Contrib. Math. Comput. Sci. 7, Springer, 2014（MR3586814）：すべての $n$ で、$10^9$ 未満の素数は $h(k_{3^n})$ を割らない（Miller のレビューによる）。
+  - Kogoshi–Morisawa, Exp. Math. 29 (2020), 470–474：$k_{29}$、$k_{31}$ の類数について。
+  - Bernstein, "Fast norm computation in smooth-degree Abelian number fields", Res. Number Theory 9 (2023), Paper No. 82：次数が滑らかなアーベル体でのノルムの高速計算。
+  - Gras, J. Number Theory 228 (2021), 219–252（arXiv:2009.05278 の出版版。題名は "Tate–Shafarevich groups in the cyclotomic $\hat{\mathbb{Z}}$-extension and Weber's class number problem"）。
+- 確認できなかったもの：Johansson の ICMS 2018 の論文は MathSciNet の検索に出ず、ページ番号は未確認のまま。Hakkarainen の表の原本の目視も未実施。
