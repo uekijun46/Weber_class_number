@@ -1,0 +1,671 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,allcolors=blue,linktoc=page]{hyperref}
+\usepackage[capitalize]{cleveref}   % without the option nameinlink, only the number is a link
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+
+\title[Class number one for two layers of cyclotomic $\mathbb{Z}_p$-extensions]{Class number one for the real cyclotomic field of conductor $243$ and for the second layer of the cyclotomic $\mathbb{Z}_7$-extension of $\mathbb{Q}$}
+% \author{}   % to be filled in
+\date{November 24, 2026 (first draft)}
+
+\emergencystretch=1.5em
+
+\begin{document}
+
+\begin{abstract}
+We prove that the maximal real subfield of the cyclotomic field of conductor $243$ has class number $1$, and that the second layer of the cyclotomic $\mathbb{Z}_7$-extension of $\mathbb{Q}$ has class number $1$.
+The proofs do not assume the generalized Riemann hypothesis.
+They combine an upper bound for class numbers due to Miller with a list of elements of small height whose norms are factored.
+From this list we deduce that the prime ideals above $16049777$ prime numbers are principal in the first field, and above $29835$ prime numbers in the second field.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For each positive integer $m$, let $k_m$ denote the unique subfield of degree $m$ of the cyclotomic $\hat{\mathbb{Z}}$-extension of $\mathbb{Q}$.
+If $p$ is a prime number and $n$ is a positive integer, then $k_{p^n}$ is the $n$-th layer of the cyclotomic $\mathbb{Z}_p$-extension of $\mathbb{Q}$.
+This field is denoted by $\mathbb{B}_{p,n}$ in \cite{Mi15b}, and the field $k_{2^n}$ is often denoted by $\mathbb{B}_n$.
+Let $h(k_m)$ denote the class number of $k_m$.
+
+Weber \cite{We86} proved that $h(k_{2^n})$ is odd for every $n$ and that $h(k_{2^n}) = 1$ if $n \le 3$.
+Whether $h(k_{2^n}) = 1$ holds for every $n$ is known as Weber's class number problem.
+Coates \cite{Co12} asked whether $h(k_{p^n}) = 1$ holds for every prime number $p$ and every positive integer $n$.
+At present, the equality $h(k_{p^n}) = 1$ is proved without any hypothesis for
+\[
+p^n \in \{2, 2^2, 2^3, 2^4, 2^5, 2^6,\ 3, 3^2, 3^3,\ 5, 5^2,\ 7,\ 11,\ 13,\ 17,\ 19\},
+\]
+and it is proved under the generalized Riemann hypothesis for
+\[
+p^n \in \{2^7,\ 3^4,\ 23,\ 29,\ 31\};
+\]
+these results are due to Weber, Cohn, Bauer, Masley, van der Linden, Coates, Liang, Mih\u{a}ilescu, and Miller; see \cite[Table 1, Theorem 7, and Table 2]{Mi15b} and \cite{Co60, Ba69, Ma78, vdL82, Co12, Mi14, Mi14b}.
+For a fixed prime number $\ell$, the question whether $\ell$ divides $h(k_{p^n})$ for some $n$ has been studied by Horie and Horie \cite{HH09}, Fukuda and Komatsu \cite{FK11}, Morisawa and Okazaki \cite{MO13}, and Fukuda, Komatsu, and Morisawa \cite{FKM14}, among others.
+An unconditional proof of $h(k_{23}) = 1$ is claimed in \cite{Ch26}; to our knowledge, it has not yet appeared in a refereed publication.
+
+The field $k_{3^n}$ is the maximal real subfield $\mathbb{Q}(e^{2\pi i/3^{n+1}})^+$ of the cyclotomic field of conductor $3^{n+1}$.
+In this note we prove the following theorem.
+
+\begin{theorem} \label{thm:main}
+\begin{enumerate}
+\item The class number of $k_{3^4} = \mathbb{Q}(e^{2\pi i/243})^+$ is $1$.
+\item The class number of $k_{7^2}$ is $1$.
+\end{enumerate}
+\end{theorem}
+
+The proof does not assume the generalized Riemann hypothesis.
+The equality $h(k_{3^4}) = 1$ was proved under this hypothesis by van der Linden \cite[Theorem 2]{vdL82}.
+
+The proof follows the method of Miller \cite{Mi14, Mi15b}.
+Let $K$ denote one of the two fields.
+First, an analytic inequality gives an upper bound for $h(K)$, provided that the prime ideals above sufficiently many prime numbers that split completely in $K$ are known to be principal.
+Second, a result on the action of the Galois group on the class group shows that $h(K)$ is either $1$ or at least $163$ if $K = k_{3^4}$, and either $1$ or at least $197$ if $K = k_{7^2}$.
+Third, we show that the prime ideals above the following prime numbers are principal: every prime number $q < 3 \cdot 10^{10}$ that splits completely in $k_{3^4}$, and every prime number $q \le 2.2 \cdot 10^7$ that splits completely in $k_{7^2}$.
+With these prime ideals, the upper bound in the first step is smaller than $163$ and $197$, respectively.
+
+The new ingredient is the third step.
+In \cite{Mi15b}, a generator is given for each prime ideal.
+Here we do not compute generators.
+We use elements $\alpha$ of the form $c + \sum_i a_i \eta_i$, where the $\eta_i$ are Gaussian periods and $c$ and the $a_i$ are small integers.
+If a prime number $q$ divides the norm of $\alpha$ exactly once, and if the prime ideals above the other prime factors of the norm are already known to be principal, then the prime ideals above $q$ are principal.
+For each prime number $q$, such an element is found by lattice reduction, and the assertions on $\alpha$ are verified with exact integer arithmetic.
+The same principle underlies the algorithms that compute class groups by collecting relations.
+Since the upper bound for $h(K)$ comes from the analytic inequality, we need neither the unit group nor the regulator of $K$.
+
+The lists of elements are too large to be printed.
+They are available, together with the programs that verify every assertion of \cref{sec:data,sec:bound}, at
+\begin{center}
+\url{https://github.com/uekijun46/Weber_class_number}
+\end{center}
+
+\section{The fields} \label{sec:field}
+
+Let $p$ be an odd prime number and let $n$ be a positive integer.
+Put $N = p^n$ and $M = p^{n+1}$, and let $\zeta$ denote the complex number $e^{2\pi i/M}$.
+The group $(\mathbb{Z}/M\mathbb{Z})^\times$ is cyclic of order $(p-1)N$.
+Let $H$ denote its subgroup of order $p - 1$, so that
+\[
+H = \{a \in (\mathbb{Z}/M\mathbb{Z})^\times \mid a^{p-1} = 1\}.
+\]
+Let $K$ denote the subfield of $\mathbb{Q}(\zeta)$ fixed by $H$, where $a \in H$ acts by $\zeta \mapsto \zeta^a$.
+Then $K = k_{p^n}$.
+The field $K$ is totally real since $-1 \in H$, and it is cyclic of degree $N$ over $\mathbb{Q}$.
+Its subfields are the fields $k_{p^j}$ with $0 \le j \le n$, where $k_1 = \mathbb{Q}$.
+
+Let $g$ be a generator of $(\mathbb{Z}/M\mathbb{Z})^\times$.
+For $i \in \mathbb{Z}/N\mathbb{Z}$, define the Gaussian period
+\[
+\eta_i = \sum_{a \in H} \zeta^{g^i a} .
+\]
+This is well defined since $g^N \in H$.
+Each $\eta_i$ is an element of the ring of integers $O_K$ of $K$.
+Let $\sigma$ denote the restriction to $K$ of the automorphism $\zeta \mapsto \zeta^g$ of $\mathbb{Q}(\zeta)$.
+Then $\sigma$ generates $\operatorname{Gal}(K/\mathbb{Q})$, and $\sigma(\eta_i) = \eta_{i+1}$ for every $i \in \mathbb{Z}/N\mathbb{Z}$.
+
+\begin{example} \label{ex:fields}
+If $p^n = 3^4$, then $M = 243$ and $H = \{\pm 1\}$. We take $g = 2$, so that $\eta_i = 2\cos(2\pi \cdot 2^i/243)$.
+If $p^n = 7^2$, then $M = 343$ and $H = \{\pm 1, \pm 18, \pm 19\}$. We take $g = 3$.
+\end{example}
+
+\begin{lemma} \label{lem:field}
+\begin{enumerate}
+\item The discriminant of $K$ is $p^e$ with $e = \sum_{j=1}^{n} (j+1)(p-1)p^{j-1}$.
+\item A prime number $q \ne p$ splits completely in $K$ if and only if $q^{p-1} \equiv 1 \pmod{M}$.
+\item There is exactly one prime ideal of $K$ above $p$, and it is principal.
+\item Let $c$ be an integer and let $(a_i)_{i \in \mathbb{Z}/N\mathbb{Z}}$ be a family of integers. Put $\alpha = c + \sum_i a_i \eta_i$. Then $\alpha \in O_K$ and
+\[
+N_{K/\mathbb{Q}}(\alpha) = \prod_{j \in \mathbb{Z}/N\mathbb{Z}} \Bigl( c + \sum_{i} a_i \eta_{i+j} \Bigr) .
+\]
+Moreover, $|N_{K/\mathbb{Q}}(\alpha)| \le b^N$ with $b = |c| + (p-1) \sum_i |a_i|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) The group of Dirichlet characters associated with $K$ is cyclic of order $N$.
+For $1 \le j \le n$, it contains exactly $(p-1)p^{j-1}$ characters of conductor $p^{j+1}$.
+The assertion follows from the conductor-discriminant formula.
+
+(2) The prime number $q$ splits completely in $K$ if and only if its Frobenius element in $\operatorname{Gal}(\mathbb{Q}(\zeta)/\mathbb{Q}) = (\mathbb{Z}/M\mathbb{Z})^\times$, which is the class of $q$, lies in $H$.
+
+(3) The prime number $p$ is totally ramified in $\mathbb{Q}(\zeta)$, so that it is totally ramified in $K$.
+Put $\pi = \prod_{a \in H} (1 - \zeta^a)$.
+Then $\pi \in O_K$ and $N_{K/\mathbb{Q}}(\pi) = N_{\mathbb{Q}(\zeta)/\mathbb{Q}}(1 - \zeta) = p$.
+Hence $\pi O_K$ is the prime ideal of $K$ above $p$.
+
+(4) The first two assertions follow from the properties of $\sigma$ stated above.
+Since $|\eta_i| \le p - 1$ for every $i$, each factor of the product has absolute value at most $b$.
+\end{proof}
+
+By \cref{lem:field}, the discriminant of $k_{3^4}$ is $3^{364}$ and the discriminant of $k_{7^2}$ is $7^{138}$.
+For a number field $L$, let $\operatorname{rd}(L)$ denote the root discriminant of $L$.
+Then
+\begin{align*}
+\log \operatorname{rd}(k_{3^4}) &= \tfrac{364}{81} \log 3 = 4.9369737416\ldots, \\
+\log \operatorname{rd}(k_{7^2}) &= \tfrac{138}{49} \log 7 = 5.4803183789\ldots,
+\end{align*}
+so that $\operatorname{rd}(k_{3^4}) < 139.35$ and $\operatorname{rd}(k_{7^2}) < 239.93$.
+A prime number $q \ne 3$ splits completely in $k_{3^4}$ if and only if $q \equiv \pm 1 \pmod{243}$.
+
+\section{Three known results} \label{sec:known}
+
+\subsection{An upper bound for class numbers}
+
+Let $\gamma$ denote Euler's constant.
+The following is \cite[Lemma 1]{Mi15b}, which is taken from \cite{Mi14}.
+
+\begin{proposition}[Miller] \label{prop:miller}
+Let $L$ be a totally real number field of degree $N$, and let $c$ be a positive real number.
+Define a function $F$ on $\mathbb{R}$ by
+\[
+F(x) = \frac{e^{-(x/c)^2}}{\cosh(x/2)} .
+\]
+Let $S$ be a set of prime numbers each of which splits completely in $L$ into principal prime ideals.
+Put
+\[
+I(c) = \int_0^\infty \frac{1 - F(x)}{2} \left( \frac{1}{\sinh(x/2)} + \frac{1}{\cosh(x/2)} \right) dx
+\]
+and
+\[
+B = \frac{\pi}{2} + \gamma + \log 8\pi - \log \operatorname{rd}(L) - I(c) + 2 \sum_{q \in S} \sum_{m=1}^{\infty} \frac{\log q}{q^{m/2}} F(m \log q) .
+\]
+If $B > 0$, then the class number $h$ of $L$ satisfies
+\[
+h < \frac{2c\sqrt{\pi}}{N B} .
+\]
+\end{proposition}
+
+The set $S$ may be any set of prime numbers with the stated property, and it may be empty.
+Every term of the double sum is positive, so that a lower bound for $B$ is obtained if the sum is replaced by a partial sum.
+Since $\cosh((m \log q)/2) = (q^{m/2} + q^{-m/2})/2$, the terms of the double sum satisfy
+\begin{equation} \label{eq:term}
+2 \cdot \frac{\log q}{q^{m/2}} F(m \log q) = \frac{4 \log q}{q^m + 1} \, e^{-(m \log q/c)^2} .
+\end{equation}
+
+\subsection{A divisibility result}
+
+The following is a consequence of \cite[Theorems 6 and 8]{vdL82}; it is the general form of the rank corollary of Masley \cite[Corollary 2.15]{Ma78}.
+We include a proof for the convenience of the reader.
+
+\begin{proposition}[Masley, van der Linden] \label{prop:masley}
+Let $E/F$ be a cyclic extension of number fields of degree $n$, and let $\ell$ be a prime number that does not divide $n$.
+Suppose that $\ell$ does not divide the class number of any field $L$ with $F \subseteq L \subsetneq E$.
+Let $f$ denote the order of $\ell$ in $(\mathbb{Z}/n\mathbb{Z})^\times$.
+If $\ell$ divides the class number of $E$, then $\ell^f$ divides the class number of $E$.
+\end{proposition}
+
+\begin{proof}
+Let $G$ denote the Galois group of $E/F$, let $\tau$ be a generator of $G$, and let $A$ denote the $\ell$-part of the ideal class group of $E$.
+Since $\ell$ does not divide $n$, the ring $\mathbb{Z}_\ell[G]$ is the product of the rings $\mathbb{Z}_\ell[x]/(\Phi_d(x))$, where $d$ runs over the positive divisors of $n$ and $\Phi_d$ denotes the $d$-th cyclotomic polynomial.
+Accordingly, $A$ is the direct sum of submodules $A_d$, where $\tau$ acts on $A_d$ through $\mathbb{Z}_\ell[x]/(\Phi_d(x))$.
+
+Let $d$ be a positive divisor of $n$ with $d < n$, and let $L$ denote the subfield of $E$ fixed by $\tau^d$.
+Then $F \subseteq L \subsetneq E$.
+The element $\nu = \sum_{j=0}^{n/d-1} \tau^{dj}$ of $\mathbb{Z}_\ell[G]$ acts on $A$ as the composite of the norm map to the $\ell$-part of the class group of $L$ and the map induced by extension of ideals.
+The $\ell$-part of the class group of $L$ is trivial by assumption, so that $\nu$ acts on $A$ as zero.
+On the other hand, $\tau^d$ acts on $A_d$ as the identity, so that $\nu$ acts on $A_d$ as multiplication by $n/d$, which is a unit of $\mathbb{Z}_\ell$.
+Hence $A_d = 0$.
+
+Therefore $A = A_n$ is a module over $\mathbb{Z}_\ell[x]/(\Phi_n(x))$.
+This ring is a product of copies of the ring of integers of the unramified extension of $\mathbb{Q}_\ell$ of degree $f$.
+The order of every finite module over this ring is a power of $\ell^f$.
+\end{proof}
+
+\subsection{The class numbers of the subfields}
+
+\begin{proposition}[Iwasawa] \label{prop:iwasawa}
+Let $p$ be a prime number and let $n$ be a positive integer. Then $p$ does not divide $h(k_{p^n})$.
+\end{proposition}
+
+\begin{proof}
+The extension $k_{p^n}/\mathbb{Q}$ is a Galois extension whose degree is a power of $p$, and $p$ is the only place of $\mathbb{Q}$ that ramifies in it.
+Hence the assertion follows from a theorem of Iwasawa \cite{Iw56}; see \cite[Theorem 10.4]{Wa97}.
+\end{proof}
+
+\begin{proposition} \label{prop:sub}
+The fields $k_3$, $k_{3^2}$, $k_{3^3}$, and $k_7$ have class number $1$.
+\end{proposition}
+
+\begin{proof}
+These fields have the conductors $9$, $27$, $81$, and $49$.
+By a theorem of van der Linden \cite[Theorem 1]{vdL82}, every real abelian field whose conductor is a prime power $q$ with $\varphi(q) \le 66$ has class number $1$.
+This proves the assertion.
+
+The assertion also follows from \cref{prop:miller,prop:masley,prop:iwasawa}, as we now explain.
+We apply \cref{prop:miller} with the empty set $S$ and with the value of $c$ shown in \cref{tab:sub}.
+The discriminants are given by \cref{lem:field}, and the bounds for $I(c)$ are obtained as in \cref{sec:bound}.
+This yields the upper bounds for the class numbers in the last column of \cref{tab:sub}.
+
+Since $h(k_3) < 2$ and $h(k_{3^2}) < 2$, these two class numbers are $1$.
+Let $\ell$ be a prime number dividing $h(k_{3^3})$.
+Then $\ell \ne 3$ by \cref{prop:iwasawa}.
+By \cref{prop:masley}, applied to $E = k_{3^3}$ and $F = \mathbb{Q}$, the number $\ell^f$ divides $h(k_{3^3})$, where $f$ denotes the order of $\ell$ modulo $27$.
+Here we use that $k_3$ and $k_{3^2}$ have class number $1$.
+Since $h(k_{3^3}) < 6$, we have $\ell^f \le 5$, so that $\ell \in \{2, 5\}$ and $f \le 2$.
+This is impossible, since $2$ and $5$ have order $18$ modulo $27$.
+Hence $h(k_{3^3}) = 1$.
+In the same way, a prime number $\ell$ dividing $h(k_7)$ satisfies $\ell \ne 7$ and $\ell^f \le 4$, where $f$ denotes the order of $\ell$ modulo $7$.
+Then $\ell \in \{2, 3\}$ and $f \le 2$, which is impossible, since $2$ and $3$ have the orders $3$ and $6$ modulo $7$.
+Hence $h(k_7) = 1$.
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrcrccc}
+\toprule
+field & degree & $\log \operatorname{rd} \le$ & $c$ & $I(c) \le$ & $B \ge$ & $h <$ \\
+\midrule
+$k_3$ & $3$ & $1.4648164$ & $2$ & $2.1508333$ & $1.7565338$ & $1.3455$ \\
+$k_{3^2}$ & $9$ & $2.6854968$ & $3$ & $1.7991266$ & $0.8875601$ & $1.3314$ \\
+$k_{3^3}$ & $27$ & $3.8247984$ & $8$ & $1.3711535$ & $0.1762316$ & $5.9601$ \\
+$k_7$ & $7$ & $3.3358460$ & $5$ & $1.5090534$ & $0.5272841$ & $4.8022$ \\
+\bottomrule
+\end{tabular}
+\caption{Bounds obtained from \cref{prop:miller} with the empty set $S$. Every entry is rounded in the safe direction, and the last two columns are computed from the values before rounding.}
+\label{tab:sub}
+\end{table}
+
+\begin{corollary} \label{cor:threshold}
+\begin{enumerate}
+\item If $h(k_{3^4}) > 1$, then $h(k_{3^4}) \ge 163$.
+\item If $h(k_{7^2}) > 1$, then $h(k_{7^2}) \ge 197$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Let $p^n$ be $3^4$ or $7^2$, and let $\ell$ be a prime number dividing $h(k_{p^n})$.
+Then $\ell \ne p$ by \cref{prop:iwasawa}.
+Every field $L$ with $\mathbb{Q} \subseteq L \subsetneq k_{p^n}$ has class number $1$ by \cref{prop:sub}.
+By \cref{prop:masley}, applied to $E = k_{p^n}$ and $F = \mathbb{Q}$, the number $\ell^f$ divides $h(k_{p^n})$, where $f$ denotes the order of $\ell$ modulo $p^n$.
+
+(1) We show that $\ell^f \ge 163$.
+If $f = 1$, then $\ell \equiv 1 \pmod{81}$, and the least prime number with this property is $163$.
+If $f \ge 2$ and $\ell^f < 163$, then $\ell \in \{2, 5, 7, 11\}$.
+The orders of $2$, $5$, $7$, and $11$ modulo $81$ are $54$, $54$, $27$, and $54$, respectively, so that $\ell^f > 163$ in each of these cases.
+
+(2) We show that $\ell^f \ge 197$.
+If $f = 1$, then $\ell \equiv 1 \pmod{49}$, and the least prime number with this property is $197$.
+If $f \ge 2$ and $\ell^f < 197$, then $\ell \in \{2, 3, 5, 11, 13\}$.
+The orders of $2$, $3$, $5$, $11$, and $13$ modulo $49$ are $21$, $42$, $42$, $21$, and $14$, respectively, so that $\ell^f > 197$ in each of these cases.
+\end{proof}
+
+\section{Principal prime ideals from norms} \label{sec:relations}
+
+Throughout this section, $K = k_{p^n}$ is as in \cref{sec:field}, and we assume that every field $k_{p^j}$ with $0 \le j < n$ has class number $1$.
+By \cref{prop:sub}, this assumption holds for $p^n = 3^4$ and for $p^n = 7^2$.
+We say that a prime number $r$ is \emph{settled} if every prime ideal of $K$ above $r$ is principal.
+The prime number $p$ is settled by \cref{lem:field}.
+
+\begin{lemma} \label{lem:nonsplit}
+Let $r \ne p$ be a prime number that does not split completely in $K$. Then $r$ is settled.
+\end{lemma}
+
+\begin{proof}
+Let $D$ denote the decomposition field of $r$ in $K$.
+Then $D = k_{p^j}$ for some $j < n$, so that $h(D) = 1$.
+Let $\mathfrak{r}$ be a prime ideal of $D$ above $r$.
+The extension $K/D$ is cyclic, the prime ideal $\mathfrak{r}$ is unramified in it, and the decomposition group of a prime ideal of $K$ above $\mathfrak{r}$ is $\operatorname{Gal}(K/D)$.
+Hence $\mathfrak{r} O_K$ is a prime ideal of $K$.
+It is principal since $\mathfrak{r}$ is principal.
+Every prime ideal of $K$ above $r$ is of this form.
+\end{proof}
+
+\begin{definition} \label{def:relation}
+Let $q$ be a prime number that splits completely in $K$.
+A \emph{relation for $q$} is an element $\alpha \in O_K$ such that $q$ divides the integer $N_{K/\mathbb{Q}}(\alpha)$ and $q^2$ does not divide it.
+\end{definition}
+
+\begin{lemma} \label{lem:relation}
+Let $q$ be a prime number that splits completely in $K$, and let $\alpha$ be a relation for $q$.
+Suppose that every prime number $r \ne q$ dividing $N_{K/\mathbb{Q}}(\alpha)$ is settled.
+Then $q$ is settled.
+\end{lemma}
+
+\begin{proof}
+Every prime ideal of $K$ above $q$ has norm $q$.
+Since $q$ divides $N_{K/\mathbb{Q}}(\alpha)$ exactly once, there is exactly one prime ideal $\mathfrak{q}$ of $K$ above $q$ that contains $\alpha$, and $\alpha O_K = \mathfrak{q} \mathfrak{a}$, where $\mathfrak{a}$ is a product of prime ideals above prime numbers $r \ne q$ dividing $N_{K/\mathbb{Q}}(\alpha)$.
+The ideal $\mathfrak{a}$ is principal by assumption.
+Hence $\mathfrak{q}$ is principal.
+The extension $K/\mathbb{Q}$ is Galois, so that every prime ideal of $K$ above $q$ is of the form $\tau(\mathfrak{q})$ with $\tau \in \operatorname{Gal}(K/\mathbb{Q})$.
+\end{proof}
+
+By \cref{lem:nonsplit}, the assumption of \cref{lem:relation} only concerns the prime numbers $r \ne q$ that divide the norm and split completely in $K$.
+We use \cref{lem:relation} in two ways.
+
+\begin{proposition} \label{prop:list}
+Let $q_1, \ldots, q_t$ be prime numbers that split completely in $K$, and let $T$ be a set of settled prime numbers.
+For $1 \le i \le t$, let $\alpha_i$ be a relation for $q_i$.
+Suppose that, for every $i$, every prime number $r \ne q_i$ that divides $N_{K/\mathbb{Q}}(\alpha_i)$ and splits completely in $K$ belongs to $T \cup \{q_1, \ldots, q_{i-1}\}$.
+Then $q_1, \ldots, q_t$ are settled.
+\end{proposition}
+
+\begin{proof}
+This follows from \cref{lem:nonsplit,lem:relation} by induction on $i$.
+\end{proof}
+
+\begin{proposition} \label{prop:range}
+Let $A < X$ be positive real numbers.
+Suppose that every prime number $q < A$ that splits completely in $K$ is settled.
+Suppose further that, for every prime number $q$ with $A \le q < X$ that splits completely in $K$, there is a relation $\alpha_q$ for $q$ such that every prime number $r \ne q$ that divides $N_{K/\mathbb{Q}}(\alpha_q)$ and splits completely in $K$ satisfies $r < q$.
+Then every prime number $q < X$ that splits completely in $K$ is settled.
+\end{proposition}
+
+\begin{proof}
+Suppose that the assertion is false, and let $q$ be the least prime number $q < X$ that splits completely in $K$ and is not settled.
+Then $q \ge A$.
+Every prime number $r \ne q$ that divides $N_{K/\mathbb{Q}}(\alpha_q)$ either does not split completely in $K$, or equals $p$, or splits completely in $K$ and satisfies $r < q$.
+In each case $r$ is settled, by \cref{lem:nonsplit}, by \cref{lem:field}, and by the choice of $q$, respectively.
+Hence $q$ is settled by \cref{lem:relation}, a contradiction.
+\end{proof}
+
+In \cref{prop:range}, the condition on $q$ does not refer to the other relations.
+Hence it can be verified separately for disjoint intervals of prime numbers $q$.
+
+In $k_{7^2}$, the least prime number that splits completely is $19$, and it divides the norms of most elements of small height.
+For this prime number we use the following lemma.
+
+\begin{lemma} \label{lem:block}
+Let $q_0$ be a prime number that splits completely in $K$, and let $\mathfrak{q}_1, \ldots, \mathfrak{q}_N$ denote the prime ideals of $K$ above $q_0$.
+Let $\beta_1, \ldots, \beta_s$ be elements of $O_K$ with the following two properties for every $i$.
+\begin{enumerate}
+\item We have $|N_{K/\mathbb{Q}}(\beta_i)| = p^{a_i} q_0^{k_i}$ with integers $a_i \ge 0$ and $k_i \ge 1$.
+\item Exactly $k_i$ of the prime ideals $\mathfrak{q}_1, \ldots, \mathfrak{q}_N$ contain $\beta_i$.
+\end{enumerate}
+For $\beta \in O_K$, let $v(\beta) \in \{0,1\}^N$ denote the vector whose $j$-th entry is $1$ if and only if $\beta \in \mathfrak{q}_j$.
+If the vectors $v(\tau(\beta_i))$ with $1 \le i \le s$ and $\tau \in \operatorname{Gal}(K/\mathbb{Q})$ generate the group $\mathbb{Z}^N$, then $q_0$ is settled.
+\end{lemma}
+
+\begin{proof}
+Let $\beta$ be one of the elements $\tau(\beta_i)$.
+By (1) and (2), the valuation of $\beta$ at $\mathfrak{q}_j$ is the $j$-th entry of $v(\beta)$, and $\beta O_K$ is the product of the ideals $\mathfrak{q}_j$ with $\beta \in \mathfrak{q}_j$ and a power of the prime ideal above $p$.
+The latter is principal by \cref{lem:field}.
+Hence $v(\beta)$ lies in the kernel of the homomorphism from $\mathbb{Z}^N$ to the ideal class group of $K$ that sends the $j$-th standard basis vector to the class of $\mathfrak{q}_j$.
+If these vectors generate $\mathbb{Z}^N$, then this homomorphism is trivial.
+\end{proof}
+
+\begin{remark} \label{rem:blockcheck}
+The conditions of \cref{lem:block} are verified as follows.
+Suppose that $\Phi_M$ is the product of $N$ distinct irreducible polynomials $g_1, \ldots, g_N$ modulo $q_0$.
+Then the ideals $(q_0, g_j(\zeta))$ are the prime ideals of $\mathbb{Z}[\zeta]$ above $q_0$.
+There are $N$ of them, so that each prime ideal $\mathfrak{q}_i$ lies below exactly one of them.
+Let $\beta \in O_K$ be represented by a polynomial $b \in \mathbb{Z}[x]$ with $b(\zeta) = \beta$.
+After renumbering, we have $\beta \in \mathfrak{q}_j$ if and only if $g_j$ divides $b$ modulo $q_0$.
+\end{remark}
+
+\section{The lists of relations} \label{sec:data}
+
+In this section, a prime number is called a \emph{split prime} of $K$ if it splits completely in $K$.
+All elements are given in the form $c + \sum_i a_i \eta_i$ of \cref{lem:field}, with the generators $g$ of \cref{ex:fields}.
+
+\subsection{The field $k_{3^4}$}
+
+Let $K = k_{3^4}$.
+Let $S_3$ denote the set of prime numbers $q < 3 \cdot 10^{10}$ with $q \equiv \pm 1 \pmod{243}$.
+The set $S_3$ has $16049777$ elements.
+Its least elements are $487$, $971$, $1459$, and $2917$, and its greatest element is $29999999969$.
+
+\begin{proposition} \label{prop:data3}
+Every prime number in $S_3$ is settled; that is, every prime ideal of $k_{3^4}$ above a prime number in $S_3$ is principal.
+\end{proposition}
+
+\begin{proof}
+The accompanying data consist of two parts.
+
+The first part is a list of $8699$ relations in the order required by \cref{prop:list}, with the empty set $T$.
+The prime numbers $q_i$ of this list include all $8160$ elements of $S_3$ below $10^7$.
+The remaining $539$ prime numbers $q_i$ are split primes greater than $10^7$ that occur in the norms of later relations.
+By \cref{prop:list}, every element of $S_3$ below $10^7$ is settled.
+
+The second part gives, for each of the $16041617$ elements $q$ of $S_3$ with $q \ge 10^7$, a relation $\alpha_q$ for $q$ such that every split prime $r \ne q$ dividing $N_{K/\mathbb{Q}}(\alpha_q)$ satisfies $r < q$.
+By \cref{prop:range} with $A = 10^7$ and $X = 3 \cdot 10^{10}$, every element of $S_3$ is settled.
+The verification of the data is described in \cref{subsec:verification}.
+\end{proof}
+
+\begin{example} \label{ex:relations}
+The relation for the greatest element $q = 29999999969$ of $S_3$ is
+\[
+\alpha = \eta_1 + \eta_3 - \eta_8 + \eta_{10} - \eta_{17} + \eta_{20} - \eta_{22} - \eta_{23} - \eta_{29} + \eta_{37},
+\]
+and $|N_{K/\mathbb{Q}}(\alpha)| = 3^2 \cdot 487 \cdot 1459 \cdot 2917 \cdot 23849479 \cdot q$.
+The relation for $q = 8742169$ in the first part is $\alpha = -1 - \eta_{11} - \eta_{14} - \eta_{23} + \eta_{29}$, and $|N_{K/\mathbb{Q}}(\alpha)| = q$.
+\end{example}
+
+\subsection{The field $k_{7^2}$}
+
+Let $K = k_{7^2}$.
+The least split primes of $K$ are $19$, $1373$, $1697$, and $1733$, and there are $28381$ split primes $q \le 2.2 \cdot 10^7$.
+
+\begin{proposition} \label{prop:data7}
+There is a set $S_7$ of $29835$ split primes of $k_{7^2}$ such that $S_7$ contains every split prime $q \le 2.2 \cdot 10^7$ and every element of $S_7$ is settled.
+\end{proposition}
+
+\begin{proof}
+The prime number $19$ is settled by \cref{lem:block}, applied to $q_0 = 19$ and to the eight elements
+\begin{gather*}
+\pm(2 + \eta_0 + \eta_{24}), \quad \pm(\eta_0 - \eta_{26}), \quad \eta_0 - \eta_{21}, \\
+\eta_{23} - \eta_0, \quad \eta_{28} - \eta_0, \quad \eta_{46} - \eta_0 - 1,
+\end{gather*}
+whose norms have the absolute values $7 \cdot 19^4$, $7^2 \cdot 19^4$, $7^9 \cdot 19^2$, $7^2 \cdot 19^4$, $7^9 \cdot 19^2$, and $19^3$, respectively.
+The order of $19$ modulo $343$ is $6$, so that $\Phi_{343}$ is the product of $49$ irreducible polynomials of degree $6$ modulo $19$, and the conditions are verified as in \cref{rem:blockcheck}.
+The $8 \cdot 49$ vectors generate $\mathbb{Z}^{49}$; this is verified by computing the Hermite normal form of the matrix formed by these vectors.
+
+The accompanying data then give a list of $29834$ relations in the order required by \cref{prop:list}, with $T = \{19\}$.
+The prime numbers $q_i$ of this list, together with $19$, form the set $S_7$.
+The greatest element of $S_7$ is $59529496693$.
+\end{proof}
+
+\subsection{The verification} \label{subsec:verification}
+
+A relation is stored as the prime number $q$, the integers $c$ and $a_i$, and the factorization of $|N_{K/\mathbb{Q}}(\alpha)|$ into prime numbers.
+The verification program reads these data and checks the following assertions with exact integer arithmetic.
+\begin{enumerate}
+\item Every number in the stated factorization is a prime number.
+\item The product of the stated factorization equals $|N_{K/\mathbb{Q}}(\alpha)|$.
+\item The prime number $q$ splits completely in $K$, and its exponent in the factorization is $1$.
+\item The split primes $r \ne q$ in the factorization satisfy the condition of \cref{prop:list} or of \cref{prop:range}.
+\item Every split prime of $K$ in the interval under consideration occurs as the prime number $q$ of some relation.
+\end{enumerate}
+For (1) and (5), primality is proved by the function \texttt{fmpz\_is\_prime} of FLINT \cite{FLINT}; all prime numbers that occur are less than $2^{36}$.
+For (5), the program tests every integer in the interval that satisfies the congruence of \cref{lem:field}.
+
+For (2), the norm is computed as follows.
+Let $l$ be a prime number with $l \equiv 1 \pmod{M}$, and let $z \in \mathbb{F}_l$ be an element of order $M$.
+There is a ring homomorphism from $\mathbb{Z}[\zeta]$ to $\mathbb{F}_l$ that sends $\zeta$ to $z$.
+By \cref{lem:field}, the image of $N_{K/\mathbb{Q}}(\alpha)$ under this homomorphism is
+\[
+\prod_{j \in \mathbb{Z}/N\mathbb{Z}} \Bigl( c + \sum_i a_i \rho_{i+j} \Bigr), \quad \text{where} \quad \rho_i = \sum_{a \in H} z^{g^i a} .
+\]
+The program uses twelve such prime numbers $l > 2^{61}$.
+By \cref{lem:field}, the integer $N_{K/\mathbb{Q}}(\alpha)$ has absolute value at most $b^N$, where $b = |c| + (p-1)\sum_i |a_i|$.
+It is therefore determined by its residues modulo prime numbers $l$ whose product exceeds $2b^N + 1$, and the program checks that this condition holds.
+
+\begin{remark} \label{rem:search}
+The relations were found as follows; this is not part of the proof.
+Let $q$ be a split prime of $K$.
+The elements $c + \sum_i a_i \eta_i$ that lie in a fixed prime ideal above $q$ correspond to the vectors $(c, (a_i)_i)$ of a lattice of index $q$, which is described by the images of the Gaussian periods in $\mathbb{F}_q$.
+We reduce a basis of this lattice with the LLL algorithm, compute the norms of the short vectors and of their sums and differences, and factor these norms with PARI/GP \cite{PARI} until a relation with the required property is found.
+This takes about $20$ to $35$ milliseconds per prime number on one core.
+For $k_{7^2}$, the whole search took about $20$ minutes on two cores, and the verification takes less than $15$ seconds.
+For $k_{3^4}$, the interval from $10^7$ to $3 \cdot 10^{10}$ was divided into $82$ intervals, and the search and the verification took between $16$ and $41$ minutes per interval on machines with four cores.
+The norms of the elements of small height are much smaller in $k_{3^4}$ than in $k_{7^2}$: for random elements with at most five nonzero coefficients $a_i \in \{\pm 1\}$, the median of the norm is about $10^{12}$ in $k_{3^4}$ and about $10^{18}$ in $k_{7^2}$.
+\end{remark}
+
+\begin{remark} \label{rem:second}
+All relations were verified a second time with an independent program.
+This program computes the resultant of $\Phi_M$ and the polynomial $c + \sum_i a_i \sum_{a \in H} x^{g^i a \bmod M}$ with PARI/GP; its absolute value is $|N_{K/\mathbb{Q}}(\alpha)|^{p-1}$.
+It proves primality with the function \texttt{isprime} of PARI/GP.
+\end{remark}
+
+\section{The upper bounds} \label{sec:bound}
+
+\begin{lemma} \label{lem:integral}
+Let $c$, $\varepsilon$, and $R$ be positive real numbers with $\varepsilon < R$, and let $u$ denote the integrand in the definition of $I(c)$.
+Then
+\[
+I(c) \le \int_\varepsilon^R u(x)\, dx + \left( \frac{1}{c^2} + \frac{1}{8} \right) \left( \frac{\varepsilon^2}{2} + \frac{\varepsilon^3}{6} \right) + 2 e^{-R/2} \left( 1 + \frac{1}{1 - e^{-R}} \right).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $x$ be a positive real number.
+From $\cosh(y) \le e^{y^2/2}$ and $e^{-t} \ge 1 - t$, we obtain
+\[
+F(x) \ge e^{-x^2/c^2 - x^2/8} \ge 1 - \frac{x^2}{c^2} - \frac{x^2}{8} .
+\]
+Together with $1/\sinh(x/2) \le 2/x$ and $1/\cosh(x/2) \le 1$, this gives
+\[
+u(x) \le \left( \frac{1}{c^2} + \frac{1}{8} \right) \left( x + \frac{x^2}{2} \right),
+\]
+and the integral of the right-hand side over the interval from $0$ to $\varepsilon$ is the second term of the assertion.
+
+Suppose that $x \ge R$.
+Then $0 \le 1 - F(x) \le 1$, $1/\sinh(x/2) = 2e^{-x/2}/(1 - e^{-x}) \le 2e^{-x/2}/(1 - e^{-R})$, and $1/\cosh(x/2) \le 2e^{-x/2}$.
+Hence
+\[
+u(x) \le e^{-x/2} \left( 1 + \frac{1}{1 - e^{-R}} \right),
+\]
+and the integral of the right-hand side over the interval from $R$ to $\infty$ is the third term of the assertion.
+\end{proof}
+
+For a set $S$ of prime numbers and a positive real number $c$, let $\Sigma(S, c)$ denote the double sum in \cref{prop:miller}.
+
+\begin{proposition} \label{prop:bound}
+\begin{enumerate}
+\item Let $c = 100$. Then $I(c) \le 1.2646927462$ and $\Sigma(S_3, c) \ge 0.8733014006$. For $L = k_{3^4}$ and $S = S_3$, the number $B$ of \cref{prop:miller} satisfies $B \ge 0.0438183$, and $h(k_{3^4}) < 99.8767$.
+\item Let $c = 80$. Then $I(c) \le 1.2651137825$ and $\Sigma(S_7, c) \ge 1.4113091085$. For $L = k_{7^2}$ and $S = S_7$, the number $B$ of \cref{prop:miller} satisfies $B \ge 0.0380603$, and $h(k_{7^2}) < 152.0639$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The hypothesis of \cref{prop:miller} on the sets $S_3$ and $S_7$ holds by \cref{prop:data3,prop:data7}.
+The inequalities are obtained with ball arithmetic, using the library Arb \cite{Jo17}, which is now part of FLINT \cite{FLINT}.
+For the integral, we use \cref{lem:integral} with $\varepsilon = 10^{-3}$ and $R = 200$, and the integral over the interval from $\varepsilon$ to $R$ is enclosed by the rigorous integration algorithm of \cite{Jo18}.
+For the sum, we use a partial sum, which is a lower bound since every term is positive.
+In (2), the partial sum consists of the terms with $m \le 8$.
+In (1), the terms are computed by \eqref{eq:term}, and the partial sum consists of the terms with $m \le 8$ and $q^{m-1} \le 10^{16}$.
+The set $S_3$ is computed again in this step, and its elements are proved to be prime numbers.
+
+We have $\pi/2 + \gamma + \log 8\pi = 5.3721834192\ldots$.
+With the values of $\log \operatorname{rd}$ of \cref{sec:field}, we obtain in (1)
+\begin{align*}
+B &\ge 5.3721834192 - 4.9369737417 - 1.2646927462 + 0.8733014006 \\
+&> 0.0438183,
+\end{align*}
+and in (2)
+\begin{align*}
+B &\ge 5.3721834192 - 5.4803183790 - 1.2651137825 + 1.4113091085 \\
+&> 0.0380603 .
+\end{align*}
+The bounds for the class numbers follow from \cref{prop:miller} with $N = 81$ and $N = 49$; they are computed from the values of $B$ before rounding.
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrcccc}
+\toprule
+field & $c$ & $I(c) \le$ & $\Sigma \ge$ & $B \ge$ & $h <$ \\
+\midrule
+$k_{3^4}$ & $60$ & $1.2660224223$ & $0.8355826772$ & $0.0047699$ & $550.5021$ \\
+ & $80$ & $1.2651137825$ & $0.8611113518$ & $0.0312072$ & $112.1901$ \\
+ & $100$ & $1.2646927462$ & $0.8733014006$ & $0.0438183$ & $99.8767$ \\
+ & $150$ & $1.2642766179$ & $0.8855807997$ & $0.0565138$ & $116.1599$ \\
+\midrule
+$k_{7^2}$ & $60$ & $1.2660224223$ & $1.3962035757$ & $0.0220461$ & $196.8913$ \\
+ & $80$ & $1.2651137825$ & $1.4113091085$ & $0.0380603$ & $152.0639$ \\
+ & $100$ & $1.2646927462$ & $1.4184096767$ & $0.0455819$ & $158.7142$ \\
+ & $150$ & $1.2642766179$ & $1.4254912948$ & $0.0530797$ & $204.4427$ \\
+\bottomrule
+\end{tabular}
+\caption{Bounds obtained from \cref{prop:miller} with the sets $S_3$ and $S_7$. The column $\Sigma$ is a partial sum of the double sum. Every entry is rounded in the safe direction, and the last two columns are computed from the values before rounding.}
+\label{tab:bounds}
+\end{table}
+
+\begin{proof}[Proof of \cref{thm:main}]
+By \cref{prop:bound}, we have $h(k_{3^4}) < 99.8767$ and $h(k_{7^2}) < 152.0639$.
+By \cref{cor:threshold}, the class number $h(k_{3^4})$ is either $1$ or at least $163$, and the class number $h(k_{7^2})$ is either $1$ or at least $197$.
+Hence both class numbers are $1$.
+\end{proof}
+
+\section{Remarks} \label{sec:remarks}
+
+\begin{remark} \label{rem:first}
+For $k_{7^2}$, we also carried out the method of \cite{Mi15b} directly.
+For each of the $28381$ split primes $q \le 2.2 \cdot 10^7$, an element $\alpha_q \in O_K$ with $|N_{K/\mathbb{Q}}(\alpha_q)| = q$ was computed with the functions \texttt{bnfinit} and \texttt{bnfisprincipal} of PARI/GP and then verified independently.
+With these prime numbers alone, \cref{prop:miller} gives $h(k_{7^2}) < 160.7121$ at $c = 80$.
+This computation took about $100$ hours on one core, and the elements $\alpha_q$ occupy $187$ megabytes; the list of relations of \cref{prop:data7} occupies $2.4$ megabytes.
+\end{remark}
+
+\begin{remark} \label{rem:19}
+In $k_{7^2}$, the prime number $19$ alone contributes more than $0.6222$ to $\Sigma(S_7, 80)$, whereas the next split prime $1373$ contributes less than $0.0209$.
+In $k_{3^4}$, the least split prime is $487$.
+This is the reason why the set $S_3$ has to be much larger than the set $S_7$, although the root discriminant of $k_{3^4}$ is smaller.
+\end{remark}
+
+\begin{remark} \label{rem:fkm}
+Fukuda, Komatsu, and Morisawa \cite{FKM14} proved that no prime number less than $10^9$ divides $h(k_{3^n})$ for any $n$; see \cite[Theorem 5]{Mi15b}.
+The proof of \cref{thm:main} does not use this result.
+\end{remark}
+
+\begin{remark} \label{rem:limit}
+In \cref{prop:miller}, the inequality $B > 0$ requires that the sum over $S$ exceeds $\log \operatorname{rd}(L) + I(c) - \pi/2 - \gamma - \log 8\pi$, and the prime numbers $q \le X$ that split completely in $L$ contribute about $(4/N) \log X$ to this sum.
+Hence the number of prime numbers that are needed grows quickly with the degree and with the root discriminant.
+By a numerical estimate, the field $k_{29}$ requires the split primes up to about $4 \cdot 10^9$, and the field $k_{31}$ requires the split primes up to at least $10^{11}$.
+Under the generalized Riemann hypothesis, the analog of \cref{prop:miller} in \cite{Mi15b} requires only a small set $S$.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{Ba69} H.~Bauer, Numerische Bestimmung von Klassenzahlen reeller zyklischer Zahlk\"orper, J. Number Theory \textbf{1} (1969), 161--162.
+
+\bibitem{Ch26} J.~Chakkour, \texttt{b23-class-number}, software repository, 2026, \url{https://github.com/johnchakkour/b23-class-number}.
+
+\bibitem{Co12} J.~Coates, The enigmatic Tate--Shafarevich group, in: Fifth International Congress of Chinese Mathematicians, AMS/IP Stud. Adv. Math. \textbf{51}, Amer. Math. Soc., Providence, RI, 2012, pp.~43--50.
+
+\bibitem{Co60} H.~Cohn, A numerical study of Weber's real class number of calculation. I, Numer. Math. \textbf{2} (1960), 347--362.
+
+\bibitem{FK11} T.~Fukuda and K.~Komatsu, Weber's class number problem in the cyclotomic $\mathbb{Z}_2$-extension of $\mathbb{Q}$, III, Int. J. Number Theory \textbf{7} (2011), 1627--1635.
+
+\bibitem{FKM14} T.~Fukuda, K.~Komatsu, and T.~Morisawa, Weber's class number one problem, in: Iwasawa Theory 2012, Contrib. Math. Comput. Sci. \textbf{7}, Springer, Heidelberg, 2014, pp.~221--226.
+
+\bibitem{FLINT} The FLINT team, FLINT: Fast Library for Number Theory, \url{https://flintlib.org}.
+
+\bibitem{HH09} K.~Horie and M.~Horie, The ideal class group of the $\mathbb{Z}_p$-extension over the rationals, Tohoku Math. J. \textbf{61} (2009), 551--570.
+
+\bibitem{Iw56} K.~Iwasawa, A note on class numbers of algebraic number fields, Abh. Math. Sem. Univ. Hamburg \textbf{20} (1956), 257--258.
+
+\bibitem{Jo17} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
+
+\bibitem{Jo18} F.~Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software -- ICMS 2018, Lecture Notes in Comput. Sci. \textbf{10931}, Springer, Cham, 2018, pp.~255--263; arXiv:1802.07942.
+% CHECK: the page numbers
+
+\bibitem{Ma78} J.~M.~Masley, Class numbers of real cyclic number fields with small conductor, Compositio Math. \textbf{37} (1978), 297--319.
+
+\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--398.
+
+\bibitem{Mi14b} J.~C.~Miller, Class numbers of real cyclotomic fields of composite conductor, LMS J. Comput. Math. \textbf{17} (2014), suppl. A, 404--417.
+
+\bibitem{Mi15b} J.~C.~Miller, Class numbers in cyclotomic $\mathbb{Z}_p$-extensions, J. Number Theory \textbf{150} (2015), 47--73.
+
+\bibitem{MO13} T.~Morisawa and R.~Okazaki, Mahler measure and Weber's class number problem in the cyclotomic $\mathbb{Z}_p$-extension of $\mathbb{Q}$ for odd prime number $p$, Tohoku Math. J. \textbf{65} (2013), 253--272.
+
+\bibitem{PARI} The PARI~Group, PARI/GP, Univ. Bordeaux, \url{https://pari.math.u-bordeaux.fr}.
+
+\bibitem{vdL82} F.~J.~van der Linden, Class number computations of real abelian number fields, Math. Comp. \textbf{39} (1982), 693--707.
+
+\bibitem{Wa97} L.~C.~Washington, Introduction to Cyclotomic Fields, 2nd ed., Grad. Texts in Math. \textbf{83}, Springer, New York, 1997.
+
+\bibitem{We86} H.~Weber, Theorie der Abel'schen Zahlk\"orper, Acta Math. \textbf{8} (1886), 193--263.
+
+\end{thebibliography}
+
+\end{document}
