@@ -51,3 +51,59 @@ Gras（arXiv:2009.05278）の脚注と Fukuda のスライド（2018）による
 - Masley の導手 72 と van der Linden の範囲（$\varphi(f)\le72$）は、スキャンが不鮮明なため一部推論。
 - LMFDB で「(GRH)」の印がないことを無条件と解釈している（$m=6,10,12$）。
 - Horie、Morisawa の $\mathbb{Z}_p\times\mathbb{Z}_q$ 塔の論文は未読。8 体について無条件証明が他にないとは言い切れない。
+
+## 追記（2026-11-24）：$k_{7^2}$ のノートのための確認
+
+VPN なしで到達できる範囲（arXiv、ar5iv、出版社の公開ページ、J-STAGE、numdam）での確認。記号は現在のもの（$k_{p^n}$）。
+
+### 既知の結果の出典（Miller, arXiv:1410.2921 の Table 1、Theorem 1.8、Table 2 による）
+
+| 体 | 仮定 | 出典 |
+|---|---|---|
+| $k_{2^3}$ | なし | Cohn (1960) |
+| $k_{2^4}$、$k_{3^2}$、$k_5$、$k_7$ | なし | Bauer (1969) |
+| $k_{2^5}$ | なし | van der Linden (1982) |
+| $k_{3^3}$ | なし | Masley (1978) |
+| $k_{2^6}$ | なし | Miller（Acta Arith. 2014） |
+| $k_{5^2}$、$k_{11}$ | なし | Miller（LMS J. Comput. Math. 2014） |
+| $k_{13}$、$k_{17}$、$k_{19}$ | なし | Miller（J. Number Theory 2015, Theorem 1.8） |
+| $k_{2^7}$ | GRH | Miller |
+| $k_{3^4}$ | GRH | van der Linden (1982) |
+| $k_{23}$ | GRH | Coates–Liang–Mihăilescu (2012) |
+| $k_{29}$、$k_{31}$ | GRH | Miller（J. Number Theory 2015, Table 2） |
+
+- $k_{2^3}$ については、Weber が示したとする文献（Morisawa–Okazaki の序文、吉崎サーベイ）もある。
+- $k_{23}$ の無条件証明を主張する GitHub リポジトリがある（`johnchakkour/b23-class-number`、上界 $h<37.717103$、未査読）。
+
+### $k_{7^2}$ の先行結果
+
+- 見つからなかった。Miller の表にあるのは $k_7$ だけ。
+- ある論文の引用文に「$(p,n)=(7,2)$ で $\mathbb{Q}(\zeta_{p^n})^+$ の類数が 1」とあるが、これは導手 $7^2=49$ の実円分体のことで、含まれるのは $k_7$。$k_{7^2}$ の導手は $7^3=343$。
+- Horie–Horie、Fukuda–Komatsu、Morisawa–Okazaki の結果は、素数 $\ell$ を固定したときの「$\ell$ が $h(k_{p^n})$ を割らない」型で、類数そのものの決定ではない。
+- 検索した範囲で、2015 年以降に $k_{p^n}$ の類数 1 を新たに証明した査読論文は見つからなかった。
+
+### GRH を仮定した $k_{37}$、$k_{41}$、$k_{43}$、$k_{47}$
+
+- 検索した範囲では、結果は見つからなかった。Miller の GRH 下の結果は $k_{29}$、$k_{31}$ まで。
+
+### 書誌情報
+
+確認できたもの：
+- Miller, Acta Arith. 164 (2014), 381–397（出版社のページ。AMS の引用では 381–398）。
+- Miller, Math. Comp. 84 (2015), 2459–2469。
+- Miller, LMS J. Comput. Math. 17 (2014), Special issue A, 404–417。
+- Bauer, J. Number Theory 1 (1969), 161–162。
+- Cohn, Numer. Math. 2 (1960), 347–362。
+- van der Linden, Math. Comp. 39 (1982), 693–707。
+- Fukuda–Komatsu III, Int. J. Number Theory 7 (2011), 1627–1635。
+- Horie–Horie, Tohoku Math. J. 61 (2009), 551–570。Morisawa–Okazaki, Tohoku Math. J. 65 (2013), 253–272。
+
+確認できなかったもの：
+- Miller, J. Number Theory 150 (2015) のページ番号（出版社のページに到達できず）。
+- Johansson の ICMS 2018 の論文のページ番号（arXiv:1802.07942 は確認）。
+
+### まだ確認できていないこと
+
+- MathSciNet と zbMATH での被引用文献の確認（VPN が必要）。
+- Hakkarainen の表の原本の目視。
+- Masley、Bauer、Cohn の原論文の本文。

@@ -48,8 +48,10 @@ and it is proved under the generalized Riemann hypothesis for
 \[
 p^n \in \{2^7,\ 3^4,\ 23,\ 29,\ 31\};
 \]
-see \cite{Mi14, Mi15b} and the references given there.
-% CHECK: complete this list and add the individual attributions.
+these results are due to Weber, Cohn, Bauer, Masley, van der Linden, Coates, Liang, Mih\u{a}ilescu, and Miller; see \cite[Table 1, Theorem 1.8, and Table 2]{Mi15b} and \cite{Co60, Ba69, Ma78, vdL82, Co12, Mi14, Mi14b}.
+For a fixed prime number $\ell$, the question whether $\ell$ divides $h(k_{p^n})$ for some $n$ has been studied by Horie and Horie \cite{HH09}, Fukuda and Komatsu \cite{FK11}, and Morisawa and Okazaki \cite{MO13}, among others.
+% TODO (author's decision): an unconditional proof of h(k_{23}) = 1 is claimed in the software repository
+% https://github.com/johnchakkour/b23-class-number (not refereed). Mention it here or not.
 
 The purpose of this note is to add one field to the first list.
 
@@ -181,8 +183,7 @@ The order of every finite module over this ring is a power of $q^f$.
 \end{proposition}
 
 \begin{proof}
-(1) The field $k_7$ is the subfield of degree $7$ of $\mathbb{Q}(e^{2\pi i/49})$. Its class number was determined by Bauer \cite{Ba69}; see also \cite{Ma78} and \cite[Table 1]{Mi15b}.
-% CHECK: the attribution to Bauer follows Miller's table.
+(1) The field $k_7$ is the subfield of degree $7$ of $\mathbb{Q}(e^{2\pi i/49})$. Its class number was determined by Bauer \cite{Ba69}; see \cite[Table 1]{Mi15b}.
 We also verified it with the function \texttt{bnfcertify} of PARI/GP \cite{PARI}, which does not assume any hypothesis.
 
 (2) The extension $k_{7^2}/\mathbb{Q}$ is a Galois extension whose degree is a power of $7$, and $7$ is the only place of $\mathbb{Q}$ that ramifies in it.
@@ -349,31 +350,40 @@ Without the hypothesis, the fields $k_{29}$, $k_{3^4}$, and $k_{31}$ seem to be 
 \begin{thebibliography}{99}
 
 \bibitem{Ba69} H.~Bauer, Numerische Bestimmung von Klassenzahlen reeller zyklischer Zahlk\"orper, J. Number Theory \textbf{1} (1969), 161--162.
-% CHECK
 
 \bibitem{Co12} J.~Coates, The enigmatic Tate--Shafarevich group, in: Fifth International Congress of Chinese Mathematicians, AMS/IP Stud. Adv. Math. \textbf{51}, Amer. Math. Soc., Providence, RI, 2012, pp.~43--50.
 
+\bibitem{Co60} H.~Cohn, A numerical study of Weber's real class number of calculation. I, Numer. Math. \textbf{2} (1960), 347--362.
+
+\bibitem{FK11} T.~Fukuda and K.~Komatsu, Weber's class number problem in the cyclotomic $\mathbb{Z}_2$-extension of $\mathbb{Q}$, III, Int. J. Number Theory \textbf{7} (2011), 1627--1635.
+
 \bibitem{FLINT} The FLINT team, FLINT: Fast Library for Number Theory, \url{https://flintlib.org}.
+
+\bibitem{HH09} K.~Horie and M.~Horie, The ideal class group of the $\mathbb{Z}_p$-extension over the rationals, Tohoku Math. J. \textbf{61} (2009), 551--570.
 
 \bibitem{Iw56} K.~Iwasawa, A note on class numbers of algebraic number fields, Abh. Math. Sem. Univ. Hamburg \textbf{20} (1956), 257--258.
 
 \bibitem{Jo17} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
 
-\bibitem{Jo18} F.~Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software -- ICMS 2018, Lecture Notes in Comput. Sci. \textbf{10931}, Springer, Cham, 2018, pp.~255--263.
-% CHECK
+\bibitem{Jo18} F.~Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software -- ICMS 2018, Lecture Notes in Comput. Sci. \textbf{10931}, Springer, Cham, 2018, pp.~255--263; arXiv:1802.07942.
+% CHECK: the page numbers
 
 \bibitem{Ma78} J.~M.~Masley, Class numbers of real cyclic number fields with small conductor, Compositio Math. \textbf{37} (1978), 297--319.
 
 \bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--397.
-% CHECK
+
+\bibitem{Mi14b} J.~C.~Miller, Class numbers of real cyclotomic fields of composite conductor, LMS J. Comput. Math. \textbf{17} (2014), suppl. A, 404--417.
 
 \bibitem{Mi15a} J.~C.~Miller, Real cyclotomic fields of prime conductor and their class numbers, Math. Comp. \textbf{84} (2015), 2459--2469.
-% CHECK
 
-\bibitem{Mi15b} J.~C.~Miller, Class numbers in cyclotomic $\mathbb{Z}_p$-extensions, J. Number Theory \textbf{150} (2015), 47--73.
-% CHECK
+\bibitem{Mi15b} J.~C.~Miller, Class numbers in cyclotomic $\mathbb{Z}_p$-extensions, J. Number Theory \textbf{150} (2015), 47--73; arXiv:1410.2921.
+% CHECK: the page numbers
+
+\bibitem{MO13} T.~Morisawa and R.~Okazaki, Mahler measure and Weber's class number problem in the cyclotomic $\mathbb{Z}_p$-extension of $\mathbb{Q}$ for odd prime number $p$, Tohoku Math. J. \textbf{65} (2013), 253--272.
 
 \bibitem{PARI} The PARI~Group, PARI/GP, Univ. Bordeaux, \url{https://pari.math.u-bordeaux.fr}.
+
+\bibitem{vdL82} F.~J.~van der Linden, Class number computations of real abelian number fields, Math. Comp. \textbf{39} (1982), 693--707.
 
 \bibitem{Wa97} L.~C.~Washington, Introduction to Cyclotomic Fields, 2nd ed., Grad. Texts in Math. \textbf{83}, Springer, New York, 1997.
 
