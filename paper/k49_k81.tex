@@ -15,19 +15,19 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{question}[theorem]{Question}
 
-\title[Class number one for two layers of cyclotomic $\mathbb{Z}_p$-extensions]{Class number one for the real cyclotomic field of conductor $243$ and for the second layer of the cyclotomic $\mathbb{Z}_7$-extension of $\mathbb{Q}$}
+\title[Three layers of cyclotomic $\mathbb{Z}_p$-extensions with class number one]{Three layers of cyclotomic $\mathbb{Z}_p$-extensions of $\mathbb{Q}$ with class number one}
 % \author{}   % to be filled in
-\date{November 24, 2026 (first draft)}
+\date{November 24, 2026 (second draft)}
 
 \emergencystretch=1.5em
 
 \begin{document}
 
 \begin{abstract}
-We prove that the maximal real subfield of the cyclotomic field of conductor $243$ has class number $1$, and that the second layer of the cyclotomic $\mathbb{Z}_7$-extension of $\mathbb{Q}$ has class number $1$.
+We prove that the following three fields have class number $1$: the maximal real subfield of the cyclotomic field of conductor $243$, the second layer of the cyclotomic $\mathbb{Z}_7$-extension of $\mathbb{Q}$, and the first layer of the cyclotomic $\mathbb{Z}_{29}$-extension of $\mathbb{Q}$.
 The proofs do not assume the generalized Riemann hypothesis.
 They combine an upper bound for class numbers due to Miller with a list of elements of small height whose norms are factored.
-From this list we deduce that the prime ideals above $16049777$ prime numbers are principal in the first field, and above $29835$ prime numbers in the second field.
+From this list we deduce that the prime ideals above $16049777$ prime numbers are principal in the first field, above $29835$ prime numbers in the second field, and above $6549261$ prime numbers in the third field.
 \end{abstract}
 
 \maketitle
@@ -61,18 +61,19 @@ In this note we prove the following theorem.
 \begin{enumerate}
 \item The class number of $k_{3^4} = \mathbb{Q}(e^{2\pi i/243})^+$ is $1$.
 \item The class number of $k_{7^2}$ is $1$.
+\item The class number of $k_{29}$ is $1$.
 \end{enumerate}
 \end{theorem}
 
 The proof does not assume the generalized Riemann hypothesis.
-The equality $h(k_{3^4}) = 1$ was proved under this hypothesis by van der Linden \cite[Theorem 2]{vdL82}.
+Under this hypothesis, the equality $h(k_{3^4}) = 1$ was proved by van der Linden \cite[Theorem 2]{vdL82}, and the equality $h(k_{29}) = 1$ was obtained by Miller \cite[Table 2]{Mi15b}.
 
 The proof follows the method of Miller \cite{Mi14, Mi15b}.
-Let $K$ denote one of the two fields.
+Let $K$ denote one of the three fields.
 First, an analytic inequality gives an upper bound for $h(K)$, provided that the prime ideals above sufficiently many prime numbers that split completely in $K$ are known to be principal.
-Second, a result on the action of the Galois group on the class group shows that $h(K)$ is either $1$ or at least $163$ if $K = k_{3^4}$, and either $1$ or at least $197$ if $K = k_{7^2}$.
-Third, we show that the prime ideals above the following prime numbers are principal: every prime number $q < 3 \cdot 10^{10}$ that splits completely in $k_{3^4}$, and every prime number $q \le 2.2 \cdot 10^7$ that splits completely in $k_{7^2}$.
-With these prime ideals, the upper bound in the first step is smaller than $163$ and $197$, respectively.
+Second, a result on the action of the Galois group on the class group shows that $h(K)$ is either $1$ or at least $t$, where $t = 163$ if $K = k_{3^4}$, $t = 197$ if $K = k_{7^2}$, and $t = 59$ if $K = k_{29}$.
+Third, we show that the prime ideals above the following prime numbers are principal: every prime number $q < 3 \cdot 10^{10}$ that splits completely in $k_{3^4}$, every prime number $q \le 2.2 \cdot 10^7$ that splits completely in $k_{7^2}$, and every prime number $q < 4 \cdot 10^9$ that splits completely in $k_{29}$.
+With these prime ideals, the upper bound in the first step is smaller than $t$.
 
 The new ingredient is the third step.
 In \cite{Mi15b}, a generator is given for each prime ideal.
@@ -116,6 +117,7 @@ Then $\sigma$ generates $\operatorname{Gal}(K/\mathbb{Q})$, and $\sigma(\eta_i) 
 \begin{example} \label{ex:fields}
 If $p^n = 3^4$, then $M = 243$ and $H = \{\pm 1\}$. We take $g = 2$, so that $\eta_i = 2\cos(2\pi \cdot 2^i/243)$.
 If $p^n = 7^2$, then $M = 343$ and $H = \{\pm 1, \pm 18, \pm 19\}$. We take $g = 3$.
+If $p^n = 29$, then $M = 841$ and $H$ has order $28$. We take $g = 2$.
 \end{example}
 
 \begin{lemma} \label{lem:field}
@@ -147,14 +149,15 @@ Hence $\pi O_K$ is the prime ideal of $K$ above $p$.
 Since $|\eta_i| \le p - 1$ for every $i$, each factor of the product has absolute value at most $b$.
 \end{proof}
 
-By \cref{lem:field}, the discriminant of $k_{3^4}$ is $3^{364}$ and the discriminant of $k_{7^2}$ is $7^{138}$.
+By \cref{lem:field}, the discriminants of $k_{3^4}$, $k_{7^2}$, and $k_{29}$ are $3^{364}$, $7^{138}$, and $29^{56}$, respectively.
 For a number field $L$, let $\operatorname{rd}(L)$ denote the root discriminant of $L$.
 Then
 \begin{align*}
 \log \operatorname{rd}(k_{3^4}) &= \tfrac{364}{81} \log 3 = 4.9369737416\ldots, \\
-\log \operatorname{rd}(k_{7^2}) &= \tfrac{138}{49} \log 7 = 5.4803183789\ldots,
+\log \operatorname{rd}(k_{7^2}) &= \tfrac{138}{49} \log 7 = 5.4803183789\ldots, \\
+\log \operatorname{rd}(k_{29}) &= \tfrac{56}{29} \log 29 = 6.5023643613\ldots,
 \end{align*}
-so that $\operatorname{rd}(k_{3^4}) < 139.35$ and $\operatorname{rd}(k_{7^2}) < 239.93$.
+so that $\operatorname{rd}(k_{3^4}) < 139.35$, $\operatorname{rd}(k_{7^2}) < 239.93$, and $\operatorname{rd}(k_{29}) < 666.73$.
 A prime number $q \ne 3$ splits completely in $k_{3^4}$ if and only if $q \equiv \pm 1 \pmod{243}$.
 
 \section{Three known results} \label{sec:known}
@@ -279,13 +282,14 @@ $k_7$ & $7$ & $3.3358460$ & $5$ & $1.5090534$ & $0.5272841$ & $4.8022$ \\
 \begin{enumerate}
 \item If $h(k_{3^4}) > 1$, then $h(k_{3^4}) \ge 163$.
 \item If $h(k_{7^2}) > 1$, then $h(k_{7^2}) \ge 197$.
+\item If $h(k_{29}) > 1$, then $h(k_{29}) \ge 59$.
 \end{enumerate}
 \end{corollary}
 
 \begin{proof}
-Let $p^n$ be $3^4$ or $7^2$, and let $\ell$ be a prime number dividing $h(k_{p^n})$.
+Let $p^n$ be $3^4$, $7^2$, or $29$, and let $\ell$ be a prime number dividing $h(k_{p^n})$.
 Then $\ell \ne p$ by \cref{prop:iwasawa}.
-Every field $L$ with $\mathbb{Q} \subseteq L \subsetneq k_{p^n}$ has class number $1$ by \cref{prop:sub}.
+Every field $L$ with $\mathbb{Q} \subseteq L \subsetneq k_{p^n}$ has class number $1$: this holds by \cref{prop:sub} if $p^n$ is $3^4$ or $7^2$, and the only such field is $\mathbb{Q}$ if $p^n = 29$.
 By \cref{prop:masley}, applied to $E = k_{p^n}$ and $F = \mathbb{Q}$, the number $\ell^f$ divides $h(k_{p^n})$, where $f$ denotes the order of $\ell$ modulo $p^n$.
 
 (1) We show that $\ell^f \ge 163$.
@@ -297,12 +301,17 @@ The orders of $2$, $5$, $7$, and $11$ modulo $81$ are $54$, $54$, $27$, and $54$
 If $f = 1$, then $\ell \equiv 1 \pmod{49}$, and the least prime number with this property is $197$.
 If $f \ge 2$ and $\ell^f < 197$, then $\ell \in \{2, 3, 5, 11, 13\}$.
 The orders of $2$, $3$, $5$, $11$, and $13$ modulo $49$ are $21$, $42$, $42$, $21$, and $14$, respectively, so that $\ell^f > 197$ in each of these cases.
+
+(3) We show that $\ell^f \ge 59$.
+If $f = 1$, then $\ell \equiv 1 \pmod{29}$, and the least prime number with this property is $59$.
+If $f \ge 2$ and $\ell^f < 59$, then $\ell \in \{2, 3, 5, 7\}$.
+The orders of $2$, $3$, $5$, and $7$ modulo $29$ are $28$, $28$, $14$, and $7$, respectively, so that $\ell^f > 59$ in each of these cases.
 \end{proof}
 
 \section{Principal prime ideals from norms} \label{sec:relations}
 
 Throughout this section, $K = k_{p^n}$ is as in \cref{sec:field}, and we assume that every field $k_{p^j}$ with $0 \le j < n$ has class number $1$.
-By \cref{prop:sub}, this assumption holds for $p^n = 3^4$ and for $p^n = 7^2$.
+By \cref{prop:sub}, this assumption holds for $p^n = 3^4$ and for $p^n = 7^2$; it holds for $p^n = 29$ since $k_1 = \mathbb{Q}$.
 We say that a prime number $r$ is \emph{settled} if every prime ideal of $K$ above $r$ is principal.
 The prime number $p$ is settled by \cref{lem:field}.
 
@@ -464,6 +473,33 @@ The prime numbers $q_i$ of this list, together with $19$, form the set $S_7$.
 The greatest element of $S_7$ is $59529496693$.
 \end{proof}
 
+\subsection{The field $k_{29}$}
+
+Let $K = k_{29}$.
+Let $S_{29}$ denote the set of prime numbers $q < 4 \cdot 10^9$ with $q^{28} \equiv 1 \pmod{841}$.
+The set $S_{29}$ has $6549261$ elements.
+Its least elements are $41$, $137$, $467$, and $571$, and its greatest element is $3999999659$.
+
+\begin{proposition} \label{prop:data29}
+Every prime number in $S_{29}$ is settled.
+\end{proposition}
+
+\begin{proof}
+The accompanying data consist of two parts.
+The first part gives, for each of the $327$ elements $q$ of $S_{29}$ below $10^5$, an element $\alpha_q \in O_K$ with $|N_{K/\mathbb{Q}}(\alpha_q)| = q$.
+Such an element is a relation for $q$ whose norm has no other prime factor, so that $q$ is settled by \cref{lem:relation}.
+The second part gives, for each of the $6548934$ elements $q$ of $S_{29}$ with $q \ge 10^5$, a relation $\alpha_q$ for $q$ such that every split prime $r \ne q$ dividing $N_{K/\mathbb{Q}}(\alpha_q)$ satisfies $r < q$.
+By \cref{prop:range} with $A = 10^5$ and $X = 4 \cdot 10^9$, every element of $S_{29}$ is settled.
+\end{proof}
+
+\begin{remark} \label{rem:41}
+In $k_{29}$, we did not find elements to which \cref{lem:block} applies with $q_0 = 41$.
+The elements $\alpha_q$ of the first part were computed with the functions \texttt{bnfinit} and \texttt{bnfisprincipal} of PARI/GP \cite{PARI}, and then written in the form $c + \sum_i a_i \eta_i$; the integers $c$ and $a_i$ have at most four digits.
+The function \texttt{bnfinit} assumes the generalized Riemann hypothesis.
+This does not affect the proof, since the proof only uses the elements $\alpha_q$ themselves, and their norms are verified as described below.
+For example, the relation for $q = 499979$ in the second part is $\alpha = 1 + \eta_1 + \eta_3 + \eta_4 + \eta_7 - \eta_{11} + \eta_{12}$, and $|N_{K/\mathbb{Q}}(\alpha)| = 41^3 \cdot 202621 \cdot 271879 \cdot q$.
+\end{remark}
+
 \subsection{The verification} \label{subsec:verification}
 
 A relation is stored as the prime number $q$, the integers $c$ and $a_i$, and the factorization of $|N_{K/\mathbb{Q}}(\alpha)|$ into prime numbers.
@@ -485,7 +521,7 @@ By \cref{lem:field}, the image of $N_{K/\mathbb{Q}}(\alpha)$ under this homomorp
 \[
 \prod_{j \in \mathbb{Z}/N\mathbb{Z}} \Bigl( c + \sum_i a_i \rho_{i+j} \Bigr), \quad \text{where} \quad \rho_i = \sum_{a \in H} z^{g^i a} .
 \]
-The program uses twelve such prime numbers $l > 2^{61}$.
+The program uses twelve such prime numbers $l > 2^{61}$, and it adds further ones if they are needed for the condition below.
 By \cref{lem:field}, the integer $N_{K/\mathbb{Q}}(\alpha)$ has absolute value at most $b^N$, where $b = |c| + (p-1)\sum_i |a_i|$.
 It is therefore determined by its residues modulo prime numbers $l$ whose product exceeds $2b^N + 1$, and the program checks that this condition holds.
 
@@ -497,7 +533,8 @@ We reduce a basis of this lattice with the LLL algorithm, compute the norms of t
 This takes about $20$ to $35$ milliseconds per prime number on one core.
 For $k_{7^2}$, the whole search took about $20$ minutes on two cores, and the verification takes less than $15$ seconds.
 For $k_{3^4}$, the interval from $10^7$ to $3 \cdot 10^{10}$ was divided into $82$ intervals, and the search and the verification took between $16$ and $41$ minutes per interval on machines with four cores.
-The norms of the elements of small height are much smaller in $k_{3^4}$ than in $k_{7^2}$: for random elements with at most five nonzero coefficients $a_i \in \{\pm 1\}$, the median of the norm is about $10^{12}$ in $k_{3^4}$ and about $10^{18}$ in $k_{7^2}$.
+For $k_{29}$, the interval from $5 \cdot 10^5$ to $4 \cdot 10^9$ was divided into $80$ intervals, and the search and the verification took less than $5$ minutes per interval.
+The norms of the elements of small height depend on the field: for random elements with at most five nonzero coefficients $a_i \in \{\pm 1\}$, the median of the norm is about $10^{12}$ in $k_{3^4}$, about $10^{18}$ in $k_{7^2}$, and about $10^{20}$ in $k_{29}$.
 \end{remark}
 
 \begin{remark} \label{rem:second}
@@ -543,17 +580,18 @@ For a set $S$ of prime numbers and a positive real number $c$, let $\Sigma(S, c)
 \begin{enumerate}
 \item Let $c = 100$. Then $I(c) \le 1.2646927462$ and $\Sigma(S_3, c) \ge 0.8733014006$. For $L = k_{3^4}$ and $S = S_3$, the number $B$ of \cref{prop:miller} satisfies $B \ge 0.0438183$, and $h(k_{3^4}) < 99.8767$.
 \item Let $c = 80$. Then $I(c) \le 1.2651137825$ and $\Sigma(S_7, c) \ge 1.4113091085$. For $L = k_{7^2}$ and $S = S_7$, the number $B$ of \cref{prop:miller} satisfies $B \ge 0.0380603$, and $h(k_{7^2}) < 152.0639$.
+\item Let $c = 80$. Then $\Sigma(S_{29}, c) \ge 2.6238431599$. For $L = k_{29}$ and $S = S_{29}$, the number $B$ of \cref{prop:miller} satisfies $B \ge 0.2285484$, and $h(k_{29}) < 42.7877$.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-The hypothesis of \cref{prop:miller} on the sets $S_3$ and $S_7$ holds by \cref{prop:data3,prop:data7}.
+The hypothesis of \cref{prop:miller} on the sets $S_3$, $S_7$, and $S_{29}$ holds by \cref{prop:data3,prop:data7,prop:data29}.
 The inequalities are obtained with ball arithmetic, using the library Arb \cite{Jo17}, which is now part of FLINT \cite{FLINT}.
 For the integral, we use \cref{lem:integral} with $\varepsilon = 10^{-3}$ and $R = 200$, and the integral over the interval from $\varepsilon$ to $R$ is enclosed by the rigorous integration algorithm of \cite{Jo18}.
 For the sum, we use a partial sum, which is a lower bound since every term is positive.
 In (2), the partial sum consists of the terms with $m \le 8$.
-In (1), the terms are computed by \eqref{eq:term}, and the partial sum consists of the terms with $m \le 8$ and $q^{m-1} \le 10^{16}$.
-The set $S_3$ is computed again in this step, and its elements are proved to be prime numbers.
+In (1) and (3), the terms are computed by \eqref{eq:term}, and the partial sum consists of the terms with $m \le 8$ and $q^{m-1} \le 10^{16}$.
+The sets $S_3$ and $S_{29}$ are computed again in this step, and their elements are proved to be prime numbers.
 
 We have $\pi/2 + \gamma + \log 8\pi = 5.3721834192\ldots$.
 With the values of $\log \operatorname{rd}$ of \cref{sec:field}, we obtain in (1)
@@ -564,9 +602,14 @@ B &\ge 5.3721834192 - 4.9369737417 - 1.2646927462 + 0.8733014006 \\
 and in (2)
 \begin{align*}
 B &\ge 5.3721834192 - 5.4803183790 - 1.2651137825 + 1.4113091085 \\
-&> 0.0380603 .
+&> 0.0380603,
 \end{align*}
-The bounds for the class numbers follow from \cref{prop:miller} with $N = 81$ and $N = 49$; they are computed from the values of $B$ before rounding.
+and in (3)
+\begin{align*}
+B &\ge 5.3721834192 - 6.5023643614 - 1.2651137825 + 2.6238431599 \\
+&> 0.2285484 .
+\end{align*}
+The bounds for the class numbers follow from \cref{prop:miller} with $N = 81$, $N = 49$, and $N = 29$; they are computed from the values of $B$ before rounding.
 \end{proof}
 
 \begin{table}[h]
@@ -584,16 +627,21 @@ $k_{7^2}$ & $60$ & $1.2660224223$ & $1.3962035757$ & $0.0220461$ & $196.8913$ \\
  & $80$ & $1.2651137825$ & $1.4113091085$ & $0.0380603$ & $152.0639$ \\
  & $100$ & $1.2646927462$ & $1.4184096767$ & $0.0455819$ & $158.7142$ \\
  & $150$ & $1.2642766179$ & $1.4254912948$ & $0.0530797$ & $204.4427$ \\
+\midrule
+$k_{29}$ & $60$ & $1.2660224223$ & $2.5675506639$ & $0.1713472$ & $42.8037$ \\
+ & $80$ & $1.2651137825$ & $2.6238431599$ & $0.2285484$ & $42.7877$ \\
+ & $100$ & $1.2646927462$ & $2.6505824088$ & $0.2557087$ & $47.8037$ \\
+ & $150$ & $1.2642766179$ & $2.6774279523$ & $0.2829703$ & $64.7974$ \\
 \bottomrule
 \end{tabular}
-\caption{Bounds obtained from \cref{prop:miller} with the sets $S_3$ and $S_7$. The column $\Sigma$ is a partial sum of the double sum. Every entry is rounded in the safe direction, and the last two columns are computed from the values before rounding.}
+\caption{Bounds obtained from \cref{prop:miller} with the sets $S_3$, $S_7$, and $S_{29}$. The column $\Sigma$ is a partial sum of the double sum. Every entry is rounded in the safe direction, and the last two columns are computed from the values before rounding.}
 \label{tab:bounds}
 \end{table}
 
 \begin{proof}[Proof of \cref{thm:main}]
-By \cref{prop:bound}, we have $h(k_{3^4}) < 99.8767$ and $h(k_{7^2}) < 152.0639$.
-By \cref{cor:threshold}, the class number $h(k_{3^4})$ is either $1$ or at least $163$, and the class number $h(k_{7^2})$ is either $1$ or at least $197$.
-Hence both class numbers are $1$.
+By \cref{prop:bound}, we have $h(k_{3^4}) < 99.8767$, $h(k_{7^2}) < 152.0639$, and $h(k_{29}) < 42.7877$.
+By \cref{cor:threshold}, each of these class numbers is either $1$ or at least $163$, $197$, and $59$, respectively.
+Hence the three class numbers are $1$.
 \end{proof}
 
 \section{Remarks} \label{sec:remarks}
@@ -619,7 +667,7 @@ The proof of \cref{thm:main} does not use this result.
 \begin{remark} \label{rem:limit}
 In \cref{prop:miller}, the inequality $B > 0$ requires that the sum over $S$ exceeds $\log \operatorname{rd}(L) + I(c) - \pi/2 - \gamma - \log 8\pi$, and the prime numbers $q \le X$ that split completely in $L$ contribute about $(4/N) \log X$ to this sum.
 Hence the number of prime numbers that are needed grows quickly with the degree and with the root discriminant.
-By a numerical estimate, the field $k_{29}$ requires the split primes up to about $4 \cdot 10^9$, and the field $k_{31}$ requires the split primes up to at least $10^{11}$.
+By a numerical estimate, the field $k_{31}$ requires the split primes up to at least $10^{11}$.
 Under the generalized Riemann hypothesis, the analog of \cref{prop:miller} in \cite{Mi15b} requires only a small set $S$.
 \end{remark}
 
