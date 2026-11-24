@@ -96,7 +96,9 @@ def split_primes(job):
     return out
 if __name__=="__main__":
     data=open(fn,"rb").read(); sha=hashlib.sha256(data).hexdigest()
-    lines=[l for l in (t.strip() for t in data.decode().split("\n")) if l and not l.startswith("#")]      # as in verify.py
+    text=data.decode().split("\n")
+    if text[0].split()!=["#","field",str(p),str(n)]: raise SystemExit("FAILED: the first line must be '# field %d %d'"%(p,n))
+    lines=[l for l in (t.strip() for t in text) if l and not l.startswith("#")]      # as in verify.py
     step=max(1,(B-A)//(4*procs)+1); jobs=[(r,lo,min(B,lo+step)) for r in range(1,M) if split(r) for lo in range(A,B,step)]
     with Pool(procs) as pool:
         res=pool.map(check,lines,chunksize=500)

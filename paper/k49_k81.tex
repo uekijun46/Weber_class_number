@@ -494,7 +494,8 @@ By \cref{prop:range} with $A = 10^5$ and $X = 4 \cdot 10^9$, every element of $S
 
 \begin{remark} \label{rem:41}
 In $k_{29}$, we did not find elements to which \cref{lem:block} applies with $q_0 = 41$.
-The elements $\alpha_q$ of the first part were computed with the functions \texttt{bnfinit} and \texttt{bnfisprincipal} of PARI/GP \cite{PARI}, and then written in the form $c + \sum_i a_i \eta_i$; the integers $c$ and $a_i$ have at most four digits.
+The elements $\alpha_q$ of the first part were computed with the functions \texttt{bnfinit} and \texttt{bnfisprincipal} of PARI/GP \cite{PARI}, and then written in the form $c + \sum_i a_i \eta_i$.
+The integers $c$ and $a_i$ are larger than in the other relations: they have at most four digits for $234$ of the $327$ prime numbers, and at most $24$ digits in all cases.
 The function \texttt{bnfinit} assumes the generalized Riemann hypothesis.
 This does not affect the proof, since the proof only uses the elements $\alpha_q$ themselves, and their norms are verified as described below.
 For example, the relation for $q = 499979$ in the second part is $\alpha = 1 + \eta_1 + \eta_3 + \eta_4 + \eta_7 - \eta_{11} + \eta_{12}$, and $|N_{K/\mathbb{Q}}(\alpha)| = 41^3 \cdot 202621 \cdot 271879 \cdot q$.
@@ -534,13 +535,15 @@ This takes about $20$ to $35$ milliseconds per prime number on one core.
 For $k_{7^2}$, the whole search took about $20$ minutes on two cores, and the verification takes less than $15$ seconds.
 For $k_{3^4}$, the interval from $10^7$ to $3 \cdot 10^{10}$ was divided into $82$ intervals, and the search and the verification took between $16$ and $41$ minutes per interval on machines with four cores.
 For $k_{29}$, the interval from $5 \cdot 10^5$ to $4 \cdot 10^9$ was divided into $80$ intervals, and the search and the verification took between $2$ and $7$ minutes per interval.
-The norms of the elements of small height depend on the field: for random elements with at most five nonzero coefficients $a_i \in \{\pm 1\}$, the median of the norm is about $10^{12}$ in $k_{3^4}$, about $10^{18}$ in $k_{7^2}$, and about $10^{20}$ in $k_{29}$.
+The norms of the elements of small height depend on the field.
+In our samples of elements with $|c| \le 2$ and at most five nonzero coefficients $a_i \in \{\pm 1\}$, typical norms were of the order of $10^{12}$ in $k_{3^4}$, $10^{18}$ in $k_{7^2}$, and $10^{20}$ in $k_{29}$; these figures depend on the sample and are only an indication.
 \end{remark}
 
 \begin{remark} \label{rem:second}
 All relations were verified a second time with an independent program.
-This program computes the resultant of $\Phi_M$ and the polynomial $c + \sum_i a_i \sum_{a \in H} x^{g^i a \bmod M}$ with PARI/GP; its absolute value is $|N_{K/\mathbb{Q}}(\alpha)|^{p-1}$.
 It proves primality with the function \texttt{isprime} of PARI/GP.
+For $k_{3^4}$ and $k_{7^2}$, it computes the resultant of $\Phi_M$ and the polynomial $c + \sum_i a_i \sum_{a \in H} x^{g^i a \bmod M}$ with PARI/GP; its absolute value is $|N_{K/\mathbb{Q}}(\alpha)|^{p-1}$.
+For $k_{29}$, this resultant is slow, and the program computes the norm as the determinant of the matrix of the multiplication by $\alpha$ with respect to the basis $1, \eta_0, \ldots, \eta_{27}$ of $K$ over $\mathbb{Q}$; the resultant is used for about one relation in $800$.
 \end{remark}
 
 \section{The upper bounds} \label{sec:bound}
