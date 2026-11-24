@@ -1,0 +1,97 @@
+name: relations-recheck
+# Second check of all published rows of k_{p^n}: for every range file in the releases,
+#   (1) the checksum is compared with the one committed in relations/k{p}_{n}/,
+#   (2) audit/relations_recheck.py checks every row and the completeness with PARI (independent of verify.py),
+#   (3) the current relations/verify.py is run again in range mode.
+# The results are committed to relations/k{p}_{n}/recheck/.  Manual start only.  Public repository: no cost.
+on:
+  workflow_dispatch:
+    inputs:
+      p: {description: 'prime p', default: '3'}
+      n: {description: 'exponent n', default: '4'}
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.m.outputs.list }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: relations
+      - id: m
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "list=$(ls "relations/k${P}_${N}"/rows_*.sha256 | sed 's/.*rows_//; s/\.sha256$//' | python3 -c "import sys,json;print(json.dumps(sorted(sys.stdin.read().split(),key=lambda s:int(s.split('_')[0]))))")" >> "$GITHUB_OUTPUT"
+  check:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        r: ${{ fromJson(needs.plan.outputs.list) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint==0.9.0 cypari2
+      - name: Download one range file and check it twice
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+          R: ${{ matrix.r }}
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          A="${R%_*}"; B="${R#*_}"; f="rows_${A}_${B}.txt"; d="relations/k${P}_${N}"
+          mkdir dl; found=0
+          for tag in $(gh api "repos/${GITHUB_REPOSITORY}/releases" --paginate --jq '.[].tag_name' | grep "^k${P}_${N}-rows-"); do
+            if gh release download "$tag" -p "$f.gz" -D dl 2>/dev/null; then found=1; echo "from release $tag"; break; fi
+          done
+          test "$found" = 1
+          gunzip "dl/$f.gz"
+          test "$(cut -d' ' -f1 "$d/rows_${A}_${B}.sha256")" = "$(sha256sum "dl/$f" | cut -d' ' -f1)"
+          echo "checksum agrees"
+          python3 audit/relations_recheck.py "$P" "$N" "dl/$f" "$A" "$B" "$(nproc)" | tee out1.txt
+          (cd relations && python3 verify.py "../dl/$f" --range "$A" "$B" --c 60,80,100,150,200) | tee out2.txt
+          grep "^RECHECK PASS " out1.txt | sed 's/^RECHECK PASS //' > r1.json; test -s r1.json
+          grep "^RANGE PASS " out2.txt | sed 's/^RANGE PASS //' > r2.json; test -s r2.json
+          python3 -c "import json,os,hashlib,sys;json.dump({'recheck':json.load(open('r1.json')),'verify':json.load(open('r2.json')),'run':os.environ['GITHUB_RUN_ID'],'commit':os.environ['GITHUB_SHA'],'verify_sha256':hashlib.sha256(open('relations/verify.py','rb').read()).hexdigest(),'recheck_sha256':hashlib.sha256(open('audit/relations_recheck.py','rb').read()).hexdigest()},open(sys.argv[1],'w'))" "recheck_${A}_${B}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: recheck-${{ matrix.r }}
+          path: recheck_*.json
+          if-no-files-found: error
+  collect:
+    needs: check
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: incoming
+          pattern: recheck-*
+          merge-multiple: true
+      - name: Commit the results
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          d="relations/k${P}_${N}/recheck"; mkdir -p "$d"
+          if ls incoming/recheck_*.json >/dev/null 2>&1; then cp incoming/recheck_*.json "$d"/; fi
+          echo "results: $(ls "$d" | wc -l) of $(ls "relations/k${P}_${N}"/rows_*.sha256 | wc -l) range files"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$d"
+          if ! git diff --cached --quiet; then git commit -m "k_{${P}^${N}}: second check of the range files, Actions run ${GITHUB_RUN_ID}"; git pull --rebase; git push; fi
