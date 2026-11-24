@@ -10,3 +10,4 @@ rig_log_*.txt
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.pkl
