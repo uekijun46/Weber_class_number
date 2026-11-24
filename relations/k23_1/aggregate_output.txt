@@ -1,0 +1,11 @@
+# python3 -O aggregate.py k23_1 2 23 1 50000000      (2026-11-25, python-flint 0.9.0)
+field k_{23^1}; 4 ranges covering [0, 50000000)
+split primes below 50000000, each with a verified row according to the summaries: 130425 (number recomputed here); rows: 130425
+prime sums: recomputed here from the list of split primes
+c=60: integral <= 1.2660224223, prime sum >= 2.1990442041, B >= 0.3068684, h < 30.1354
+c=80: integral <= 1.2651137825, prime sum >= 2.2363500323, B >= 0.3450829, h < 35.7309
+c=100: integral <= 1.2646927462, prime sum >= 2.2539105016, B >= 0.3630644, h < 42.4516
+c=150: integral <= 1.2642766179, prime sum >= 2.2714394837, B >= 0.3810095, h < 60.6782
+c=200: integral <= 1.2641309048, prime sum >= 2.2776185624, B >= 0.3873343, h < 79.5832
+degree 23, discriminant 23^44, least possible class number > 1: 47
+VERDICT: PASS  (h < 30.1354 < 47)

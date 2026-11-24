@@ -680,6 +680,14 @@ Fukuda, Komatsu, and Morisawa \cite{FKM14} proved that no prime number less than
 The proof of \cref{thm:main} does not use this result.
 \end{remark}
 
+\begin{remark} \label{rem:23}
+The equality $h(k_{23}) = 1$ is claimed in \cite{Ch26}, where relations for $99167$ of the split primes of $k_{23}$ below $5 \cdot 10^7$ are obtained from an exhaustive search over the elements with coefficients in $\{-1, 0, 1\}$; according to \cite{Ch26}, this search took about $25$ core-hours.
+We confirmed this equality with the method of the present note.
+There are $130425$ split primes of $k_{23}$ below $5 \cdot 10^7$, and all of them are settled: for the $150$ split primes below $3 \cdot 10^4$, we use elements whose norm has absolute value $q$, computed as in \cref{rem:41}, and for the others we use \cref{prop:range} with $A = 3 \cdot 10^4$.
+With $c = 60$, \cref{prop:miller} gives $B \ge 0.3068684$ and $h(k_{23}) < 30.1354$, and the argument of \cref{cor:threshold} shows that $h(k_{23})$ is either $1$ or at least $47$.
+The search took about $8$ minutes of processor time.
+\end{remark}
+
 \begin{remark} \label{rem:limit}
 In \cref{prop:miller}, the inequality $B > 0$ requires that the sum over $S$ exceeds $\log \operatorname{rd}(L) + I(c) - \pi/2 - \gamma - \log 8\pi$, and the prime numbers $q \le X$ that split completely in $L$ contribute about $(4/N) \log X$ to this sum.
 Hence the number of prime numbers that are needed grows quickly with the degree and with the root discriminant.
