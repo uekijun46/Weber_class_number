@@ -27,7 +27,7 @@ $\mathbb{Q}$ の円分 $\hat{\mathbb{Z}}$ 拡大の部分体 $k_m$ の類数を�
 ## 次の作業（優先順）
 
 1. **$h(k_{7^2})=1$ のノート `paper/k49.tex` を仕上げる。** 文献の書誌情報の確認、Hakkarainen の表と Horie・Morisawa の論文の確認、利用者による推敲。
-2. **$k_{3^4}$ の無条件証明。** `relations/README.md` を読む。残りの区間は GitHub Actions の `relations-ranges`（`p=3, n=4, lo=14000000, hi=30000000000, jobs=80`）。起動は利用者の了承を得てから。終わったら `cd relations && python3 aggregate.py k3_4` で上界が 163 未満かを確かめる。足りなければ `hi` を伸ばす。そのあと、`verify.py` と `aggregate.py` の第三者監査、文献確認、文章化。
+2. **$k_{3^4}$ の仕上げ。** 計算は完了（`relations/README.md`：$h<99.8767<163$）。残りは、`relations/verify.py` と `aggregate.py` の第三者監査（範囲の形式の帰納法の論理、ノルムの厳密計算、完全性の確認、和の丸めを重点的に）、文献確認、文章化。監査が済むまで定理とは書かない。
 3. **同じ方法を $k_{29}$、$k_{31}$ に試す。** 最小の完全分解素数の処理（格子ブロック）が要るかを先に調べる。GRH を仮定する $k_{37}$〜$k_{47}$ は後回し。
 4. 合成数次の layer は保留（`composite/`）。
 
