@@ -681,11 +681,13 @@ The proof of \cref{thm:main} does not use this result.
 \end{remark}
 
 \begin{remark} \label{rem:23}
-The equality $h(k_{23}) = 1$ is claimed in \cite{Ch26}, where relations for $99167$ of the split primes of $k_{23}$ below $5 \cdot 10^7$ are obtained from an exhaustive search over the elements with coefficients in $\{-1, 0, 1\}$; according to \cite{Ch26}, this search took about $25$ core-hours.
+The equality $h(k_{23}) = 1$ is claimed in \cite{Ch26}.
+There, relations for $99167$ of the split primes of $k_{23}$ below $5 \cdot 10^7$ and for $55$ larger split primes are obtained from an exhaustive search over the elements with coefficients in $\{-1, 0, 1\}$, and \cref{prop:miller} with $c = 50$ gives $h(k_{23}) < 37.72$; according to \cite{Ch26}, the search took about $25$ core-hours.
 We confirmed this equality with the method of the present note.
+For $p^n = 23$, we have $M = 529$, the group $H$ has order $22$, and we take $g = 5$.
 There are $130425$ split primes of $k_{23}$ below $5 \cdot 10^7$, and all of them are settled: for the $150$ split primes below $3 \cdot 10^4$, we use elements whose norm has absolute value $q$, computed as in \cref{rem:41}, and for the others we use \cref{prop:range} with $A = 3 \cdot 10^4$.
-With $c = 60$, \cref{prop:miller} gives $B \ge 0.3068684$ and $h(k_{23}) < 30.1354$, and the argument of \cref{cor:threshold} shows that $h(k_{23})$ is either $1$ or at least $47$.
-The search took about $8$ minutes of processor time.
+With $c = 60$, \cref{prop:miller} gives $B \ge 0.3068684$ and $h(k_{23}) < 30.1354$, The argument of \cref{cor:threshold} shows that $h(k_{23})$ is either $1$ or at least $47$: the least prime number $\ell \equiv 1 \pmod{23}$ is $47$, and the orders of $2$, $3$, and $5$ modulo $23$ are $11$, $11$, and $22$.
+Our search took about $4$ minutes on two cores.
 \end{remark}
 
 \begin{remark} \label{rem:limit}
