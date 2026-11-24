@@ -169,3 +169,10 @@ VPN 経由で MathSciNet を使った確認。記号は現在のもの。
 - Section 6（導手 256、$c=210$）：完全分解素数の和 $>0.7023$ に、完全分岐する 2 の項 $>0.0331$ を足して $B>0.0021$、$h<5539$。最後は Fukuda–Komatsu の結果（小さい素数の非可除性）で $h=1$。
 - 「van der Linden は導手 128 で 2 の上の分岐する素イデアルの寄与を使った」と Section 5 にある。
 - ノートの修正：補題の引用を Lemma 5.1 に、ページを 381–398 に。分岐する素数の項についての注意を追加。
+
+## 追記（2026-11-24 夜、その 4）：Johansson の 2 論文を原典で確認
+
+利用者から受け取った PDF による。
+- F. Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software – ICMS 2018 (J. H. Davenport et al., eds.), Lecture Notes in Comput. Sci. 10931, Springer, Cham, 2018, **pp. 255–263**（章の脚注と目次で確認。次の章は 264 ページから）。積分の方法は Petras のアルゴリズム（適応的な二分と Gauss–Legendre 求積）で、誤差の上界は厳密。
+- F. Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, IEEE Trans. Comput. 66 (2017), no. 8, **1281–1292**（12 ページ、DOI 10.1109/TC.2017.2690633）。
+- これで、ノート 2 本の文献表に未確認の印（CHECK）は残っていない。
