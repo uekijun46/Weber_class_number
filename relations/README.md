@@ -19,6 +19,7 @@ PARI の類群計算（`bnfinit`、`bnfisprincipal`）を使わずに、$k_{p^n}
 | `verify.py` | 検証器。ノルムは補助素数での計算と中国剰余定理で厳密に求める。素数性は証明つきの判定。上界は区間演算 | 信頼する側。python-flint のみ使用 |
 | `aggregate.py` | 最後の段階。区間が 0 から隙間なく続くことを確かめ、完全分解素数の一覧と素数についての和を**自分で計算し直して**、類数の上界を出す。要約（`summary_A_B.json`）から使うのは「その区間が `verify.py` に合格した」という事実だけ | 信頼する側 |
 | `check_recheck.py` | 全行の再検証（`recheck.yml`）の結果が、すべての範囲ファイルについて揃っているかを確かめる | 信頼する側 |
+| `bound_plus.py` | 分岐する素数の項を足した上界（`docs/improvements.md`。ノートの証明では使わない） | 参考 |
 | `subfields.py` | 真部分体 $k_{p^j}$（$j<n$）の類数が 1 であることを、素数を使わない Miller の補題、階数定理、岩澤の定理だけで確かめる | 信頼する側 |
 | `field.py`、`collect.py`、`search.py`、`export.py`、`gen_range.py` | 行の探索（無作為な小さい元、素数ごとの格子の簡約）。ノルムは固定小数点、因数分解は PARI | 信頼しない。出力は `verify.py` が確かめる |
 | `need_k81.py` | $k_{3^4}$ に必要な範囲の見積もり（浮動小数） | 見積もり用 |
@@ -89,3 +90,10 @@ python3 check_recheck.py k3_4                                     # 全行の再
 
 - 修正後のワークフロー 2 本（`relations.yml`、`recheck.yml`）は、最後の修正の後には実行していない。
 - 範囲の形式の行（Actions で生成）は GitHub のリリースに置かれ、リポジトリには要約とチェックサムだけが入る。
+
+## $k_{29}$（試行中、2026-11-24）
+
+- `k29_1/base_cert.txt`：$10^5$ 未満の完全分解素数 327 個の行（PARI で求めたノルム $q$ の元。`verify.py --complete 100000` が合格）。
+- `k29_1/rows_100000_500000.txt`：区間 $[10^5,5\cdot10^5)$ の 1,093 行（`verify.py --range` と `audit/relations_recheck.py` が合格）。
+- 残りは $[5\cdot10^5,4\cdot10^9)$。経過と見積もりは `docs/improvements.md` の §6。
+- `verify.py` は、補助素数を必要に応じて追加するように変更した（係数の大きい元のため）。この変更は監査を受けていない。

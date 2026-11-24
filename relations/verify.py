@@ -39,27 +39,30 @@ class K:
         self.H=[pow(g,N*t,M) for t in range(p-1)]; need(len(set(self.H))==p-1,"H")
         self.exps=[[pow(g,i,M)*h%M for h in self.H] for i in range(N)]
         need(sorted(e for ex in self.exps for e in ex)==[x for x in range(M) if x%p],"cosets of H")
-        # auxiliary primes l = 1 mod M with a verified element z of order M, and eta_i mod l
-        self.aux=[]; l=(2**61//M)*M+1
-        while len(self.aux)<12:
+        # auxiliary primes l = 1 mod M with a verified element z of order M, and eta_i mod l; more are added when a norm needs them
+        self.aux=[]; self._l=(2**61//M)*M+1
+        while len(self.aux)<12: self._add_aux()
+    def _add_aux(self):
+        M,p=self.M,self.p; l=self._l
+        while True:
             l+=M
-            if not is_prime(l): continue
-            z=next(pow(x,(l-1)//M,l) for x in range(2,200) if pow(pow(x,(l-1)//M,l),M//p,l)!=1)
-            need(pow(z,M,l)==1 and pow(z,M//p,l)!=1,"root of unity")
-            zp=[1]
-            for _ in range(M-1): zp.append(zp[-1]*z%l)
-            self.aux.append((l,[sum(zp[e] for e in ex)%l for ex in self.exps]))
+            if is_prime(l): break
+        self._l=l
+        z=next(pow(x,(l-1)//M,l) for x in range(2,200) if pow(pow(x,(l-1)//M,l),M//p,l)!=1)
+        need(pow(z,M,l)==1 and pow(z,M//p,l)!=1,"root of unity")
+        zp=[1]
+        for _ in range(M-1): zp.append(zp[-1]*z%l)
+        self.aux.append((l,[sum(zp[e] for e in ex)%l for ex in self.exps]))
     def split(self,q): return q!=self.p and pow(q,self.p-1,self.M)==1
     def norm(self,c,coef):                           # exact |N(alpha)|, by the Chinese remainder theorem
         N=self.N; b=abs(c)+(self.p-1)*sum(abs(a) for i,a in coef); bound=2*b**N+1
-        mod=1; res=0
-        for l,R in self.aux:
-            if mod>bound: break
-            v=1
+        mod=1; res=0; k=0
+        while mod<=bound:
+            if k==len(self.aux): self._add_aux()
+            l,R=self.aux[k]; k+=1; v=1
             for j in range(N):
                 v=v*(c+sum(a*R[(i+j)%N] for i,a in coef))%l
             res=res+mod*((v-res)*pow(mod,-1,l)%l); mod*=l       # res = v mod l, res unchanged mod the old modulus
-        need(mod>bound,"not enough auxiliary primes")
         if res>mod//2: res-=mod
         return abs(res)
     def logrd(self):                                  # conductor-discriminant formula: phi(p^j) characters of conductor p^(j+1), j = 1..n
