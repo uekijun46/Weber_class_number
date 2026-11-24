@@ -159,3 +159,13 @@ VPN 経由で MathSciNet を使った確認。記号は現在のもの。
 - 文献表では Acta Arith. の論文のページが 381–398。MathSciNet も 381–398。以前に出版社のページとして 381–397 と記録したものと食い違う。ノートでは 381–398 に合わせた。
 
 **ノート `paper/k49.tex` の修正**：引用の番号を出版版に合わせた（Lemma 1、Theorem 7）。階数定理の引用を van der Linden の Theorems 6, 8 に変更。$h(k_7)=1$ に van der Linden の Theorem 1 を追加。本文で確認していない Math. Comp. 2015 の論文（Lemma 3.1）への引用を削除。
+
+## 追記（2026-11-24 夜、その 3）：Miller, Acta Arith. の PDF で確認したこと
+
+- 書誌：Acta Arith. 164 (2014), no. 4, **381–398**（PDF は 18 ページ。最後のページ 398 は文献表と著者の住所）。EuDML の「381–397」は誤り。
+- 無条件の上界は **Lemma 5.1**。文面は J. Number Theory の Lemma 1 と同じで、$S$ は「完全分解して単項素イデアルになる素数の集合の部分集合」。GRH 下の版は Lemma 5.2（$F$ は Gauss 関数、上界に因子 $e^{(c/4)^2}$）。
+- (4.1)：$h=\dfrac{4\mathcal{H}(F)/n}{C-\mathcal{G}(F)-\log\mathrm{rd}(K)+\frac1{hn}\sum_\rho\Phi(\rho)+\frac2{hn}\sum_{\mathfrak{P}}\sum_m\frac{\log N\mathfrak{P}}{N\mathfrak{P}^{m/2}}F(m\log N\mathfrak{P})}$。和は Hilbert 類体のすべての素イデアルにわたる。
+- $F=f/\cosh(x/2)$ で $f$ が非負かつ Fourier 変換が非負なら、$\Phi$ は臨界帯全体で非負（Odlyzko の概説を引用）。
+- Section 6（導手 256、$c=210$）：完全分解素数の和 $>0.7023$ に、完全分岐する 2 の項 $>0.0331$ を足して $B>0.0021$、$h<5539$。最後は Fukuda–Komatsu の結果（小さい素数の非可除性）で $h=1$。
+- 「van der Linden は導手 128 で 2 の上の分岐する素イデアルの寄与を使った」と Section 5 にある。
+- ノートの修正：補題の引用を Lemma 5.1 に、ページを 381–398 に。分岐する素数の項についての注意を追加。

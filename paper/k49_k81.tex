@@ -165,7 +165,7 @@ A prime number $q \ne 3$ splits completely in $k_{3^4}$ if and only if $q \equiv
 \subsection{An upper bound for class numbers}
 
 Let $\gamma$ denote Euler's constant.
-The following is \cite[Lemma 1]{Mi15b}, which is taken from \cite{Mi14}.
+The following is \cite[Lemma 5.1]{Mi14}; see also \cite[Lemma 1]{Mi15b}.
 
 \begin{proposition}[Miller] \label{prop:miller}
 Let $L$ be a totally real number field of degree $N$, and let $c$ be a positive real number.
@@ -659,6 +659,19 @@ In $k_{3^4}$, the least split prime is $487$.
 This is the reason why the set $S_3$ has to be much larger than the set $S_7$, although the root discriminant of $k_{3^4}$ is smaller.
 \end{remark}
 
+\begin{remark} \label{rem:ramified}
+\Cref{prop:miller} is derived in \cite{Mi14} from the identity \cite[(4.1)]{Mi14}, which contains a sum over all prime ideals of the Hilbert class field of $L$, and every term of this sum is positive.
+The terms that belong to other principal prime ideals of $L$ may therefore be kept as well; this is done for a ramified prime ideal in \cite[Section 6]{Mi14}.
+For $L = k_{p^n}$, the prime ideal above $p$ is principal of norm $p$ by \cref{lem:field}, so that it splits completely in the Hilbert class field.
+Keeping its terms adds
+\[
+\frac{2}{N} \sum_{m=1}^{\infty} \frac{\log p}{p^{m/2}} F(m \log p)
+\]
+to the number $B$.
+With this term, the bounds of \cref{prop:bound} improve to $h(k_{3^4}) < 65.9166$ at $c = 80$, $h(k_{7^2}) < 93.9394$ at $c = 80$, and $h(k_{29}) < 39.1488$ at $c = 60$.
+The proof of \cref{thm:main} does not use this refinement.
+\end{remark}
+
 \begin{remark} \label{rem:fkm}
 Fukuda, Komatsu, and Morisawa \cite{FKM14} proved that no prime number less than $10^9$ divides $h(k_{3^n})$ for any $n$; see \cite[Theorem 5]{Mi15b}.
 The proof of \cref{thm:main} does not use this result.
@@ -698,8 +711,7 @@ Under the generalized Riemann hypothesis, the analog of \cref{prop:miller} in \c
 
 \bibitem{Ma78} J.~M.~Masley, Class numbers of real cyclic number fields with small conductor, Compositio Math. \textbf{37} (1978), 297--319.
 
-\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--397.
-% CHECK: the last page is 397 according to the publisher and EuDML, and 398 according to MathSciNet and \cite{Mi15b}
+\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--398.
 
 \bibitem{Mi14b} J.~C.~Miller, Class numbers of real cyclotomic fields of composite conductor, LMS J. Comput. Math. \textbf{17} (2014), suppl. A, 404--417.
 
