@@ -25,6 +25,7 @@ def _frac(x):                                         # exact value of an arb of
     m,e=x.man_exp(); m,e=int(m),int(e)
     return (m<<e,1) if e>=0 else (m,1<<(-e))
 def _dec(n,k):
+    need(k>=1,"number of digits")
     s="%0*d"%(k+1,abs(n)); return ("-" if n<0 else "")+s[:-k]+"."+s[-k:]
 def up(x,k): a,b=_frac(arb(x).upper()); return _dec(a*10**k//b+1,k)
 def down(x,k): a,b=_frac(arb(x).lower()); return _dec(-((-a*10**k)//b)-1,k)

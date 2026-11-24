@@ -1,5 +1,7 @@
 # Final step for a field covered by ranges: combine the ranges and compute the bound of the class number.
-#   python3 aggregate.py DIR [processes]      (DIR contains the files summary_A_B.json written from the output of verify.py)
+#   python3 aggregate.py DIR [processes] [p n END]      (DIR contains the files summary_A_B.json written from the output of verify.py)
+# With p n END, the program fails unless the field is k_{p^n} and the ranges cover exactly [0, END).
+# The exit status is 0 only if the bound is below the least possible class number > 1.
 #
 # What is taken from a summary: only the statement "verify.py passed for the range [A,B)", that is, every split prime q with
 # A <= q < B has a verified row.  The numbers in the summaries are not trusted.  This program computes again, from scratch,
@@ -42,6 +44,7 @@ def main():
     for s in S:
         need(s["field"]==[p,n],"summaries of different fields")
         need(s["range"][0]==end,"ranges are not contiguous at %d"%end); end=s["range"][1]
+    if len(sys.argv)>3: need([p,n,end]==[int(x) for x in sys.argv[3:6]],"expected field and end: %s; found: k_{%d^%d}, [0, %d)"%(sys.argv[3:6],p,n,end))
     cs=[60,80,100,150,200]
     print("field k_{%d^%d}; %d ranges covering [0, %d)"%(p,n,len(S),end),flush=True)
     with Pool(procs) as pool:
@@ -66,5 +69,6 @@ def main():
         print("c=%d: integral <= %s, prime sum >= %s, B >= %s"%(c,up(I_up,10),down(S_low,10),down(B,7))+("" if hb is None else ", h < %s"%up(hb,4)))
         if hb is not None and (best is None or hb<best): best=hb
     print("degree %d, discriminant %d^%d, least possible class number > 1: %d"%(F.N,p,ex,hm))
-    print("VERDICT: PASS  (h < %s < %d)"%(up(best,4),hm) if best is not None and best<hm else "VERDICT: bound not below %d yet"%hm)
+    if best is not None and best<hm: print("VERDICT: PASS  (h < %s < %d)"%(up(best,4),hm))
+    else: raise SystemExit("VERDICT: bound not below %d yet"%hm)
 if __name__=="__main__": main()

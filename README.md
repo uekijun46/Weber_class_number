@@ -96,7 +96,7 @@ $m=6,10,12,14,15,18,20,21,22,24,26,28,36$ で、`composite/` の検証器が $h(
 |---|---|
 | `B72/` | $k_{7^2}$ の証明書、生成 `gen_cert.py`、検証 `verify_cert.py` |
 | `paper/` | $h(k_{7^2})=1$ のノートの下書き |
-| `docs/` | 監査報告 `audit_b72.md`（$k_{7^2}$）、`audit_relations.md`（`relations/` と $k_{3^4}$）、`audit.md`（合成数次）、文献照合 `literature.md` |
+| `docs/` | 監査報告 `audit_b72.md`（$k_{7^2}$）、`audit_relations.md`、`audit_relations_2.md`（`relations/` と $k_{3^4}$）、`audit.md`（合成数次）、文献照合 `literature.md` |
 | `audit/` | 監査と独立確認のスクリプト |
 | `relations/` | 小さい元の関係式による単項性の証明。$k_{7^2}$ の 2 つ目の証明書、$k_{3^4}$ の途中経過 |
 | `composite/` | 合成数次の検証器と証明書 |
@@ -107,5 +107,5 @@ $m=6,10,12,14,15,18,20,21,22,24,26,28,36$ で、`composite/` の検証器が $h(
 
 - 新規性は、到達できた文献の範囲での確認。Hakkarainen の表、Horie と Morisawa の $\mathbb{Z}_p\times\mathbb{Z}_q$ 拡大の論文は未読。
 - van der Linden (1982) と Miller (J. Number Theory 2015) は原論文の PDF で確認した（`docs/literature.md`）。Masley、Poitou、Bauer、Miller の他の論文は、要約やレビュー経由で読んだだけ。
-- $k_{3^4}$：範囲ファイル 82 個のうち 75 個の行は、Actions 上での `verify.py` の合格に頼っている（別の実装による全行の再検証は未実施）。
+- $k_{3^4}$：公開した全行を別の実装（PARI）でも検証し直し、修正後の検証器は再監査を受けた（`relations/README.md`、`docs/audit_relations_2.md`）。人による確認はまだ受けていない。
 - すべて未査読。

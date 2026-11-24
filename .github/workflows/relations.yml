@@ -95,7 +95,9 @@ jobs:
           P: ${{ inputs.p }}
           N: ${{ inputs.n }}
           GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
+          set -euo pipefail
           d="relations/k${P}_${N}"; mkdir -p "$d"
           cp incoming/summary_*.json incoming/rows_*.sha256 "$d"/ 2>/dev/null || true
           git config user.name "github-actions[bot]"
@@ -107,4 +109,9 @@ jobs:
             gh release create "$tag" --title "Rows for k_{${P}^${N}} (run ${GITHUB_RUN_ID})" --notes "Certificate rows by range; each file was verified by relations/verify.py in range mode. Checksums of the uncompressed files are in ${d}."
             for f in incoming/rows_*.txt.gz; do gh release upload "$tag" "$f"; done
           fi
-          (cd relations && python3 aggregate.py "k${P}_${N}") || true
+      # This step fails if the summaries are inconsistent or the bound is not yet below the least possible class number > 1.
+      - name: Aggregate
+        env:
+          P: ${{ inputs.p }}
+          N: ${{ inputs.n }}
+        run: cd relations && python3 aggregate.py "k${P}_${N}"
