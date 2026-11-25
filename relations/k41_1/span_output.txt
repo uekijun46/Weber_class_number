@@ -1,0 +1,12 @@
+$ python3 -O span.py k41_1/span_cert.txt --primes k41_1/span_primes.txt
+relations verified (norms and prime ideal factorizations): 7800; primes: 4434
+(a) T: 4434 primes (smallest 313, largest 980133437); rows: 7800
+(b) pivots: 4314; remaining: 120 primes, 883 rows
+(c) set 1 of 120 rows: Nm(det) has 3094 digits (319 auxiliary primes); gcd so far has 3094 digits
+(c) set 2 of 120 rows: Nm(det) has 3591 digits (365 auxiliary primes); gcd so far = 83
+(c) set 3 of 120 rows: Nm(det) has 3821 digits (382 auxiliary primes); gcd so far = 83
+(c) set 4 of 120 rows: Nm(det) has 3959 digits (393 auxiliary primes); gcd so far = 1
+SPAN PASS  field k_41: the prime ideals above the 4434 split primes of T are principal (no hypothesis).
+  T: smallest [313, 487, 509, 719, 761, 787], largest 980133437; 1865 of them below 10^6
+UNDER GRH (Miller, Lemma 5.2): c=7.0: G(c) <= 0.4709674869, prime sum >= 7.7893310695, B >= 5.4445527, h < 2.3768; least possible class number > 1: 83
+VERDICT (under GRH): PASS  (h < 2.3768 < 83)
