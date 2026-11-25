@@ -195,3 +195,9 @@ VPN 経由。対象は「GRH 下で $h(k_{37})=h(k_{41})=h(k_{43})=1$」と、�
 - こちらの議論はこの標準的な事実の特別な場合である：倍数が 1 になれば、単数も単数基準も要らない。違いは 3 点。(1) 類群が因子基底で生成されることを Bach の上界ではなく Miller の補題（GRH）に任せる。(2) Galois 群の作用を使って行列を $\mathbb{Z}[\zeta_p]$ 上の小さい行列にする。(3) PARI を使わず、整数の厳密な計算だけの検証器で確かめる。
 - Bach, "Explicit bounds for primality testing and related problems", Math. Comp. 55 (1990), no. 191, 355–380（MR1023756）：GRH 下の明示的な上界（レビューで書誌を確認。類群の生成元の上界 $12(\log|d|)^2$ はこの論文によるとされるが、本文では未確認）。$k_{37}$ では $12(\log|d|)^2\approx8.1\cdot10^5$ で、それ未満の完全分解素数をすべて $T$ に入れる必要がある。今の $T$ は $10^6$ 未満の 2,135 個のうち 2,049 個なので、Bach の上界ではなく Miller の補題を使っている。
 - 関連：Biasse–Espitau–Fouque–Gélin–Kirchner, "Computing generator in cyclotomic integer rings", EUROCRYPT 2017, Part I, 60–88, LNCS 10210（MR3652099）。円分整数環での単項イデアルの生成元の計算。Miller の Acta Arith. の論文を引用している。
+
+## 追記（2026-11-26）：arXiv などの検索（GRH 下の $k_{37}$、$k_{41}$、$k_{43}$）
+
+- Web 検索（3 通りの語句、arXiv を含む）で、次数 37、41、43 の第 1 layer の類数を GRH 下で決めた原稿は見つからなかった。確認できたのは検索結果の範囲で、arXiv の全件を調べたわけではない。
+- Miller (2015, arXiv:1410.2921) の Table 1 では、GRH 下の $k_{17}$、$k_{19}$、$k_{23}$ は Coates–Liang–Mihăilescu (2012) に帰されている。
+- **要確認の原稿：** arXiv:2604.15858「Module Lattice Security (Part I): Unconditional Verification of Weber's Conjecture for $k\le12$」（2026-04-17、cs.CR と quant-ph）。導手 $2^k$ の実円分体の類数が $k\le12$ で 1 であることを無条件で証明した、と主張している（$k=12$ は $k_{2^{10}}$ に当たる）。これは Miller の無条件の結果（導手 256、$k_{2^6}$）を大きく超える主張である。見たのは検索結果に出た第三者の要約ページだけで、原稿本文は読めていない（ページの取得に承認が要り、応答がなかった）。要約によると、Miller の結果を出発点に、指標ごとに一般 Bernoulli 数のノルムの可除性へ帰着させる議論。正しいかどうかは未確認。$p=2$ はこのリポジトリの当面の対象の外だが、ノートの序文の「知られている場合」の一覧に関わるので、原稿を確認する必要がある。

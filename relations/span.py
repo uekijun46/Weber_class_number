@@ -26,12 +26,16 @@
 #   (c) For the remaining n primes: if C is the matrix over A of n of the rows, then the rows of C generate a submodule of
 #       index |Nm(det C)| in A^n if this number is not 0 (Nm: norm of Q(zeta_p)/Q).  If the greatest common divisor of these
 #       numbers for several choices of the n rows is 1, then the rows generate A^n.
+#       If the greatest common divisor is a power p^e with e > 0, then the rows generate a submodule of A^T whose index is a
+#       power of p; so the classes [Q_q], q in T, generate a p-group.  The class number of K is not divisible by p (Iwasawa:
+#       K/Q is cyclic of degree p and exactly one prime ramifies), so these classes are trivial also in this case.
 #       Nm(det C) is computed modulo primes l = 1 mod p as prod_{k=1}^{p-1} det C(w^k), w of order p modulo l, and recovered by
 #       the Chinese remainder theorem using  Nm(det C)^2 <= prod_i (t_i/(p-1))^(p-1)  (Hadamard and the inequality of the
 #       means), where t_i is the sum over the entries e = sum_{j<p} e_j x^j of the row i of  Tr(e conj(e)) = p sum e_j^2 - (sum e_j)^2.
 # Certificate lines:  "c | i:a i:a ... | r^e r^e ..."   with |N(c + sum a_i eta_i)| = prod r^e, every r equal to p or a split prime.
 #   python3 span.py CERT [--core n] [--rows a,b] [--primes OUT]     (--core, --rows: when step (b) stops and how many rows it keeps)
 import sys, math
+if hasattr(sys,"set_int_max_str_digits"): sys.set_int_max_str_digits(0)      # the numbers of digits of large integers are printed
 from flint import fmpz, fmpz_poly, nmod_poly, nmod_mat
 from verify import K, need, is_prime, parse_coef, up, down
 def rabin_irreducible(m,q,f):                         # Rabin's test for a monic polynomial m of degree f over F_q
@@ -114,7 +118,10 @@ def relation_rows(F,rels):                            # fact (3): rels yields (c
         if row: rows.append(row)
     print("relations verified (norms and prime ideal factorizations): %d; primes: %d"%(nrel,len(R)),flush=True)
     return rows
-def prove(F,rows,core,cap=None):                      # returns T and the gcd of (c); every prime of T is principal if the gcd is 1
+def ppower(g,p):                                      # is the positive integer g a power of p (including 1)?
+    while g%p==0: g//=p
+    return g==1
+def prove(F,rows,core,cap=None):                      # returns T and the gcd of (c); every prime of T is principal if the gcd is a power of the degree
     # core: step (b) stops when this many primes remain; cap = (a, b): rows are dropped when there are more than a * (primes) + b
     p=F.N; need(is_prime(p),"the degree must be prime"); A=Ring(p)
     # (a) primes that occur in one row only
@@ -197,14 +204,15 @@ def prove(F,rows,core,cap=None):                      # returns T and the gcd of
             if res>mod//2: res-=mod
             D=abs(res); nblocks+=1; g=math.gcd(g,D)
             print("(c) set %d of %d rows: Nm(det) %s (%d auxiliary primes); gcd so far %s"%(nblocks,n,"= 0" if D==0 else "has %d digits"%len(str(D)),k,"= %d"%g if g<10**6 else "has %d digits"%len(str(g))),flush=True)
-            if g==1: break
+            if g!=0 and ppower(g,p): break
     return T,(g if n>0 else 1)
 def main():
     args=sys.argv[1:]; fn=args[0]; opt={args[i]:args[i+1] for i in range(1,len(args)-1) if args[i].startswith("--")}
     hd=open(fn).readline().split(); need(hd[:2]==["#","field"] and int(hd[3])==1,"the certificate must begin with '# field p 1'")
     F=K(int(hd[2]),1); p=F.p
     T,g=prove(F,relation_rows(F,read_cert(F,fn)),int(opt.get("--core",120)),tuple(int(v) for v in opt.get("--rows","4,400").split(",")))
-    need(g==1,"(c): the greatest common divisor of the indices is not 1")
+    need(g!=0 and ppower(g,p),"(c): the greatest common divisor of the indices is not a power of p")
+    if g!=1: print("(c) the greatest common divisor is %d, a power of p; the conclusion uses that p does not divide the class number (Iwasawa)"%g)
     print("SPAN PASS  field k_%d: the prime ideals above the %d split primes of T are principal (no hypothesis)."%(p,len(T)))
     print("  T: smallest %s, largest %d; %d of them below 10^6"%(T[:6],T[-1],sum(1 for q in T if q<10**6)))
     if "--primes" in opt: open(opt["--primes"],"w").write("# field %d 1: split primes whose prime ideals are principal (span.py %s)\n"%(p,fn)+"".join("%d\n"%q for q in T))

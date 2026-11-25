@@ -1,0 +1,11 @@
+$ python3 -O span.py k47_1/span_cert.txt --primes k47_1/span_primes.txt
+relations verified (norms and prime ideal factorizations): 13109; primes: 9156
+(a) T: 9156 primes (smallest 53, largest 997698613); rows: 13109
+(b) pivots: 9029; remaining: 127 primes, 908 rows
+(c) set 1 of 127 rows: Nm(det) has 5440 digits (947 auxiliary primes); gcd so far has 5440 digits
+(c) set 2 of 127 rows: Nm(det) has 5843 digits (1009 auxiliary primes); gcd so far = 47
+(c) the greatest common divisor is 47, a power of p; the conclusion uses that p does not divide the class number (Iwasawa)
+SPAN PASS  field k_47: the prime ideals above the 9156 split primes of T are principal (no hypothesis).
+  T: smallest [53, 67, 71, 479, 1609, 1979], largest 997698613; 1671 of them below 10^6
+UNDER GRH (Miller, Lemma 5.2): c=6.5: G(c) <= 0.5253785835, prime sum >= 6.3555732154, B >= 3.6659189, h < 1.8752; least possible class number > 1: 283
+VERDICT (under GRH): PASS  (h < 1.8752 < 283)

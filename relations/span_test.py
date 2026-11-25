@@ -63,6 +63,7 @@ if __name__=="__main__":
         if ok: good.append((c,coef,fac))
     T,g=span.prove(F,span.relation_rows(F,good),0)
     print("field of degree %d and conductor %d: %d relations, T has %d primes (smallest %s); gcd of step (c): %d"%(d,l,len(good),len(T),T[:8],g))
-    print("expected: %s"%("gcd 1" if h==1 else "gcd greater than 1 (class number %d)"%h))
-    need(g==1 if h==1 else g>1,"TEST FAILED" if g!=0 else "TEST WITHOUT RESULT (the rows do not have full rank)")
+    print("expected: %s"%("gcd 1 or a power of %d"%d if h==1 else "gcd greater than 1 and not a power of %d (class number %d)"%(d,h)))
+    ok=g!=0 and span.ppower(g,d)                     # what span.py accepts: the gcd is a power of the degree d
+    need(ok if h==1 else (g>1 and not ok),"TEST FAILED" if g!=0 else "TEST WITHOUT RESULT (the rows do not have full rank)")
     print("TEST PASSED")
