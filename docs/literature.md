@@ -176,3 +176,22 @@ VPN 経由で MathSciNet を使った確認。記号は現在のもの。
 - F. Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software – ICMS 2018 (J. H. Davenport et al., eds.), Lecture Notes in Comput. Sci. 10931, Springer, Cham, 2018, **pp. 255–263**（章の脚注と目次で確認。次の章は 264 ページから）。積分の方法は Petras のアルゴリズム（適応的な二分と Gauss–Legendre 求積）で、誤差の上界は厳密。
 - F. Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, IEEE Trans. Comput. 66 (2017), no. 8, **1281–1292**（12 ページ、DOI 10.1109/TC.2017.2690633）。
 - これで、ノート 2 本の文献表に未確認の印（CHECK）は残っていない。
+
+## 追記（2026-11-25 夜）：GRH を仮定する $k_{37}$、$k_{41}$、$k_{43}$ についての MathSciNet での確認
+
+VPN 経由。対象は「GRH 下で $h(k_{37})=h(k_{41})=h(k_{43})=1$」と、その方法（`docs/grh.md` の §6）。
+
+- 検索 `any:(Weber "class number" cyclotomic)`、2014〜2026 年：20 件。題名を見た範囲で、次数 37、41、43 の layer の類数を扱うものはない。
+- 検索 `any:("class number" ("Z_p-extension" …) (GRH OR "Riemann hypothesis"))`、2014〜2026 年：1 件（Miller, J. Number Theory 2015）。
+- 検索 `any:("class number" cyclotomic ("37,1" OR "41,1" OR "43,1" OR "Z_{37}" OR "Z_{41}" OR "Z_{43}"))`：0 件。
+- 被引用文献：MR3304606（Miller, JNT 2015）を引用する 5 件、MR3244941（Miller, Acta Arith. 2014）を引用する 21 件（2026 年の 3 件を含む）。題名を見た範囲で該当なし。
+- Miller, JNT 2015 のレビュー（MR3304606）による GRH 下の既知の結果：$k_{2^7}$（Miller）、$k_{3^4}$、$k_{13}$（van der Linden）、$k_{17}$、$k_{19}$、$k_{23}$（Coates の ICCM 2010 の報告、MR2908059 を典拠としている）、$k_{29}$、$k_{31}$（Miller のこの論文）。$k_{37}$ 以上はない。
+- **この範囲では、GRH 下の $h(k_{37})=h(k_{41})=h(k_{43})=1$ は見つからなかった。** レビューと題名による確認で、本文の全文検索ではない。arXiv の未出版の原稿は別に確認が要る。
+
+**方法の位置づけ（新規性を主張しすぎないための記録）。**
+
+- 「関係式の行列の行列式は類群の位数の倍数である」は、類群計算の標準的な事実。Hafner–McCurley, "A rigorous subexponential algorithm for computation of class groups", J. Amer. Math. Soc. 2 (1989), no. 4, 837–850（MR1002631）のレビューに、関係式の疎な行列の行列式 $h$ を小さい素数を法として計算して中国剰余定理で復元し、それが類群の位数の倍数である、とある。
+- 一般の数体への拡張は Buchmann, "A subexponential algorithm for the determination of class groups and regulators of algebraic number fields", Séminaire de Théorie des Nombres, Paris 1988–1989, 27–41, Progr. Math. 91, Birkhäuser Boston, 1990（MR1104698）。レビューによると、新しい要素は単数群の扱いで、関係式の格子に単数の対数の格子を加えて類群と単数基準を同時に求める。GRH と滑らかさの仮定の下で準指数時間。
+- こちらの議論はこの標準的な事実の特別な場合である：倍数が 1 になれば、単数も単数基準も要らない。違いは 3 点。(1) 類群が因子基底で生成されることを Bach の上界ではなく Miller の補題（GRH）に任せる。(2) Galois 群の作用を使って行列を $\mathbb{Z}[\zeta_p]$ 上の小さい行列にする。(3) PARI を使わず、整数の厳密な計算だけの検証器で確かめる。
+- Bach, "Explicit bounds for primality testing and related problems", Math. Comp. 55 (1990), no. 191, 355–380（MR1023756）：GRH 下の明示的な上界（レビューで書誌を確認。類群の生成元の上界 $12(\log|d|)^2$ はこの論文によるとされるが、本文では未確認）。$k_{37}$ では $12(\log|d|)^2\approx8.1\cdot10^5$ で、それ未満の完全分解素数をすべて $T$ に入れる必要がある。今の $T$ は $10^6$ 未満の 2,135 個のうち 2,049 個なので、Bach の上界ではなく Miller の補題を使っている。
+- 関連：Biasse–Espitau–Fouque–Gélin–Kirchner, "Computing generator in cyclotomic integer rings", EUROCRYPT 2017, Part I, 60–88, LNCS 10210（MR3652099）。円分整数環での単項イデアルの生成元の計算。Miller の Acta Arith. の論文を引用している。
