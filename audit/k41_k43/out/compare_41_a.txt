@@ -1,0 +1,3 @@
+(1) periods of span.py: 4434 primes, all verified against the multiplication table, all cyclic shifts of the audit's homomorphisms; 24 s
+(2) rows of span.py: 7800 rows, 60171 entries, all equal to the audit's entries up to the shift of the base prime ideal; 24 s
+(3) sets compared: 0 of 1; gcd of the compared ones = 0

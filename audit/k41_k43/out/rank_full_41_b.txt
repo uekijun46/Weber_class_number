@@ -1,0 +1,16 @@
+  l = 83, x = 27: rank 4434 of 4434; 24 s
+  l = 83, x = 25: rank 4434 of 4434; 44 s
+  l = 83, x = 17: rank 4434 of 4434; 70 s
+  l = 83, x = 68: rank 4434 of 4434; 97 s
+  l = 83, x = 23: rank 4434 of 4434; 123 s
+  l = 83, x = 9: rank 4434 of 4434; 151 s
+  l = 83, x = 36: rank 4434 of 4434; 179 s
+  l = 83, x = 61: rank 4434 of 4434; 206 s
+  l = 83, x = 78: rank 4434 of 4434; 229 s
+  l = 83, x = 63: rank 4434 of 4434; 247 s
+  l = 83, x = 3: rank 4434 of 4434; 263 s
+  l = 83, x = 12: rank 4434 of 4434; 276 s
+  l = 83, x = 48: rank 4434 of 4434; 289 s
+  l = 83, x = 26: rank 4434 of 4434; 302 s
+  l = 83, x = 21: rank 4434 of 4434; 316 s
+k_41 full matrix (7800 rows, 4434 columns) modulo l = 83 at 15 points: all ranks equal to 4434: True

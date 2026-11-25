@@ -1,0 +1,7 @@
+k_43, rule sparsecol: core of 107 columns, 1950 rows; pivots before: 3421; |T| = 3528
+block 1: Nm(det) has 3948 digits (bound 13354 digits, 709 auxiliary primes); gcd so far has 3948 digits; 392 s
+[time budget reached after block 1; continued below]
+k_43, rule sparsecol: core of 107 columns, 1950 rows; pivots before: 3421; |T| = 3528
+resuming: 1 blocks done, gcd so far has 3948 digits
+block 2: Nm(det) has 4320 digits (bound 14098 digits, 749 auxiliary primes); gcd so far = 1; 300 s
+OWN SPAN PASS k_43 (sparsecol): the rows generate A^107, hence L = A^T for the 3528 primes of T (smallest [19, 367, 641, 2137, 2141, 2273], largest 942172381; 1832 below 10^6)

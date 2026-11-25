@@ -1,0 +1,4 @@
+k_41, rule markowitz: core of 92 columns, 3458 rows; pivots before: 4342; |T| = 4434
+block 1: Nm(det) has 3184 digits (bound 9865 digits, 524 auxiliary primes); gcd so far has 3184 digits; 175 s
+block 2: Nm(det) has 3418 digits (bound 10413 digits, 553 auxiliary primes); gcd so far = 1; 381 s
+OWN SPAN PASS k_41 (markowitz): the rows generate A^92, hence L = A^T for the 4434 primes of T (smallest [313, 487, 509, 719, 761, 787], largest 980133437; 1865 below 10^6)

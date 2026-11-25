@@ -10,7 +10,7 @@ rels=[]
 for fn in sorted(args[2:]): rels+=pickle.load(open(fn,"rb"))
 def factor(x,lp,primes):
     fac={}
-    for r in ([p]+([lp] if lp else [])):
+    for r in [p]+list(lps(lp)):
         while x%r==0: x//=r; fac[r]=fac.get(r,0)+1
     for q in primes:
         if x==1: break
@@ -18,12 +18,13 @@ def factor(x,lp,primes):
     return fac if x==1 else None
 import flint
 fb=[q for q in range(2,Y) if F.split(q) and flint.fmpz(q).is_prime()]
+lps=lambda lp:() if lp is None else ((lp,) if isinstance(lp,int) else tuple(lp))     # the large primes of a relation
 cnt={}
 for r in rels:
-    if r[3]: cnt[r[3]]=cnt.get(r[3],0)+1
+    for l in lps(r[3]): cnt[l]=cnt.get(l,0)+1
 Rq={}; rows=[]
 for c,coef,x,lp in rels:
-    if lp and cnt[lp]<2: continue
+    if any(cnt[l]<2 for l in lps(lp)): continue
     fac=factor(x,lp,fb)
     if fac is None: continue
     ok=True

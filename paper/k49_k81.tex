@@ -17,7 +17,7 @@
 
 \title[Three layers of cyclotomic $\mathbb{Z}_p$-extensions with class number one]{Three layers of cyclotomic $\mathbb{Z}_p$-extensions of $\mathbb{Q}$ with class number one}
 % \author{}   % to be filled in
-\date{November 25, 2026 (third draft)}
+\date{November 26, 2026 (third draft)}
 
 \emergencystretch=1.5em
 
@@ -865,6 +865,7 @@ For $p = 37$, it uses three matrices: the integers $\operatorname{Nm}(\det C_i)$
 For $p = 41$, it uses four matrices, and the integers have $3094$, $3591$, $3821$, and $3959$ digits; the greatest common divisor of the first two, and of the first three, is $83$.
 For $p = 43$, it uses two matrices, and the integers have $3858$ and $4236$ digits.
 In each case, the greatest common divisor of all the integers is $1$.
+For $p = 41$, the intermediate value $83$ is the least prime number $\ell$ with $\ell \equiv 1 \pmod{41}$; it is the norm of a prime ideal of $A$, and the first three determinants are divisible by prime ideals of $A$ above $83$.
 
 The integer $\operatorname{Nm}(\det C)$ is computed as follows.
 Let $l < 2^{62}$ be a prime number with $l \equiv 1 \pmod{p}$, and let $\theta \in \mathbb{F}_l$ be an element of order $p$.
@@ -941,10 +942,11 @@ If $h(k_{43}) > 1$, then $h(k_{43}) \ge 173$.
 We argue as in the proof of \cref{cor:threshold}.
 Let $\ell$ be a prime number dividing $h(k_p)$, and let $f$ denote the order of $\ell$ modulo $p$; then $\ell \ne p$ and $\ell^f$ divides $h(k_p)$.
 The least prime numbers $\ell$ with $\ell \equiv 1 \pmod{p}$ are $149$ for $p = 37$, $83$ for $p = 41$, and $173$ for $p = 43$.
-Suppose that $f \ge 2$.
-For $p = 37$, the orders of $2$, $3$, $5$, $7$, and $11$ modulo $37$ are $36$, $18$, $36$, $9$, and $6$, so that $\ell^f > 149$.
-For $p = 41$, the orders of $2$, $3$, $5$, and $7$ modulo $41$ are $20$, $8$, $20$, and $40$, so that $\ell^f > 83$.
-For $p = 43$, the orders of $2$, $3$, $5$, $7$, $11$, and $13$ modulo $43$ are $14$, $42$, $42$, $6$, $7$, and $21$, so that $\ell^f > 173$.
+Suppose that $f \ge 2$ and that $\ell^f$ is less than the stated number.
+Then $\ell \le 11$ for $p = 37$, $\ell \le 7$ for $p = 41$, and $\ell \le 13$ for $p = 43$.
+For $p = 37$, the orders of $2$, $3$, $5$, $7$, and $11$ modulo $37$ are $36$, $18$, $36$, $9$, and $6$, so that $\ell^f > 149$, a contradiction.
+For $p = 41$, the orders of $2$, $3$, $5$, and $7$ modulo $41$ are $20$, $8$, $20$, and $40$, so that $\ell^f > 83$, a contradiction.
+For $p = 43$, the orders of $2$, $3$, $5$, $7$, $11$, and $13$ modulo $43$ are $14$, $42$, $42$, $6$, $7$, and $21$, so that $\ell^f > 173$, a contradiction.
 \end{proof}
 
 \begin{proof}[Proof of \cref{thm:grh}]
@@ -964,6 +966,9 @@ Since the matrices have entries in $A$ and not in $\mathbb{Z}$, their size is sm
 The statement of \cref{prop:datagrh} on the set $T$ does not depend on any hypothesis.
 In contrast to \cref{sec:relations}, its proof uses not only the factorizations of the norms but also the sets $J_q$, that is, the information which prime ideals above $q$ contain a given element.
 An error in one of these sets may lead to a wrong conclusion.
+For this reason, all sets $J_q$ of the three lists were computed a second and a third time with independent programs: once with ring homomorphisms $O_K \to \mathbb{F}_q$ that are constructed without the field $\mathbb{Q}(\zeta)$, from the multiplication table of the basis $1, \eta_0, \dots, \eta_{p-2}$ of $O_K$, and once with the ideal arithmetic of PARI/GP \cite{PARI}.
+The results agree.
+The generation of $A^T$ was also verified with a second program that uses other pivots and other matrices in \cref{lem:det}.
 \end{remark}
 
 \begin{remark} \label{rem:control}
@@ -978,7 +983,7 @@ We computed the norms of the elements $c + \sum_i a_i \eta_i$ with $c \in \{-2, 
 We kept the elements whose norm is a product of a power of $p$, of split primes below $10^6$, and of at most one further prime number below $10^9$, and then we removed the elements with a prime factor that occurs in no other element.
 For $p = 37$, we examined about $1.0 \cdot 10^8$ elements with at most $7$ nonzero coefficients; this took about $6$ minutes on two cores.
 For $p = 41$ and $p = 43$, we examined about $1.05 \cdot 10^9$ and $7.4 \cdot 10^8$ elements with at most $8$ nonzero coefficients.
-The verification takes about $10$ minutes for each field.
+The verification takes between $10$ and $35$ minutes for each field on one core.
 For $p = 37$, the function \texttt{bnfinit} of PARI/GP did not finish within $355$ minutes in our attempt.
 \end{remark}
 

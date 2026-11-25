@@ -1,0 +1,15 @@
+p = 43, M = 1849, least primitive root g = 3, |H| = 42, g^p in H, H -> (Z/p)^* bijective, zeta -> zeta^g sends eta_i to eta_(i+1): checked in fieldp.py
+H = <g^p>: checked (the definition of relations/verify.py);  E_i = g^i H
+charpoly of multiplication by eta_0 == polsubcyclo(1849,43): True
+irreducible: True
+the table is invariant under the shift i -> i+1: True
+Tr(1) = 43, Tr(eta_k) = [0]
+discriminant of the lattice Z[1, eta_0, ..., eta_41] = Mat([43, 84])
+conductor-discriminant formula: the p-1 nontrivial characters of Gal(K/Q) have conductor p^2, so d(K) = p^(2(p-1)) = lattice discriminant  =>  the lattice is O_K (index 1);  log rd = (2(p-1)/p) log p
+PARI nfdisc(f) = Mat([43, 84]); equal to p^(2(p-1)): True
+index [O_K : Z[eta_0]] has 560 digits; factors found by trial division up to 10^7: [19, 43; 367, 1; 641, 1; 2137, 2; 2141, 1; 3331, 1; 3623, 1; 3697, 1; 4339, 1; 10691, 1; 24247, 1; 24697, 2; 25463, 1; 53831, 1; 55109, 1; 75521, 1; 96167, 1; 407203, 1; 656819, 1; 664067, 1; 4461929, 1; 9305939, 1; 6489441980534095830577908577967492908622094469642789543224244795160061160107869038549379938064477681844660704209838314460451438584643444050946651370877443354507819817757333778286836162705682758941989493810445420227153598393274318414425389766717537276114471698783073981219104774532521021943951343957886881440365101521488789182976410305827914963009741741371677948584490690740417595038021939133210521012437, 1]
+pi = prod_{h in H}(1 - zeta^h) lies in Z[1, eta_i] (H-invariant coefficients); N(pi) = 43
+min over primes l != p of l^(order of l mod p) = 173 (l = 173, order 1); searched all l < 173
+orders modulo p of the primes below the threshold (l:order, l^order): 2:14 3:42 5:42 7:6 11:7 13:21 17:21 19:42 23:21 29:42 31:21 37:6 41:7 47:7 53:21 59:7 61:42 67:21 71:42 73:42 79:3 83:21 89:42 97:7 101:21 103:21 107:7 109:21 113:14 127:7 131:14 137:14 139:21 149:42 151:14 157:42 163:42 167:21
+  second smallest value of l^f: [173, 431, 947]
+0 s

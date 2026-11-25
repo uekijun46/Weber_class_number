@@ -1,0 +1,16 @@
+field k_43, rule markowitz; rows: 5371 (nonzero 5371); T: 3528 primes, smallest [19, 367, 641, 2137, 2141, 2273], largest 942172381
+pivots 500; columns 3028; rows 4871; nonzero entries 39895; largest coefficient 1 digits; 1 s
+pivots 1000; columns 2528; rows 4371; nonzero entries 38284; largest coefficient 1 digits; 2 s
+pivots 1500; columns 2028; rows 3871; nonzero entries 36717; largest coefficient 1 digits; 3 s
+pivots 2000; columns 1528; rows 3371; nonzero entries 37737; largest coefficient 1 digits; 4 s
+pivots 2500; columns 1028; rows 2871; nonzero entries 45649; largest coefficient 1 digits; 5 s
+pivots 3000; columns 528; rows 2371; nonzero entries 80425; largest coefficient 1 digits; 10 s
+pivots 3280; columns 248; rows 2091; nonzero entries 198540; largest coefficient 2 digits; 34 s
+pivots 3300; columns 228; rows 2071; nonzero entries 216378; largest coefficient 2 digits; 42 s
+pivots 3320; columns 208; rows 2051; nonzero entries 233544; largest coefficient 2 digits; 53 s
+pivots 3340; columns 188; rows 2031; nonzero entries 251023; largest coefficient 2 digits; 67 s
+pivots 3360; columns 168; rows 2011; nonzero entries 261866; largest coefficient 2 digits; 86 s
+pivots 3380; columns 148; rows 1991; nonzero entries 261466; largest coefficient 2 digits; 113 s
+pivots 3400; columns 128; rows 1971; nonzero entries 245707; largest coefficient 2 digits; 154 s
+pivots 3420; columns 108; rows 1951; nonzero entries 210667; largest coefficient 4 digits; 255 s
+STATE k_43 markowitz: pivots 3423; columns left 105 (empty columns: 0); rows left 1948; no entry +-x^j left; 284 s

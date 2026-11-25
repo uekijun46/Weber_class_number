@@ -1,0 +1,3 @@
+k_43 core (markowitz): 105 columns, 1948 rows; rank modulo (p, x - 1): 105
+primes l = 1 mod 43 below 2500: [173, 431, 947, 1033, 1291, 1549, 1721, 1979, 2237]
+rank modulo (l, x - w^k) is 105 for all these l and all k = 1..42: True; 44 s

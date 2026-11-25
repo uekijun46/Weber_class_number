@@ -1,0 +1,32 @@
+== k43_t00_untouched_30rows.txt
+relations verified (norms and prime ideal factorizations): 30; primes: 150
+FAILED: no primes left
+== k43_t01_exponent.txt
+FAILED: norm: 1 | 0:1 2:-1 8:-1 22:-1 | 19^4 4001^2 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t02_coef_sign.txt
+FAILED: norm: 1 | 0:-1 2:-1 8:-1 22:-1 | 19^4 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t03_c_plus1.txt
+FAILED: norm: 2 | 0:1 2:-1 8:-1 22:-1 | 19^4 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t04_composite.txt
+FAILED: factor 33156287 is not p or a split prime: 1 | 0:1 2:-1 8:-1 22:-1 | 19^4 9833^1 15683^1 64793^1 848983^1 33156287^1
+== k43_t05_header_other_p.txt
+FAILED: factor 19 is not p or a split prime: 1 | 0:1 3:-1 16:1 | 19^2 43^1 367^1 13367^1 129127^1 137363^1 257671^1 756319^1
+== k43_t06_header_layer2.txt
+FAILED: the certificate must begin with '# field p 1'
+== k43_t07_nonsplit_2.txt
+FAILED: factor 2 is not p or a split prime: 2 |  | 2^43
+== k43_t08_prime_swapped.txt
+FAILED: norm: 1 | 0:1 2:-1 8:-1 22:-1 | 19^4 367^1 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t09_extra_factor_p.txt
+FAILED: norm: 1 | 0:1 2:-1 8:-1 22:-1 | 19^4 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1 43^1
+== k43_t10_duplicate_prime.txt
+FAILED: norm: 1 | 0:1 2:-1 8:-1 22:-1 | 19^4 4001^1 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t11_index_p.txt
+FAILED: coefficients: 1 | 43:1 2:-1 8:-1 22:-1 | 19^4 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1
+== k43_t12_shifted_indices.txt
+relations verified (norms and prime ideal factorizations): 30; primes: 150
+FAILED: no primes left
+== k43_t13_square_of_row3.txt
+FAILED: the number of prime ideals above 19 that contain the element is not the exponent of 19 in the norm
+== k43_t14_other_numbering.txt
+FAILED: norm: 1 | 0:1 4:-1 16:-1 1:-1 | 19^4 4001^1 8287^1 9833^1 15683^1 64793^1 848983^1

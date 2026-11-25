@@ -1,0 +1,32 @@
+== k41_t00_untouched_30rows.txt
+relations verified (norms and prime ideal factorizations): 30; primes: 139
+FAILED: no primes left
+== k41_t01_exponent.txt
+FAILED: norm: 2 | 0:1 3:-1 6:-1 | 313^2 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t02_coef_sign.txt
+FAILED: norm: 2 | 0:-1 3:-1 6:-1 | 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t03_c_plus1.txt
+FAILED: norm: 3 | 0:1 3:-1 6:-1 | 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t04_composite.txt
+FAILED: factor 60768637 is not p or a split prime: 2 | 0:1 3:-1 6:-1 | 196033^1 452957^1 844069^1 2329553^1 60768637^1
+== k41_t05_header_other_p.txt
+FAILED: factor 313 is not p or a split prime: 0 | 0:1 1:1 7:1 | 313^1 509^1 761^1 60029^1 77813^1 181061^1 33619087^1
+== k41_t06_header_layer2.txt
+FAILED: the certificate must begin with '# field p 1'
+== k41_t07_nonsplit_2.txt
+FAILED: factor 2 is not p or a split prime: 2 |  | 2^41
+== k41_t08_prime_swapped.txt
+FAILED: norm: 2 | 0:1 3:-1 6:-1 | 487^1 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t09_extra_factor_p.txt
+FAILED: norm: 2 | 0:1 3:-1 6:-1 | 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1 41^1
+== k41_t10_duplicate_prime.txt
+FAILED: norm: 2 | 0:1 3:-1 6:-1 | 313^1 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t11_index_p.txt
+FAILED: coefficients: 2 | 41:1 3:-1 6:-1 | 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1
+== k41_t12_shifted_indices.txt
+relations verified (norms and prime ideal factorizations): 30; primes: 139
+FAILED: no primes left
+== k41_t13_square_of_row3.txt
+FAILED: the number of prime ideals above 313 that contain the element is not the exponent of 313 in the norm
+== k41_t14_other_numbering.txt
+FAILED: norm: 2 | 0:1 6:-1 12:-1 | 313^1 194149^1 196033^1 452957^1 844069^1 2329553^1

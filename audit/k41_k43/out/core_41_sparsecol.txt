@@ -1,0 +1,4 @@
+k_41, rule sparsecol: core of 91 columns, 3457 rows; pivots before: 4343; |T| = 4434
+block 1: Nm(det) has 3152 digits (bound 9800 digits, 521 auxiliary primes); gcd so far has 3152 digits; 148 s
+block 2: Nm(det) has 3439 digits (bound 10395 digits, 552 auxiliary primes); gcd so far = 1; 298 s
+OWN SPAN PASS k_41 (sparsecol): the rows generate A^91, hence L = A^T for the 4434 primes of T (smallest [313, 487, 509, 719, 761, 787], largest 980133437; 1865 below 10^6)

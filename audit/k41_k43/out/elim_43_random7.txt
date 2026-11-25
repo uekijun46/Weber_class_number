@@ -1,0 +1,7 @@
+field k_43, rule random:7; rows: 5371 (nonzero 5371); T: 3528 primes, smallest [19, 367, 641, 2137, 2141, 2273], largest 942172381
+pivots 500; columns 3028; rows 4871; nonzero entries 39888; largest coefficient 1 digits; 1 s
+pivots 1000; columns 2528; rows 4371; nonzero entries 38270; largest coefficient 1 digits; 2 s
+pivots 1500; columns 2028; rows 3871; nonzero entries 36752; largest coefficient 1 digits; 3 s
+pivots 2000; columns 1528; rows 3371; nonzero entries 39317; largest coefficient 1 digits; 4 s
+pivots 2500; columns 1028; rows 2871; nonzero entries 67834; largest coefficient 1 digits; 4 s
+STATE k_43 random:7: pivots 2919; columns left 609 (empty columns: 0); rows left 2452; time budget reached; 566 s

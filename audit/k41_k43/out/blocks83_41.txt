@@ -1,0 +1,4 @@
+set 1: exponent of 83 in |Nm(det)|: 1; (k, corank of C(w^k) mod 83) for the k with det = 0: [(14, 1)]
+set 2: exponent of 83 in |Nm(det)|: 1; (k, corank of C(w^k) mod 83) for the k with det = 0: [(33, 1)]
+set 3: exponent of 83 in |Nm(det)|: 1; (k, corank of C(w^k) mod 83) for the k with det = 0: [(11, 1)]
+set 4: exponent of 83 in |Nm(det)|: 0; (k, corank of C(w^k) mod 83) for the k with det = 0: []

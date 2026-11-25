@@ -1,0 +1,16 @@
+field k_43, rule sparsecol; rows: 5371 (nonzero 5371); T: 3528 primes, smallest [19, 367, 641, 2137, 2141, 2273], largest 942172381
+pivots 500; columns 3028; rows 4871; nonzero entries 39887; largest coefficient 1 digits; 1 s
+pivots 1000; columns 2528; rows 4371; nonzero entries 38271; largest coefficient 1 digits; 2 s
+pivots 1500; columns 2028; rows 3871; nonzero entries 36727; largest coefficient 1 digits; 2 s
+pivots 2000; columns 1528; rows 3371; nonzero entries 37870; largest coefficient 1 digits; 3 s
+pivots 2500; columns 1028; rows 2871; nonzero entries 46204; largest coefficient 1 digits; 3 s
+pivots 3000; columns 528; rows 2371; nonzero entries 85850; largest coefficient 2 digits; 4 s
+pivots 3280; columns 248; rows 2091; nonzero entries 222548; largest coefficient 2 digits; 7 s
+pivots 3300; columns 228; rows 2071; nonzero entries 240598; largest coefficient 2 digits; 8 s
+pivots 3320; columns 208; rows 2051; nonzero entries 264234; largest coefficient 2 digits; 10 s
+pivots 3340; columns 188; rows 2031; nonzero entries 294187; largest coefficient 2 digits; 13 s
+pivots 3360; columns 168; rows 2011; nonzero entries 299010; largest coefficient 2 digits; 17 s
+pivots 3380; columns 148; rows 1991; nonzero entries 283388; largest coefficient 2 digits; 23 s
+pivots 3400; columns 128; rows 1971; nonzero entries 250290; largest coefficient 3 digits; 36 s
+pivots 3420; columns 108; rows 1951; nonzero entries 210607; largest coefficient 5 digits; 66 s
+STATE k_43 sparsecol: pivots 3421; columns left 107 (empty columns: 0); rows left 1950; no entry +-x^j left; 70 s

@@ -1,7 +1,7 @@
 # Search (NOT rigorous; the output is checked by span.py): relations for the first layer k_p from small elements.
 # Elements: c + sum_{i in I} s_i eta_i with |I| = w, s_i = +-1, c in -2..2, one element for each orbit under Gal(k_p/Q) and sign.
 # The norm is computed modulo six primes l = 1 mod p^2 with numpy; an element is kept if its norm is
-#   p^a * (split primes below Y) * (at most one more prime below LP).
+#   p^a * (split primes below Y) * (at most two more primes below LP).
 #   python3 span_search.py p w J:j Y LP OUT      (the part j of J of the supports; needs numpy)
 import sys, math, itertools, pickle, time, numpy as np, flint
 from field import Field
@@ -49,9 +49,14 @@ def batch(Is):
             m=x
             while m%p==0: m//=p
             while g>1: m//=g; g=math.gcd(m,g)
-            if m!=1 and not (m<LP and flint.fmpz(m).is_prime()): continue
+            two=None
+            if m!=1 and not (m<LP and flint.fmpz(m).is_prime()):
+                if m<LP*LP and not flint.fmpz(m).is_prime():
+                    fc=flint.fmpz(m).factor()
+                    if len(fc)==2 and all(e==1 and int(q)<LP for q,e in fc): two=tuple(int(q) for q,e in fc)
+                if two is None: continue
             b,rem=divmod(k,len(sg)*len(cs)); si,c=divmod(rem,len(cs))
-            rels.append((int(cs[c]),[(int(i),int(a)) for i,a in zip(Is[b],sg[si])],x,m if m!=1 else None))
+            rels.append((int(cs[c]),[(int(i),int(a)) for i,a in zip(Is[b],sg[si])],x,(two if two else m) if m!=1 else None))
     tp+=time.time()-t
 B=max(1,200000//(len(sg)*len(cs))); cur=[]
 for I in supports():
@@ -59,4 +64,4 @@ for I in supports():
     if len(cur)==B: batch(cur); cur=[]
 if cur: batch(cur)
 pickle.dump(rels,open(out,"wb"))
-print("k_%d, weight %d, part %d of %d: %d elements in %.0fs (norms %.0fs, tests %.0fs); kept %d (full %d, one large prime %d)"%(p,w,j0,J,n,time.time()-t0,tn,tp,len(rels),sum(1 for r in rels if r[3] is None),sum(1 for r in rels if r[3] is not None)),flush=True)
+print("k_%d, weight %d, part %d of %d: %d elements in %.0fs (norms %.0fs, tests %.0fs); kept %d (full %d, one large prime %d)"%(p,w,j0,J,n,time.time()-t0,tn,tp,len(rels),sum(1 for r in rels if r[3] is None),sum(1 for r in rels if isinstance(r[3],int)))+"; two large primes %d"%sum(1 for r in rels if isinstance(r[3],tuple)),flush=True)

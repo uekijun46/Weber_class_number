@@ -1,0 +1,3 @@
+k_41: index of Z[eta_0] in O_K = |det(powers of eta_0)| has 519 digits, disc(f) = index^2 * 41^80; the common denominator d of the g_i has 505 digits and divides the index (same prime divisors: exponent and order of the finite group O_K/Z[eta_0]); numerical check of g_i: largest error 2.12e-2978; 14 s
+k_41: 4421 primes not dividing the index: the homomorphisms eta_i -> g_i(rho) are exactly the p cyclic shifts of the audit's homomorphism; 86 s
+primes of T dividing the index (left to pari_homs.py): 13: [313, 487, 509, 761, 787, 857, 937, 2221, 3833, 16603, 17123, 27743, 894779]

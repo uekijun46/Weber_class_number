@@ -1,0 +1,6 @@
+k_41 core (sparsecol): 91 columns, 3457 rows; rank modulo (p, x - 1): 91
+primes l = 1 mod 41 below 2500: [83, 739, 821, 1231, 1559, 1723, 2297]
+rank modulo (l, x - w^k) is 91 for all these l and all k = 1..40: True; 74 s
+k_43 core (sparsecol): 107 columns, 1950 rows; rank modulo (p, x - 1): 107
+primes l = 1 mod 43 below 2500: [173, 431, 947, 1033, 1291, 1549, 1721, 1979, 2237]
+rank modulo (l, x - w^k) is 107 for all these l and all k = 1..42: True; 58 s

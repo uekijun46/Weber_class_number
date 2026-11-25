@@ -1,0 +1,11 @@
+field k_43; lines: 5371
+(i) norms (two exact determinants) and factorizations: 5371 lines, all equal; split primes: 3528; largest norm has 48 digits; 52 s
+    shape: number of nonzero coefficients [(3, 1), (4, 11), (5, 81), (6, 461), (7, 2111), (8, 2706)]; c [(-2, 941), (-1, 1007), (0, 1432), (1, 989), (2, 1002)]; coefficient values [(-1, 16866), (1, 22777)]; number of prime factors >= 10^6 per line [(0, 1621), (1, 3750)]; lines whose norm is divisible by p: 1489
+    largest prime 942172381; primes below 10^6: 1832; smallest number of lines in which a prime occurs: 2; no duplicate lines
+  prime 0 of 3528, 52 s
+  prime 1000 of 3528, 57 s
+  prime 2000 of 3528, 62 s
+  prime 3000 of 3528, 67 s
+(ii) ring homomorphisms O_K -> F_q verified by the multiplication table for 3528 primes (number of eigenspace steps: [(1, 3527), (2, 1)]); 69 s
+    primes where the values R_0..R_(p-1) are not distinct (q divides the index of Z[eta_0]): 21, the smallest: [(19, 19), (367, 42), (641, 42), (2137, 41), (2141, 42), (3331, 42), (3623, 42), (3697, 42), (4339, 42), (10691, 42), (24247, 42), (24697, 41)]
+(iii) every exponent equals the number of prime ideals containing the element: 5371 lines, 41510 entries; exponents: [(1, 35942), (2, 1452), (3, 1174), (4, 1178), (5, 851), (6, 494), (7, 244), (8, 108), (9, 42), (10, 14), (11, 8), (12, 3)]; entries with all p prime ideals: 0; 71 s
