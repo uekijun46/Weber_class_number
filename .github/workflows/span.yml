@@ -1,0 +1,121 @@
+name: span-search
+# For the first layer k_p: searches relations among small elements (span_search.py, not rigorous), builds the certificate
+# (span_export.py), and checks it with the rigorous verifier span.py.  The class number bound printed by span.py is UNDER GRH.
+# Manual start only.  Public repository: no cost.
+on:
+  workflow_dispatch:
+    inputs:
+      p: {description: 'prime p', default: '41'}
+      weights: {description: 'numbers of nonzero coefficients, separated by spaces', default: '3 4 5 6 7 8'}
+      jobs: {description: 'number of jobs (each job runs 4 parts)', default: '20'}
+      y: {description: 'bound of the factor base', default: '1e6'}
+      lp: {description: 'bound of the large prime', default: '1e9'}
+      core: {description: 'span.py --core', default: '120'}
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      idx: ${{ steps.m.outputs.idx }}
+    steps:
+      - id: m
+        env:
+          J: ${{ inputs.jobs }}
+        run: echo "idx=$(python3 -c "import os,json;print(json.dumps(list(range(max(1,min(60,int(os.environ['J'])))))))")" >> "$GITHUB_OUTPUT"
+  search:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        i: ${{ fromJson(needs.plan.outputs.idx) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: relations
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint==0.9.0 numpy mpmath
+      - name: Search
+        env:
+          P: ${{ inputs.p }}
+          W: ${{ inputs.weights }}
+          J: ${{ inputs.jobs }}
+          I: ${{ matrix.i }}
+          Y: ${{ inputs.y }}
+          LP: ${{ inputs.lp }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd relations; mkdir out
+          parts=$((J*4))
+          for w in $W; do
+            pids=()
+            for k in 0 1 2 3; do
+              part=$((I*4+k))
+              python3 span_search.py "$P" "$w" "${parts}:${part}" "$Y" "$LP" "out/span_${P}_${w}_${part}.pkl" & pids+=($!)
+            done
+            for pid in "${pids[@]}"; do wait "$pid"; done
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: search-${{ matrix.i }}
+          path: relations/out/*.pkl
+          if-no-files-found: error
+  collect:
+    needs: search
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: incoming
+          pattern: search-*
+          merge-multiple: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install python-flint==0.9.0 numpy mpmath
+      - name: Export the certificate
+        env:
+          P: ${{ inputs.p }}
+          Y: ${{ inputs.y }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd relations; mkdir -p "k${P}_1"
+          python3 span_export.py "$P" "k${P}_1/span_cert.txt" ../incoming/*.pkl --Y "$Y" | tee export.txt
+          echo "### k_${P}: $(cat export.txt)" >> "$GITHUB_STEP_SUMMARY"
+          test "$(grep -vc '^#' "k${P}_1/span_cert.txt")" -gt 0
+      # The certificate is kept as an artifact even if the verifier does not accept it.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: certificate
+          path: relations/k*_1/span_cert.txt
+          if-no-files-found: ignore
+      - name: Verify (rigorous; the class number bound is under GRH)
+        env:
+          P: ${{ inputs.p }}
+          CORE: ${{ inputs.core }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd relations
+          (echo "\$ python3 -O span.py k${P}_1/span_cert.txt --core ${CORE} --primes k${P}_1/span_primes.txt   (Actions run ${GITHUB_RUN_ID}, commit ${GITHUB_SHA})"; python3 -O span.py "k${P}_1/span_cert.txt" --core "$CORE" --primes "k${P}_1/span_primes.txt") 2>&1 | tee "k${P}_1/span_output.txt"
+          tail -4 "k${P}_1/span_output.txt" >> "$GITHUB_STEP_SUMMARY"
+          grep -q "^SPAN PASS" "k${P}_1/span_output.txt"
+      - name: Commit
+        env:
+          P: ${{ inputs.p }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "relations/k${P}_1/span_cert.txt" "relations/k${P}_1/span_primes.txt" "relations/k${P}_1/span_output.txt"
+          if ! git diff --cached --quiet; then git commit -m "k_${P}: certificate for span.py from Actions run ${GITHUB_RUN_ID}"; git pull --rebase; git push; fi

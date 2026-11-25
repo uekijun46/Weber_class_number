@@ -1,11 +1,13 @@
 # Export (untrusted search data -> certificate for span.py).  Input: output files of span_search.py.
 # Keeps the relations all of whose primes occur in at least two kept relations, and drops relations in which a prime ideal
-# occurs with exponent > 1.   python3 span_export.py p OUT FILE [FILE ...]
+# occurs with exponent > 1.   python3 span_export.py p OUT FILE [FILE ...] [--Y bound of the factor base]
 import sys, pickle, random
 from field import Field
-p,out=int(sys.argv[1]),sys.argv[2]; F=Field(p,1); N=F.N; rnd=random.Random(1)
+args=sys.argv[1:]; Y=10**6
+if "--Y" in args: k=args.index("--Y"); Y=int(float(args[k+1])); del args[k:k+2]
+p,out=int(args[0]),args[1]; F=Field(p,1); N=F.N; rnd=random.Random(1)
 rels=[]
-for fn in sys.argv[3:]: rels+=pickle.load(open(fn,"rb"))
+for fn in sorted(args[2:]): rels+=pickle.load(open(fn,"rb"))
 def factor(x,lp,primes):
     fac={}
     for r in ([p]+([lp] if lp else [])):
@@ -15,7 +17,6 @@ def factor(x,lp,primes):
         while x%q==0: x//=q; fac[q]=fac.get(q,0)+1
     return fac if x==1 else None
 import flint
-Y=int(float(sys.argv[sys.argv.index("--Y")+1])) if "--Y" in sys.argv else 10**6
 fb=[q for q in range(2,Y) if F.split(q) and flint.fmpz(q).is_prime()]
 cnt={}
 for r in rels:
