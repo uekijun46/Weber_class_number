@@ -1,0 +1,5 @@
+core: 75 columns, 2282 rows; pivots before: 3757; |T| = 3832
+block 1: Nm(det) has 2426 digits (bound 8203 digits, 447 auxiliary primes); gcd so far has 2426 digits; 60 s
+block 2: Nm(det) has 2616 digits (bound 8599 digits, 469 auxiliary primes); gcd so far = 223; 120 s
+block 3: Nm(det) has 2724 digits (bound 8785 digits, 479 auxiliary primes); gcd so far = 1; 180 s
+OWN SPAN PASS: the rows generate A^75, hence (elim_own.py) L = A^T for the 3832 primes of T (smallest [691, 787, 1013, 1021, 1069, 1669], largest 984681211)

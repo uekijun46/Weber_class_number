@@ -1,0 +1,2 @@
+nfinit: disc = 37^72; 1 s
+primes number 0..15 of 3832 (q = 691..5003): 16 primes, 8695 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 62 s

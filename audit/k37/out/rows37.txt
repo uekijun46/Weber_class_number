@@ -1,0 +1,13 @@
+PARI stack size set to 1000000000 bytes, maximum size set to 1000001536
+lines: 6039
+(i) norms and factorizations: 6039 lines, all equal; primes other than 37: 3832; largest norm has 41 digits; 41 s
+  prime 0 of 3832, 42 s
+  prime 500 of 3832, 98 s
+  prime 1000 of 3832, 152 s
+  prime 1500 of 3832, 212 s
+  prime 2000 of 3832, 262 s
+  prime 2500 of 3832, 314 s
+  prime 3000 of 3832, 370 s
+  prime 3500 of 3832, 429 s
+(ii) ring homomorphisms O_K -> F_q verified for 3832 primes (generator eta_0 + t eta_1, t: [(0, 3818), (1, 10), (2, 4)]); 463 s
+(iii) every exponent equals the number of prime ideals containing the element: 6039 lines; exponents: [(1, 38743), (2, 526), (3, 11)]; entries with all 37 prime ideals: 0; 465 s

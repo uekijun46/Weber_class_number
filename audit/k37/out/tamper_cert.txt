@@ -1,0 +1,15 @@
+== t00_untouched_40rows.txt: FAILED: no primes left
+== t01_exponent.txt: FAILED: norm: -1 | 0:1 2:-1 22:1 | 1069^1 1669^1 1723^1 44389^1 58511^1
+== t02_coef_sign.txt: FAILED: norm: -1 | 0:1 2:1 22:1 | 1069^2 1669^1 1723^1 44389^1 58511^1
+== t03_c_plus1.txt: FAILED: norm: 0 | 0:1 2:-1 22:1 | 1069^2 1669^1 1723^1 44389^1 58511^1
+== t04_composite.txt: FAILED: factor 2875687 is not p or a split prime: -1 | 0:1 2:-1 22:1 | 1069^2 2875687^1 44389^1 58511^1
+== t05_header_41.txt: FAILED: factor 1951 is not p or a split prime: 2 | 0:1 1:-1 31:-1 | 1951^1 9907^1 36469^1 105337^1 192133^1 357733^1
+== t06_header_37_2.txt: FAILED: the certificate must begin with '# field p 1'
+== t07_nonsplit_2.txt: FAILED: factor 2 is not p or a split prime: 2 |  | 2^37
+== t08_prime_swapped.txt: FAILED: norm: -1 | 0:1 2:-1 22:1 | 1069^2 1669^1 1951^1 44389^1 58511^1
+== t09_extra_factor_37.txt: FAILED: norm: -1 | 0:1 2:-1 22:1 | 1069^2 1669^1 1723^1 44389^1 58511^1 37^1
+== t10_duplicate_prime.txt: FAILED: norm: -1 | 0:1 2:-1 22:1 | 1069^1 1069^1 1669^1 1723^1 44389^1 58511^1
+== t11_index_37.txt: FAILED: coefficients: -1 | 0:1 2:-1 37:1 | 1069^2 1669^1 1723^1 44389^1 58511^1
+== t12_zero_coef.txt: FAILED: coefficients: -1 | 0:1 2:-1 22:1 5:0 | 1069^2 1669^1 1723^1 44389^1 58511^1
+== t13_square_of_row3.txt: FAILED: the number of prime ideals above 1069 that contain the element is not the exponent of 1069 in the norm
+== t14_alpha_691_harmless.txt: FAILED: no primes left

@@ -1,0 +1,10 @@
+== span_test.py 941 5 2 190 16
+relations verified (norms and prime ideal factorizations): 4; primes: 4
+(a) T: 2 primes (smallest 37, largest 83); rows: 2
+(b) pivots: 1; remaining: 1 primes, 0 rows
+field of degree 5 and conductor 941: 4 relations, T has 2 primes (smallest [37, 83]); gcd of step (c): 0
+expected: gcd greater than 1 (class number 16)
+FAILED: TEST WITHOUT RESULT (the rows do not have full rank)
+real	2m8.600s
+== span_test.py 941 5 3 190 16
+real	3m20.012s

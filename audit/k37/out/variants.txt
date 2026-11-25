@@ -1,0 +1,19 @@
+mode half: 3000 rows
+(a) T: 1241 primes (smallest 691, largest 800890333); rows: 1081
+(b) pivots: 1069; remaining: 172 primes, 12 rows
+RESULT mode half: gcd = 0; |T| = 1241; 691 in T: True; smallest [691, 787, 1013, 1021]; 1 s
+rows with 691: 1109; kept 1
+mode one691: 4931 rows
+(a) T: 3170 primes (smallest 787, largest 984681211); rows: 4333
+(b) pivots: 3050; remaining: 120 primes, 883 rows
+(c) set 1 of 120 rows: Nm(det) = 0 (337 auxiliary primes); gcd so far = 0
+(c) set 2 of 120 rows: Nm(det) = 0 (383 auxiliary primes); gcd so far = 0
+(c) set 3 of 120 rows: Nm(det) = 0 (402 auxiliary primes); gcd so far = 0
+(c) set 4 of 120 rows: Nm(det) has 4083 digits (417 auxiliary primes); gcd so far has 4083 digits
+(c) set 5 of 120 rows: Nm(det) = 0 (430 auxiliary primes); gcd so far has 4083 digits
+mode core130: 6039 rows
+(a) T: 3832 primes (smallest 691, largest 984681211); rows: 6039
+(b) pivots: 3702; remaining: 130 primes, 923 rows
+(c) set 1 of 130 rows: Nm(det) has 2397 digits (238 auxiliary primes); gcd so far has 2397 digits
+(c) set 2 of 130 rows: Nm(det) has 3012 digits (286 auxiliary primes); gcd so far = 1
+RESULT mode core130: gcd = 1; |T| = 3832; 691 in T: True; smallest [691, 787, 1013, 1021]; 154 s

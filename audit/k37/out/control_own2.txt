@@ -1,0 +1,15 @@
+control: l=941 d=5 h=16: 8403 elements, 780 rows, |T| = 59 (own) / 59 (span.py, after its step (a)), smallest [37, 73, 83, 97, 131, 167]; gcd: own 16, span.prove 16
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+  after tampering with ONE entry: gcds (own, span.prove) = [(1, 1), (1, 1), (16, 16), (1, 1), (1, 1)]
+control: l=1861 d=5 h=11: 8403 elements, 1290 rows, |T| = 78 (own) / 78 (span.py, after its step (a)), smallest [5, 7, 13, 17, 37, 61]; gcd: own 11, span.prove 11
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=2161 d=5 h=16: 8403 elements, 615 rows, |T| = 70 (own) / 70 (span.py, after its step (a)), smallest [3, 7, 19, 83, 97, 157]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)
+control: l=953 d=7 h=71: 39062 elements, 364 rows, |T| = 51 (own) / 51 (span.py, after its step (a)), smallest [2, 31, 67, 71, 151, 227]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)
+control: l=641 d=5 h=11: 8403 elements, 400 rows, |T| = 41 (own) / 41 (span.py, after its step (a)), smallest [2, 5, 29, 31, 61, 67]; gcd: own 11, span.prove 11
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=67 d=11 h=1: 88573 elements, 31680 rows, |T| = 36 (own) / 36 (span.py, after its step (a)), smallest [29, 37, 97, 163, 239, 269]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=23 d=11 h=1: 88573 elements, 53185 rows, |T| = 38 (own) / 38 (span.py, after its step (a)), smallest [47, 137, 139, 229, 277, 367]; gcd: own 1, span.prove 1
+  as expected (gcd 1)

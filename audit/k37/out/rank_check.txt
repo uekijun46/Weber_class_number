@@ -1,0 +1,6 @@
+(37, x-1): rank 75 of 75 (2282 rows)
+(149, x - w^k), k = 1..36: ranks [75] (58 s)
+(223, x - w^k), k = 1..36: ranks [75] (115 s)
+(593, x - w^k), k = 1..36: ranks [75] (174 s)
+Phi_37 irreducible modulo 2: True
+(2): rank 75 of 75 over F_2^36 (first 400 rows; 179 s)

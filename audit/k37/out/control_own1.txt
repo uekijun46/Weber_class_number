@@ -1,0 +1,25 @@
+== span_test.py 941 5 2 220 16
+FAILED: 191: no irreducible polynomial found
+real	2m19.170s
+== span_test.py 577 3 6 100 1
+real	2m30.009s
+== span_test.py 277 3 6 150 4
+relations verified (norms and prime ideal factorizations): 376; primes: 13
+(a) T: 13 primes (smallest 2, largest 149); rows: 366
+(b) pivots: 12; remaining: 1 primes, 183 rows
+field of degree 3 and conductor 277: 376 relations, T has 13 primes (smallest [2, 13, 19, 37, 41, 59, 61, 73]); gcd of step (c): 4
+expected: gcd greater than 1 (class number 4)
+TEST PASSED
+real	0m12.668s
+== span_test.py 877 3 6 120 7
+real	2m30.010s
+== span_test.py 1063 3 6 120 13
+real	2m30.011s
+== span_test.py 191 5 2 300 11
+relations verified (norms and prime ideal factorizations): 303; primes: 12
+(a) T: 12 primes (smallest 5, largest 257); rows: 303
+(b) pivots: 11; remaining: 1 primes, 218 rows
+field of degree 5 and conductor 191: 303 relations, T has 12 primes (smallest [5, 11, 31, 37, 41, 107, 139, 197]); gcd of step (c): 11
+expected: gcd greater than 1 (class number 11)
+TEST PASSED
+real	0m0.959s

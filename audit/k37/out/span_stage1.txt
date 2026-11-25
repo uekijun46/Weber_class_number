@@ -1,0 +1,2 @@
+relations verified (norms and prime ideal factorizations): 6039; primes: 3832
+stage 1: 383 s

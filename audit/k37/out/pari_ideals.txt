@@ -1,0 +1,4 @@
+nfinit: disc = 37^72; 1 s
+q = 691: 1109 rows; valuations 0/1 with the right number; patterns = audit's patterns shifted by d = [5] for all rows (largest exponent 3); 8 s
+q = 787: 931 rows; valuations 0/1 with the right number; patterns = audit's patterns shifted by d = [9] for all rows (largest exponent 3); 15 s
+q = 1013: 782 rows; valuations 0/1 with the right number; patterns = audit's patterns shifted by d = [3] for all rows (largest exponent 2); 21 s

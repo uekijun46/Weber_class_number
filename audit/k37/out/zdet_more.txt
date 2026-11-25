@@ -1,0 +1,14 @@
+  block 1: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775783; 5 s
+  block 1: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775643; 11 s
+  block 1: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775549; 17 s
+block 1: agreement modulo 3 primes
+  block 2: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775783; 6 s
+  block 2: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775643; 12 s
+  block 2: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775549; 18 s
+block 2: agreement modulo 3 primes
+set 1 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775783; 19 s
+set 1 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775643; 38 s
+set 2 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775783; 21 s
+set 2 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775643; 41 s
+set 3 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775783; 19 s
+set 3 of span.py: det of the 4320 x 4320 integer matrix = D modulo 9223372036854775643; 39 s

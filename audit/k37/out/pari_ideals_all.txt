@@ -1,0 +1,7 @@
+nfinit: disc = 37^72; 1 s
+primes number 0..15 of 3832 (q = 691..5003): 16 primes, 8695 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 62 s
+primes number 16..837 of 3832 (q = 5039..352309): 822 primes, 20581 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 530 s
+primes number 838..1863 of 3832 (q = 352327..893939): 1026 primes, 5362 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 545 s
+primes number 1864..2866 of 3832 (q = 894281..3429821): 1003 primes, 2636 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 545 s
+primes number 2867..3710 of 3832 (q = 3431759..77427901): 844 primes, 1762 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 561 s
+primes number 3711..3831 of 3832 (q = 78549461..984681211): 121 primes, 244 entries; all valuations 0/1 with the right number, and for every prime the patterns are the audit's patterns shifted by one d; 63 s

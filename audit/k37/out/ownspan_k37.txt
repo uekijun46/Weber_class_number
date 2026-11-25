@@ -1,0 +1,12 @@
+  pivots 500; columns 3332; rows 5539; 1 s
+  pivots 1000; columns 2832; rows 5039; 2 s
+  pivots 1500; columns 2332; rows 4539; 3 s
+  pivots 2000; columns 1832; rows 4039; 4 s
+  pivots 2500; columns 1332; rows 3539; 5 s
+  pivots 3000; columns 832; rows 3039; 7 s
+  pivots 3500; columns 332; rows 2539; 12 s
+  elimination: 3757 pivots; 75 columns and 2282 rows left
+  block 1: Nm(det) has 2426 digits (bound 8203 digits, 447 auxiliary primes); gcd so far has 2426 digits; 76 s
+  block 2: Nm(det) has 2616 digits (bound 8599 digits, 469 auxiliary primes); gcd so far = 223; 155 s
+  block 3: Nm(det) has 2724 digits (bound 8785 digits, 479 auxiliary primes); gcd so far = 1; 235 s
+OWN SPAN PASS (ownspan.py): L = A^T for the 3832 primes of T (smallest [691, 787, 1013, 1021, 1069, 1669], largest 984681211); pivots 3757, core 75 columns

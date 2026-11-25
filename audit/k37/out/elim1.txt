@@ -1,0 +1,27 @@
+rows: 6039 (nonzero 6039); T: 3832 primes, smallest [691, 787, 1013, 1021, 1069, 1669], largest 984681211
+pivots 200; columns 3632; rows 5839; nonzero entries 38848; largest coefficient 1 digits; 1 s
+pivots 400; columns 3432; rows 5639; nonzero entries 38401; largest coefficient 1 digits; 1 s
+pivots 600; columns 3232; rows 5439; nonzero entries 37947; largest coefficient 1 digits; 1 s
+pivots 800; columns 3032; rows 5239; nonzero entries 37500; largest coefficient 1 digits; 2 s
+pivots 1000; columns 2832; rows 5039; nonzero entries 37063; largest coefficient 1 digits; 2 s
+pivots 1200; columns 2632; rows 4839; nonzero entries 36636; largest coefficient 1 digits; 2 s
+pivots 1400; columns 2432; rows 4639; nonzero entries 36196; largest coefficient 1 digits; 3 s
+pivots 1600; columns 2232; rows 4439; nonzero entries 35755; largest coefficient 1 digits; 3 s
+pivots 1800; columns 2032; rows 4239; nonzero entries 35894; largest coefficient 1 digits; 4 s
+pivots 2000; columns 1832; rows 4039; nonzero entries 36206; largest coefficient 1 digits; 4 s
+pivots 2200; columns 1632; rows 3839; nonzero entries 37244; largest coefficient 1 digits; 4 s
+pivots 2400; columns 1432; rows 3639; nonzero entries 38902; largest coefficient 1 digits; 5 s
+pivots 2600; columns 1232; rows 3439; nonzero entries 41783; largest coefficient 1 digits; 5 s
+pivots 2800; columns 1032; rows 3239; nonzero entries 46267; largest coefficient 1 digits; 5 s
+pivots 3000; columns 832; rows 3039; nonzero entries 53667; largest coefficient 1 digits; 6 s
+pivots 3200; columns 632; rows 2839; nonzero entries 66943; largest coefficient 1 digits; 7 s
+pivots 3400; columns 432; rows 2639; nonzero entries 95200; largest coefficient 1 digits; 9 s
+pivots 3600; columns 232; rows 2439; nonzero entries 174433; largest coefficient 1 digits; 14 s
+pivots 3690; columns 142; rows 2349; nonzero entries 240497; largest coefficient 2 digits; 29 s
+pivots 3700; columns 132; rows 2339; nonzero entries 240381; largest coefficient 2 digits; 34 s
+pivots 3710; columns 122; rows 2329; nonzero entries 240906; largest coefficient 2 digits; 40 s
+pivots 3720; columns 112; rows 2319; nonzero entries 234246; largest coefficient 2 digits; 47 s
+pivots 3730; columns 102; rows 2309; nonzero entries 223154; largest coefficient 2 digits; 56 s
+pivots 3740; columns 92; rows 2299; nonzero entries 208442; largest coefficient 2 digits; 67 s
+pivots 3750; columns 82; rows 2289; nonzero entries 187501; largest coefficient 3 digits; 86 s
+STATE: pivots 3757; columns left 75 (empty columns: 0); rows left 2282; no entry +-x^j left; 106 s

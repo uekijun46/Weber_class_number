@@ -1,0 +1,70 @@
+control: l=13 d=3 h=1: 1098 elements, 381 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 31, 47, 53, 73, 79]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=577 d=3 h=1: 1098 elements, 144 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [3, 11, 19, 29, 37, 41]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 4, span.prove 4
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+  tampered (row 45, prime 37, entry times x): l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 1, span.prove 1
+  tampered (row 129, prime 5, entry times x): l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 1, span.prove 1
+  tampered (row 181, prime 59, entry times x): l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 1, span.prove 1
+  tampered (row 3, prime 5, entry times x): l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 1, span.prove 1
+  tampered (row 138, prime 37, entry times x): l=163 d=3 h=4: 1098 elements, 204 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [5, 13, 17, 23, 31, 37]; gcd: own 1, span.prove 1
+  after tampering with ONE entry: gcds (own, span.prove) = [(1, 1), (1, 1), (1, 1), (1, 1), (1, 1)]
+control: l=277 d=3 h=4: 1098 elements, 93 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [2, 13, 19, 37, 41, 59]; gcd: own 4, span.prove 4
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=349 d=3 h=4: 1098 elements, 174 rows, |T| = 15 (own) / 15 (span.py, after its step (a)), smallest [11, 17, 31, 37, 41, 47]; gcd: own 4, span.prove 4
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=397 d=3 h=4: 1098 elements, 63 rows, |T| = 10 (own) / 10 (span.py, after its step (a)), smallest [2, 17, 31, 43, 53, 71]; gcd: own 4, span.prove 4
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=1009 d=3 h=4: 1098 elements, 132 rows, |T| = 17 (own) / 17 (span.py, after its step (a)), smallest [3, 13, 19, 23, 43, 47]; gcd: own 4, span.prove 4
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 7, span.prove 7
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+  tampered (row 24, prime 5, entry times x): l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 1, span.prove 1
+  tampered (row 56, prime 5, entry times x): l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 1, span.prove 1
+  tampered (row 84, prime 5, entry times x): l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 7, span.prove 7
+  tampered (row 5, prime 113, entry times x): l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 1, span.prove 1
+  tampered (row 17, prime 7, entry times x): l=313 d=3 h=7: 1098 elements, 150 rows, |T| = 12 (own) / 12 (span.py, after its step (a)), smallest [5, 7, 19, 23, 53, 61]; gcd: own 1, span.prove 1
+  after tampering with ONE entry: gcds (own, span.prove) = [(1, 1), (1, 1), (7, 7), (1, 1), (1, 1)]
+control: l=877 d=3 h=7: 1098 elements, 135 rows, |T| = 20 (own) / 20 (span.py, after its step (a)), smallest [11, 17, 29, 43, 59, 61]; gcd: own 7, span.prove 7
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=1129 d=3 h=7: 1098 elements, 108 rows, |T| = 17 (own) / 17 (span.py, after its step (a)), smallest [19, 23, 31, 37, 59, 61]; gcd: own 7, span.prove 7
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=1063 d=3 h=13: 1098 elements, 102 rows, |T| = 13 (own) / 13 (span.py, after its step (a)), smallest [5, 13, 17, 37, 41, 43]; gcd: own 13, span.prove 13
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=31 d=5 h=1: 1562 elements, 730 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 37, 61, 67, 149, 181]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=401 d=5 h=1: 1562 elements, 100 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [29, 83, 151, 157, 179, 199]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 11, span.prove 11
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+  tampered (row 340, prime 41, entry times x): l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 11, span.prove 11
+  tampered (row 232, prime 11, entry times x): l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 1, span.prove 1
+  tampered (row 315, prime 107, entry times x): l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 1, span.prove 1
+  tampered (row 76, prime 197, entry times x): l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 1, span.prove 1
+  tampered (row 254, prime 383, entry times x): l=191 d=5 h=11: 1562 elements, 375 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 11, 31, 37, 41, 107]; gcd: own 1, span.prove 1
+  after tampering with ONE entry: gcds (own, span.prove) = [(11, 11), (1, 1), (1, 1), (1, 1), (1, 1)]
+control: l=641 d=5 h=11: 1562 elements, 30 rows, |T| = 6 (own) / 6 (span.py, after its step (a)), smallest [2, 5, 29, 31, 61, 541]; gcd: own 275, span.prove 275
+  as expected (gcd > 1; gcd/h = 25.0, 25.0)
+control: l=1861 d=5 h=11: 1562 elements, 210 rows, |T| = 25 (own) / 25 (span.py, after its step (a)), smallest [5, 7, 13, 17, 37, 61]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)
+control: l=941 d=5 h=16: 1562 elements, 85 rows, |T| = 17 (own) / 17 (span.py, after its step (a)), smallest [37, 73, 83, 97, 131, 167]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)
+control: l=2161 d=5 h=16: 1562 elements, 80 rows, |T| = 15 (own) / 15 (span.py, after its step (a)), smallest [3, 7, 19, 83, 97, 157]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)
+control: l=43 d=7 h=1: 1093 elements, 665 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [7, 37, 79, 173, 179, 251]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=71 d=7 h=1: 1093 elements, 455 rows, |T| = 14 (own) / 14 (span.py, after its step (a)), smallest [5, 17, 137, 167, 199, 227]; gcd: own 1, span.prove 1
+  as expected (gcd 1)
+control: l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 8, span.prove 8
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+  tampered (row 229, prime 223, entry times x): l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 1, span.prove 1
+  tampered (row 84, prime 41, entry times x): l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 8, span.prove 1
+  tampered (row 334, prime 479, entry times x): l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 8, span.prove 1
+  tampered (row 95, prime 41, entry times x): l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 8, span.prove 1
+  tampered (row 44, prime 41, entry times x): l=491 d=7 h=8: 39062 elements, 392 rows, |T| = 11 (own) / 11 (span.py, after its step (a)), smallest [41, 101, 181, 197, 223, 251]; gcd: own 1, span.prove 1
+  after tampering with ONE entry: gcds (own, span.prove) = [(1, 1), (8, 1), (8, 1), (8, 1), (1, 1)]
+control: l=827 d=7 h=8: 39062 elements, 847 rows, |T| = 18 (own) / 18 (span.py, after its step (a)), smallest [5, 47, 149, 191, 227, 241]; gcd: own 8, span.prove 8
+  as expected (gcd > 1; gcd/h = 1.0, 1.0)
+control: l=953 d=7 h=71: 39062 elements, 112 rows, |T| = 17 (own) / 17 (span.py, after its step (a)), smallest [2, 31, 67, 71, 151, 227]; gcd: own 0, span.prove 0
+AUDIT FAILED: no result (rank)

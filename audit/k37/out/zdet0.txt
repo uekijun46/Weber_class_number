@@ -1,0 +1,3 @@
+  block 0: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775783; 6 s
+  block 0: det of the 2700 x 2700 integer matrix = Nm(det C) modulo 9223372036854775643; 13 s
+block 0: agreement modulo 2 primes

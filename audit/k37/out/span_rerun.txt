@@ -1,0 +1,5 @@
+relations verified (norms and prime ideal factorizations): 6039; primes: 3832
+(a) T: 3832 primes (smallest 691, largest 984681211); rows: 6039
+(b) pivots: 3712; remaining: 120 primes, 883 rows
+(c) set 1 of 120 rows: Nm(det) = 0 (234 auxiliary primes); gcd so far = 0
+exit 124 seconds 595
