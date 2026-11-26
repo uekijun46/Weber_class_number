@@ -1,0 +1,4 @@
+k_47, rule markowitz: core of 128 columns, 4081 rows; pivots before: 9028; |T| = 9156
+block 1: Nm(det) has 5535 digits (bound 17431 digits, 926 auxiliary primes); gcd so far has 5535 digits; 878 s
+block 2: Nm(det) has 5864 digits (bound 18319 digits, 973 auxiliary primes); gcd so far = 47; 1740 s
+OWN RESULT k_47 (markowitz): the gcd of the indices is 47 = 47^1.  The rows generate a submodule of A^T whose index divides 47 (|T| = 9156).

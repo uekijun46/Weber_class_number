@@ -41,6 +41,26 @@ while ch:
         for q in rows[i][2]:
             if q!=p: occ[q]=occ.get(q,0)+1
     bad={i for i in alive if any(q!=p and occ[q]<2 for q in rows[i][2])}; ch=bool(bad); alive-=bad
+# Two primes that occur in the same two relations and in no other relation give only a submodule of index p (the two entries
+# form a 2 x 2 matrix whose determinant is a unit times 1 - x^m).  Such relations are removed, and the first step is repeated.
+ch=True
+while ch:
+    sup={}
+    for i in alive:
+        for q in rows[i][2]:
+            if q!=p: sup.setdefault(q,[]).append(i)
+    grp={}
+    for q,s in sup.items():
+        if len(s)==2: grp.setdefault(tuple(s),[]).append(q)
+    bad={i for s,qs in grp.items() if len(qs)>=2 for i in s}; alive-=bad; ch=bool(bad)
+    while True:
+        occ={}
+        for i in alive:
+            for q in rows[i][2]:
+                if q!=p: occ[q]=occ.get(q,0)+1
+        bad={i for i in alive if any(q!=p and occ[q]<2 for q in rows[i][2])}
+        if not bad: break
+        alive-=bad; ch=True
 with open(out,"w") as f:
     f.write("# field %d 1\n# relations for span.py: c | i:a ... | factorization of |N(c + sum a_i eta_i)|\n"%p)
     for i in sorted(alive):

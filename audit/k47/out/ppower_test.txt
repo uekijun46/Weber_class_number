@@ -1,0 +1,11 @@
+(1) span.ppower(g, 47) agrees with the definition for g = 1..19999 and 45 further values (ppower(0, p) would not terminate; span.py tests g != 0 first in all three places)
+(2) span.prove on synthetic rows (1 or 2 columns q = 101, 103; core = number of columns, so that step (c) decides):
+  a) rows e1, e2 (twice each)                                gcd = 1; accepted by span.main's rule: True
+  b) [x^23, x^9], [x^13, x^28] (twice)                       gcd = 47; accepted by span.main's rule: True
+  c) [1-x, 0], [0, 1-x] (twice)                              gcd = 2209; accepted by span.main's rule: True
+  d) [2, 0], [0, 2] (twice)                                  gcd = 28 digits; accepted by span.main's rule: False
+  e) [2(1-x), 0], [0, 2(1-x)] (twice)                        gcd = 32 digits; accepted by span.main's rule: False
+  f) [1-x, 1-x], [1-x, 1-x] (twice)                          gcd = 0; accepted by span.main's rule: False
+  g) [x-2, 0], [0, x-2] (twice)                              gcd = 29 digits; accepted by span.main's rule: False
+  h) one column, rows 2(1-x) and 3(1-x)                      gcd = 47; accepted by span.main's rule: True
+ppower_test passed

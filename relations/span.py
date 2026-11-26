@@ -122,6 +122,9 @@ def ppower(g,p):                                      # is the positive integer 
     while g%p==0: g//=p
     return g==1
 def prove(F,rows,core,cap=None):                      # returns T and the gcd of (c); every prime of T is principal if the gcd is a power of the degree
+    # The conclusion for a gcd p^e with e > 0 needs that p does not divide the class number.  This holds if K/Q is cyclic of
+    # degree p, K is real, and exactly one prime ramifies (Iwasawa).  The callers (main: K = k_p; span_test.py: prime conductor,
+    # odd prime degree) satisfy this; prove() itself does not check it.
     # core: step (b) stops when this many primes remain; cap = (a, b): rows are dropped when there are more than a * (primes) + b
     p=F.N; need(is_prime(p),"the degree must be prime"); A=Ring(p)
     # (a) primes that occur in one row only
@@ -213,7 +216,7 @@ def main():
     T,g=prove(F,relation_rows(F,read_cert(F,fn)),int(opt.get("--core",120)),tuple(int(v) for v in opt.get("--rows","4,400").split(",")))
     need(g!=0 and ppower(g,p),"(c): the greatest common divisor of the indices is not a power of p")
     if g!=1: print("(c) the greatest common divisor is %d, a power of p; the conclusion uses that p does not divide the class number (Iwasawa)"%g)
-    print("SPAN PASS  field k_%d: the prime ideals above the %d split primes of T are principal (no hypothesis)."%(p,len(T)))
+    print("SPAN PASS  field k_%d: the prime ideals above the %d split primes of T are principal (%s)."%(p,len(T),"no hypothesis" if g==1 else "GRH is not used; Iwasawa's theorem is used"))
     print("  T: smallest %s, largest %d; %d of them below 10^6"%(T[:6],T[-1],sum(1 for q in T if q<10**6)))
     if "--primes" in opt: open(opt["--primes"],"w").write("# field %d 1: split primes whose prime ideals are principal (span.py %s)\n"%(p,fn)+"".join("%d\n"%q for q in T))
     # the class number, UNDER GRH

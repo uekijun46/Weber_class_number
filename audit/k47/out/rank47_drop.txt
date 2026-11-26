@@ -1,0 +1,2 @@
+matrix of exponents modulo 47: 13109 rows (2 left out), 9154 columns
+rank over F_47: 9154; |T| - rank = 0; 66 s

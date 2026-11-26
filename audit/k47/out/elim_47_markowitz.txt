@@ -1,0 +1,25 @@
+field k_47, rule markowitz; rows: 13109 (nonzero 13109); T: 9156 primes, smallest [53, 67, 71, 479, 1609, 1979], largest 997698613
+pivots 500; columns 8656; rows 12609; nonzero entries 116470; largest coefficient 1 digits; 3 s
+pivots 1000; columns 8156; rows 12109; nonzero entries 114406; largest coefficient 1 digits; 6 s
+pivots 1500; columns 7656; rows 11609; nonzero entries 112324; largest coefficient 1 digits; 8 s
+pivots 2000; columns 7156; rows 11109; nonzero entries 110203; largest coefficient 1 digits; 11 s
+pivots 2500; columns 6656; rows 10609; nonzero entries 108044; largest coefficient 1 digits; 13 s
+pivots 3000; columns 6156; rows 10109; nonzero entries 105805; largest coefficient 1 digits; 15 s
+pivots 3500; columns 5656; rows 9609; nonzero entries 103589; largest coefficient 1 digits; 17 s
+pivots 4000; columns 5156; rows 9109; nonzero entries 101330; largest coefficient 1 digits; 19 s
+pivots 4500; columns 4656; rows 8609; nonzero entries 99056; largest coefficient 1 digits; 21 s
+pivots 5000; columns 4156; rows 8109; nonzero entries 96804; largest coefficient 1 digits; 23 s
+pivots 5500; columns 3656; rows 7609; nonzero entries 95917; largest coefficient 1 digits; 24 s
+pivots 6000; columns 3156; rows 7109; nonzero entries 95773; largest coefficient 1 digits; 26 s
+pivots 6500; columns 2656; rows 6609; nonzero entries 96183; largest coefficient 1 digits; 27 s
+pivots 7000; columns 2156; rows 6109; nonzero entries 98652; largest coefficient 1 digits; 29 s
+pivots 7500; columns 1656; rows 5609; nonzero entries 106241; largest coefficient 1 digits; 30 s
+pivots 8000; columns 1156; rows 5109; nonzero entries 131521; largest coefficient 1 digits; 33 s
+pivots 8500; columns 656; rows 4609; nonzero entries 219908; largest coefficient 1 digits; 39 s
+pivots 8920; columns 236; rows 4189; nonzero entries 665533; largest coefficient 2 digits; 101 s
+pivots 8940; columns 216; rows 4169; nonzero entries 683751; largest coefficient 2 digits; 121 s
+pivots 8960; columns 196; rows 4149; nonzero entries 688362; largest coefficient 2 digits; 146 s
+pivots 8980; columns 176; rows 4129; nonzero entries 667990; largest coefficient 2 digits; 180 s
+pivots 9000; columns 156; rows 4109; nonzero entries 627563; largest coefficient 3 digits; 230 s
+pivots 9020; columns 136; rows 4089; nonzero entries 555155; largest coefficient 3 digits; 332 s
+STATE k_47 markowitz: pivots 9028; columns left 128 (empty columns: 0); rows left 4081; no entry +-x^j left; 419 s

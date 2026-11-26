@@ -1,0 +1,6 @@
+rows of span.py: 13109; left out: [5417]; used: 13108
+(a) T: 9154 primes (smallest 53, largest 997698613); rows: 13107
+(b) pivots: 9028; remaining: 126 primes, 904 rows
+(c) set 1 of 126 rows: Nm(det) has 5444 digits (941 auxiliary primes); gcd so far has 5444 digits
+(c) set 2 of 126 rows: Nm(det) has 5841 digits (990 auxiliary primes); gcd so far = 1
+result: |T| = 9154; 6453089 in T: False; 184398551 in T: False; gcd of step (c) = 1; 985 s

@@ -1,0 +1,6 @@
+lines 13109; primes 9156; number of primes by the number of lines in which they occur: [(2, 5175), (3, 1399), (4, 551), (5, 249), (6, 130), (7, 89), (8, 70), (9, 94)] ...
+number of prime factors >= 10^6 per line: [(0, 1049), (1, 5338), (2, 6722)]
+groups of primes with the same support: 1
+  primes [6453089, 184398551] occur exactly in the lines [5417, 10574] (0-based data lines)
+     line 5417: 0 | 0:1 2:1 5:-1 15:-1 17:-1 20:-1 36:1 38:1 | 47^2 67^2 71^2 1609^1 6857^1 42409^1 99233^1 6453089^1 184398551^1
+     line 10574: -1 | 0:1 1:1 5:-1 12:-1 17:1 25:-1 27:-1 45:-1 | 53^2 67^2 71^2 1609^1 5503^1 115163^1 130051^1 6453089^1 184398551^1

@@ -1,0 +1,11 @@
+  l = 283, x = 64: rank 9156 of 9156; 159 s
+  l = 283, x = 134: rank 9156 of 9156; 323 s
+  l = 283, x = 86: rank 9156 of 9156; 483 s
+  l = 283, x = 127: rank 9156 of 9156; 573 s
+  l = 283, x = 204: rank 9156 of 9156; 689 s
+  l = 283, x = 38: rank 9156 of 9156; 807 s
+  l = 283, x = 168: rank 9156 of 9156; 923 s
+  l = 283, x = 281: rank 9156 of 9156; 1038 s
+  l = 283, x = 155: rank 9156 of 9156; 1153 s
+  l = 283, x = 15: rank 9156 of 9156; 1266 s
+(stopped by the auditor after 10 + 7 points; k = 1..10 and k = 46..40)

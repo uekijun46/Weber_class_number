@@ -1,0 +1,17 @@
+field k_47; lines: 13109
+(i) norms (two exact determinants) and factorizations: 13109 lines, all equal; split primes: 9156; largest norm has 54 digits; 117 s
+    shape: number of nonzero coefficients [(3, 2), (4, 11), (5, 35), (6, 298), (7, 1539), (8, 11224)]; c [(-2, 2254), (-1, 2148), (0, 3914), (1, 2210), (2, 2583)]; coefficient values [(-1, 44437), (1, 58141)]; number of prime factors >= 10^6 per line [(0, 1049), (1, 5338), (2, 6722)]; lines whose norm is divisible by p: 4149
+    largest prime 997698613; primes below 10^6: 1671; smallest number of lines in which a prime occurs: 2; no duplicate lines
+  prime 0 of 9156, 117 s
+  prime 1000 of 9156, 122 s
+  prime 2000 of 9156, 127 s
+  prime 3000 of 9156, 131 s
+  prime 4000 of 9156, 136 s
+  prime 5000 of 9156, 141 s
+  prime 6000 of 9156, 146 s
+  prime 7000 of 9156, 151 s
+  prime 8000 of 9156, 156 s
+  prime 9000 of 9156, 161 s
+(ii) ring homomorphisms O_K -> F_q verified by the multiplication table for 9156 primes (number of eigenspace steps: [(1, 9153), (2, 3)]); 162 s
+    primes where the values R_0..R_(p-1) are not distinct (q divides the index of Z[eta_0]): 20, the smallest: [(53, 33), (67, 39), (71, 33), (479, 46), (1609, 45), (2647, 46), (3251, 44), (12959, 46), (16063, 46), (19709, 46), (30631, 46), (43013, 46)]
+(iii) every exponent equals the number of prime ideals containing the element: 13109 lines, 118539 entries; exponents: [(1, 97858), (2, 11614), (3, 5888), (4, 2305), (5, 673), (6, 167), (7, 25), (8, 8), (9, 1)]; entries with all p prime ideals: 0; 167 s

@@ -1,0 +1,3 @@
+matrix of exponents modulo 47: 13109 rows (0 left out), 9156 columns
+rank over F_47: 9155; |T| - rank = 1; 67 s
+kernel vector 0: M v = 0 checked row by row: True; support (prime, coefficient): [(6453089, 46), (184398551, 1)]

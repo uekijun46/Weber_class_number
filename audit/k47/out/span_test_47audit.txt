@@ -1,0 +1,12 @@
+== span_test.py 13 3 4 100 1
+field of degree 3 and conductor 13: 435 relations, T has 7 primes (smallest [5, 31, 47, 53, 73, 79, 83]); gcd of step (c): 1
+expected: gcd 1 or a power of 3
+TEST PASSED
+== span_test.py 163 3 6 150 4
+field of degree 3 and conductor 163: 933 relations, T has 10 primes (smallest [5, 13, 17, 23, 31, 37, 53, 59]); gcd of step (c): 4
+expected: gcd greater than 1 and not a power of 3 (class number 4)
+TEST PASSED
+== span_test.py 313 3 8 100 7
+field of degree 3 and conductor 313: 1286 relations, T has 10 primes (smallest [5, 7, 19, 23, 53, 61, 71, 73]); gcd of step (c): 7
+expected: gcd greater than 1 and not a power of 3 (class number 7)
+TEST PASSED

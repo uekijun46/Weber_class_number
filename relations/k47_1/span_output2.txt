@@ -1,0 +1,10 @@
+$ python3 -O span.py k47_1/span_cert2.txt --primes k47_1/span_primes2.txt
+relations verified (norms and prime ideal factorizations): 13107; primes: 9154
+(a) T: 9154 primes (smallest 53, largest 997698613); rows: 13107
+(b) pivots: 9028; remaining: 126 primes, 904 rows
+(c) set 1 of 126 rows: Nm(det) has 5444 digits (941 auxiliary primes); gcd so far has 5444 digits
+(c) set 2 of 126 rows: Nm(det) has 5841 digits (990 auxiliary primes); gcd so far = 1
+SPAN PASS  field k_47: the prime ideals above the 9154 split primes of T are principal (no hypothesis).
+  T: smallest [53, 67, 71, 479, 1609, 1979], largest 997698613; 1671 of them below 10^6
+UNDER GRH (Miller, Lemma 5.2): c=6.5: G(c) <= 0.5253785835, prime sum >= 6.3555360239, B >= 3.6658817, h < 1.8753; least possible class number > 1: 283
+VERDICT (under GRH): PASS  (h < 1.8753 < 283)

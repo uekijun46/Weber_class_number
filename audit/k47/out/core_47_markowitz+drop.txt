@@ -1,0 +1,4 @@
+k_47, rule markowitz+drop5417,10574: core of 131 columns, 4084 rows; pivots before: 9023; |T| = 9154
+block 1: Nm(det) has 5430 digits (bound 16502 digits, 876 auxiliary primes); gcd so far has 5430 digits; 849 s
+block 2: Nm(det) has 5833 digits (bound 17419 digits, 925 auxiliary primes); gcd so far = 1; 1516 s
+OWN SPAN PASS k_47 (markowitz+drop5417,10574): the rows generate A^131, hence L = A^T for the 9154 primes of T (smallest [53, 67, 71, 479, 1609, 1979], largest 997698613; 1671 below 10^6)

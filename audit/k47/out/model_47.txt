@@ -1,0 +1,15 @@
+p = 47, M = 2209, least primitive root g = 5, |H| = 46, g^p in H, H -> (Z/p)^* bijective, zeta -> zeta^g sends eta_i to eta_(i+1): checked in fieldp.py
+H = <g^p>: checked (the definition of relations/verify.py);  E_i = g^i H
+charpoly of multiplication by eta_0 == polsubcyclo(2209,47): True
+irreducible: True
+the table is invariant under the shift i -> i+1: True
+Tr(1) = 47, Tr(eta_k) = [0]
+discriminant of the lattice Z[1, eta_0, ..., eta_45] = Mat([47, 92])
+conductor-discriminant formula: the p-1 nontrivial characters of Gal(K/Q) have conductor p^2, so d(K) = p^(2(p-1)) = lattice discriminant  =>  the lattice is O_K (index 1);  log rd = (2(p-1)/p) log p
+PARI nfdisc(f) = Mat([47, 92]); equal to p^(2(p-1)): True
+index [O_K : Z[eta_0]] has 722 digits; factors found by trial division up to 10^7: [53, 16; 67, 8; 71, 22; 479, 1; 1609, 2; 2647, 1; 3251, 3; 12959, 1; 16063, 1; 19709, 1; 30631, 1; 43013, 1; 69821, 1; 90289, 1; 304771, 1; 516959, 1; 1629587, 1; 2200459, 1; 2360357, 1; 4466303, 1; 5402347, 1; 6862695542176104706272252693494810089013712380476087122760511464589108838285192236110926823423821536809331884481889794690313637437398622801101737945834139762742319753543418720949830291718827808352344156128351704954445381764105538144943032734581618483603817744192763908985015541911384252692430717914361666558846137564528126733010464662512186113791445752335714328961420297516371014104863793390315763287105735957261738897673777639746879817182397010109456649046188573330365342811385382621679003934637414493024895967788076040685577096187825878017, 1]
+pi = prod_{h in H}(1 - zeta^h) lies in Z[1, eta_i] (H-invariant coefficients); N(pi) = 47
+min over primes l != p of l^(order of l mod p) = 283 (l = 283, order 1); searched all l < 283
+orders modulo p of the primes below the threshold (l:order, l^order): 2:23 3:23 5:46 7:23 11:46 13:46 17:23 19:46 23:46 29:46 31:46 37:23 41:46 43:46 53:23 59:23 61:23 67:46 71:23 73:46 79:23 83:23 89:23 97:23 101:23 103:23 107:46 109:46 113:46 127:46 131:23 137:46 139:46 149:23 151:46 157:23 163:46 167:46 173:23 179:46 181:46 191:23 193:46 197:23 199:46 211:46 223:46 227:46 229:46 233:46 239:23 241:23 251:23 257:46 263:23 269:23 271:23 277:23 281:2
+  second smallest value of l^f: [283, 659, 941]
+1 s

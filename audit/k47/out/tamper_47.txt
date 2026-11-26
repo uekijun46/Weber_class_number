@@ -1,0 +1,32 @@
+== t01_exponent
+FAILED: norm: 1 | 0:1 1:1 13:-1 24:1 | 53^2 71^2 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t02_coef_sign
+FAILED: norm: 1 | 0:-1 1:1 13:-1 24:1 | 53^2 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t03_c_plus1
+FAILED: norm: 2 | 0:1 1:1 13:-1 24:1 | 53^2 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t04_composite
+FAILED: factor 169051 is not p or a split prime: 1 | 0:1 1:1 13:-1 24:1 | 53^2 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1 169051^1
+== t05_header_other_p
+FAILED: coefficients: 1 | 0:1 1:1 45:-1 | 47^1 53^4 67^2 3083^1 26561^1 699379^1 2001421^1
+== t06_header_layer2
+FAILED: the certificate must begin with '# field p 1'
+== t07_nonsplit_2
+FAILED: factor 2 is not p or a split prime: 2 |  | 2^47
+== t08_prime_swapped
+FAILED: norm: 1 | 0:1 1:1 13:-1 24:1 | 53^2 67^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t09_extra_factor_p
+FAILED: norm: 1 | 0:1 1:1 13:-1 24:1 | 53^2 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1 47^1
+== t10_duplicate_prime
+FAILED: norm: 1 | 0:1 1:1 13:-1 24:1 | 53^2 71^1 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t11_index_p
+FAILED: coefficients: 1 | 47:1 1:1 13:-1 24:1 | 53^2 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t14_other_numbering
+FAILED: norm: 1 | 0:1 2:1 26:-1 1:1 | 53^2 71^1 2381^1 6397^1 8837^1 20161^1 815351^1 873643^1 5334619^1
+== t13_square_of_row3
+FAILED: the number of prime ideals above 53 that contain the element is not the exponent of 53 in the norm
+== t00_untouched_30rows
+relations verified (norms and prime ideal factorizations): 30; primes: 151
+FAILED: no primes left
+== t12_shifted_indices
+relations verified (norms and prime ideal factorizations): 30; primes: 151
+FAILED: no primes left

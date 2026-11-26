@@ -1,0 +1,5 @@
+lines containing b: [5417, 10574]; lines containing B: [5417, 10574]
+entries (sets J; the entry is sum_{j in J} x^j): {(5417, 6453089): [23], (5417, 184398551): [9], (10574, 6453089): [13], (10574, 184398551): [28]}
+block [[x^23, x^9],[x^13, x^28]]: det = x^4 - x^22 = x^22 (1 - x^29) up to sign; m = 29 mod 47 (m != 0: True)
+Nm(1 - x^m) by the determinant of the multiplication matrix: 47
+other primes of the two lines: [67, 71, 1609, 6857, 42409, 99233] [53, 67, 71, 1609, 5503, 115163, 130051]

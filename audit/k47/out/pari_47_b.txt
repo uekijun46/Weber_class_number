@@ -1,0 +1,2 @@
+k_47: g_i(eta_0) = eta_i numerically (largest error 2.49e-2985, denominator of 642 digits); nfinit: disc = 47^92; 28 s
+k_47, selection 143 9156 (number 143..4170 in it; first q = 66749, last q = 3750953), mode val:0: 4028 primes: PARI's 47 residue maps are exactly the cyclic shifts of the audit's homomorphism; 39689 (row, prime) entries, 1865383 valuations by nfeltval, all 0/1 and equal to the audit's patterns; 2400 s

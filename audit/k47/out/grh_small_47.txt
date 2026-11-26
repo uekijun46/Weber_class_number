@@ -1,0 +1,17 @@
+k_47, S = {53, 67, 71, 479}: best h < 109.84 at c = 8.0 (mpmath, not interval arithmetic)
+k_47, S = {53, 67, 71}: best h < 469.92 at c = 9.0 (mpmath, not interval arithmetic)
+  c=7.4 h < 189.29143
+  c=7.5 h < 149.07463
+  c=7.6 h < 129.25509
+  c=7.7 h < 118.53688
+  c=7.8 h < 112.80252
+  c=7.9 h < 110.21242
+  c=8.0 h < 109.83955
+  c=8.1 h < 111.18394
+  c=8.2 h < 113.97003
+  c=8.3 h < 118.05223
+  c=8.4 h < 123.36714
+  c=8.5 h < 129.90814
+  c=8.6 h < 137.71155
+primes of T below 1000000 (1671): best h < 2.156543 at c = 6.5 (c = 5, 5.5, ..., 8; mpmath)
+primes of T below 10000000 (6086): best h < 1.886887 at c = 6.5 (c = 5, 5.5, ..., 8; mpmath)

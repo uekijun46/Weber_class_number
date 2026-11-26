@@ -1,0 +1,15 @@
+k_37: 3 sets
+   gcd = 0 (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd has 2916 digits (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd = 1 (divisible by p exactly 0 times), old rule stops: True, new rule stops: True
+   the two rules agree at every step: True; final gcd 1
+k_41: 4 sets
+   gcd has 3094 digits (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd = 83 (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd = 83 (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd = 1 (divisible by p exactly 0 times), old rule stops: True, new rule stops: True
+   the two rules agree at every step: True; final gcd 1
+k_43: 2 sets
+   gcd has 3858 digits (divisible by p exactly 0 times), old rule stops: False, new rule stops: False
+   gcd = 1 (divisible by p exactly 0 times), old rule stops: True, new rule stops: True
+   the two rules agree at every step: True; final gcd 1

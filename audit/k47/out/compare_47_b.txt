@@ -1,0 +1,7 @@
+(1) periods of span.py: 9156 primes, all verified against the multiplication table, all cyclic shifts of the audit's homomorphisms; 30 s
+(2) rows of span.py: 13109 rows, 118539 entries, all equal to the audit's entries up to the shift of the base prime ideal; 30 s
+(3) set 1 of span.py (n = 127): own Nm(det) has 5440 digits (828 auxiliary primes); equal to the number of span.py; 830 s
+(3) set 2 of span.py (n = 127): own Nm(det) has 5843 digits (879 auxiliary primes); equal to the number of span.py; 1769 s
+    after set 1: gcd has 5440 digits
+    after set 2: gcd = 47
+(3) sets compared: 2 of 2; gcd of the compared ones = 47
