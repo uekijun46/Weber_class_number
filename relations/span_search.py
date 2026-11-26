@@ -1,6 +1,6 @@
 # Search (NOT rigorous; the output is checked by span.py): relations for the first layer k_p from small elements.
 # Elements: c + sum_{i in I} s_i eta_i with |I| = w, s_i = +-1, c in -2..2, one element for each orbit under Gal(k_p/Q) and sign.
-# The norm is computed modulo six primes l = 1 mod p^2 with numpy; an element is kept if its norm is
+# The norm is computed modulo six or more primes l = 1 mod p^2 with numpy; an element is kept if its norm is
 #   p^a * (split primes below Y) * (at most two more primes below LP).
 #   python3 span_search.py p w J:j Y LP OUT      (the part j of J of the supports; needs numpy)
 import sys, math, itertools, pickle, time, numpy as np, flint
@@ -8,7 +8,8 @@ from field import Field
 p,w=int(sys.argv[1]),int(sys.argv[2]); J,j0=[int(u) for u in sys.argv[3].split(":")]; Y,LP,out=int(float(sys.argv[4])),int(float(sys.argv[5])),sys.argv[6]
 F=Field(p,1); N=F.N; M=F.M
 ls=[]; l=(2**31//M)*M+1
-while len(ls)<6:
+nls=max(6,math.ceil(p*math.log2(1.2*math.sqrt(w*(p-1)))/31))    # enough primes for almost all norms (6 lose many norms for p >= 53)
+while len(ls)<nls:
     l-=M
     if flint.fmpz(l).is_prime(): ls.append(l)
 Rl=[np.array(F.periods_mod(l),dtype=np.int64) for l in ls]
