@@ -1,0 +1,1162 @@
+% 日本語版．英語版 k49_k81.tex（第 4 稿，2026-11-26）の訳．
+% 数式，数値，番号は英語版と同じ．内容を変えるときは英語版を先に変える．
+% コンパイル：lualatex k49_k81_ja.tex （2 回）
+\documentclass[11pt,a4paper]{ltjsarticle}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,allcolors=blue,linktoc=page]{hyperref}
+\usepackage{cleveref}   % オプション nameinlink をつけないので，番号だけがリンクになる
+
+\crefformat{theorem}{定理#2#1#3}
+\crefformat{proposition}{命題#2#1#3}
+\crefformat{lemma}{補題#2#1#3}
+\crefformat{corollary}{系#2#1#3}
+\crefformat{definition}{定義#2#1#3}
+\crefformat{remark}{注意#2#1#3}
+\crefformat{example}{例#2#1#3}
+\crefformat{section}{第#2#1#3節}
+\crefformat{subsection}{第#2#1#3節}
+\crefformat{table}{表#2#1#3}
+\crefformat{equation}{(#2#1#3)}
+
+\newtheoremstyle{ja}{}{}{\normalfont}{}{\bfseries}{}{1\zw}{\thmname{#1}\thmnumber{#2}\thmnote{（#3）}}
+\theoremstyle{ja}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{remark}[theorem]{注意}
+\newtheorem{example}[theorem]{例}
+\newtheorem{question}[theorem]{問題}
+
+\makeatletter
+\renewenvironment{proof}[1][証明]{\par
+  \pushQED{\qed}\normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\bfseries #1]\hspace{1\zw}\ignorespaces
+}{\popQED\endtrivlist\@endpefalse}
+\makeatother
+
+\title{$\mathbb{Q}$の円分$\mathbb{Z}_p$拡大のいくつかのlayerの類数について}
+\author{}   % 著者欄は未記入
+\date{2026年11月27日（第4稿の日本語版）}
+
+\renewcommand{\labelenumi}{(\theenumi)}
+
+\emergencystretch=1.5em
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+次の3個の体の類数が$1$であることを証明する：導手$243$の円分体の最大実部分体，$\mathbb{Q}$の円分$\mathbb{Z}_7$拡大の2番目のlayer，$\mathbb{Q}$の円分$\mathbb{Z}_{29}$拡大の1番目のlayer．
+これらの証明は一般Riemann予想を仮定しない．
+また，$p = 37$，$41$，$43$，$47$に対して，$\mathbb{Q}$の円分$\mathbb{Z}_p$拡大の1番目のlayerの類数が$1$であることを，そのHilbert類体に対する一般Riemann予想のもとで証明する．
+方法は既知のものである：Millerによる類数の上界と，係数の小さい元のノルムを素因数分解した一覧とを組み合わせる．後者の使い方は，関係式から類群を計算するアルゴリズムと同じである．
+素イデアルの生成元も単数も計算しない．
+\end{abstract}
+
+\section{序}
+
+各正整数$m$に対して，$\mathbb{Q}$の円分$\hat{\mathbb{Z}}$拡大の$m$次の唯一の部分体を$k_m$で表す．
+$p$が素数で$n$が正整数ならば，$k_{p^n}$は$\mathbb{Q}$の円分$\mathbb{Z}_p$拡大の$n$番目のlayerである．
+この体は\cite{Mi15b}では$\mathbb{B}_{p,n}$と書かれており，体$k_{2^n}$は$\mathbb{B}_n$と書かれることが多い．
+$k_m$の類数を$h(k_m)$で表す．
+
+Weber \cite{We86}は，すべての$n$に対して$h(k_{2^n})$が奇数であること，および$n \le 3$ならば$h(k_{2^n}) = 1$であることを証明した．
+すべての$n$に対して$h(k_{2^n}) = 1$が成り立つかという問題は，Weberの類数問題とよばれている．
+Coates \cite{Co12}は，すべての素数$p$とすべての正整数$n$に対して$h(k_{p^n}) = 1$が成り立つかを問うた．
+現在のところ，等式$h(k_{p^n}) = 1$は
+\[
+p^n \in \{2, 2^2, 2^3, 2^4, 2^5, 2^6,\ 3, 3^2, 3^3,\ 5, 5^2,\ 7,\ 11,\ 13,\ 17,\ 19\}
+\]
+に対して仮説なしで証明されており，
+\[
+p^n \in \{2^7,\ 3^4,\ 23,\ 29,\ 31\}
+\]
+に対して一般Riemann予想のもとで証明されている．
+これらはWeber，Cohn，Bauer，Masley，van der Linden，Coates，Liang，Mih\u{a}ilescu，Millerによる結果である；\cite[Table 1, Theorem 7, Table 2]{Mi15b}と\cite{Co60, Ba69, Ma78, vdL82, Co12, Mi14, Mi14b}を見よ．
+素数$\ell$を固定したとき，$\ell$がある$n$に対して$h(k_{p^n})$を割るかという問題は，堀江・堀江 \cite{HH09}，福田・小松 \cite{FK11}，森澤・岡崎 \cite{MO13}，福田・小松・森澤 \cite{FKM14}などによって研究されている．
+$h(k_{23}) = 1$の仮説なしの証明が\cite{Ch26}で主張されている；知る限り，これはまだ査読のある出版物になっていない．
+
+体$k_{3^n}$は，導手$3^{n+1}$の円分体の最大実部分体$\mathbb{Q}(e^{2\pi i/3^{n+1}})^+$である．
+本稿では，さらに7個の体の類数を決定する：3個の体については仮説なしで，4個の体については一般Riemann予想のもとで決定する．
+
+\begin{theorem} \label{thm:main}
+\begin{enumerate}
+\item $k_{3^4} = \mathbb{Q}(e^{2\pi i/243})^+$の類数は$1$である．
+\item $k_{7^2}$の類数は$1$である．
+\item $k_{29}$の類数は$1$である．
+\end{enumerate}
+\end{theorem}
+
+\cref{thm:main}の証明は一般Riemann予想を仮定しない．
+この予想のもとでは，等式$h(k_{3^4}) = 1$はvan der Linden \cite[Theorem 2]{vdL82}によって証明されており，等式$h(k_{29}) = 1$はMiller \cite[Table 2]{Mi15b}によって得られている．
+
+\begin{theorem} \label{thm:grh}
+$p \in \{37, 41, 43, 47\}$とする．
+$k_p$のHilbert類体のDedekindゼータ関数の非自明な零点の実部がすべて$1/2$であるならば，$k_p$の類数は$1$である．
+\end{theorem}
+
+知る限り，この4個の体の類数は，一般Riemann予想のもとでも知られていなかった．
+
+本稿の方法は既知のものである．
+二つの定理はどちらもMiller \cite{Mi14, Mi15b}の方法で証明する．この方法は3段階からなる．
+$K$を上の7個の体の一つとする．
+第一に，解析的な不等式が$h(K)$の上界を与える．ただし，$K$で完全分解する十分多くの素数について，その上にある素イデアルが単項であると分かっていなければならない．
+この不等式には，仮説によらない形と，一般Riemann予想のもとでのより強い形がある．
+第二に，類群へのGalois群の作用についての結果から，$h(K)$は$1$であるか$t$以上であることが分かる．ここで$t$は，$K = k_{3^4}$，$k_{7^2}$，$k_{29}$，$k_{37}$，$k_{41}$，$k_{43}$，$k_{47}$に対してそれぞれ$163$，$197$，$59$，$149$，$83$，$173$，$283$である．
+第三に，十分多くの素数の上にある素イデアルが単項であることを証明して，第一段階の上界を$t$より小さくする．
+
+\cite{Mi15b}では，第三段階は各素イデアルの生成元を計算することで実行されている．
+本稿では生成元を計算しない．
+$c + \sum_i a_i \eta_i$の形の元$\alpha$を使い，そのノルムを素因数分解する．ここで$\eta_i$はGauss周期であり，$c$と$a_i$は小さい整数である．
+イデアル$\alpha O_K$の素イデアル分解は，素イデアルの類の間の関係式である．関係式が十分多くあれば，これらの類が自明であることが分かる．
+これは，関係式から類群を計算するアルゴリズムの原理である；Hafner--McCurley \cite{HM89}とBuchmann \cite{Bu90}を見よ．
+$h(K)$の上界は解析的な不等式から得られるので，$K$の単数群も単数規準も必要としない．
+
+\cref{thm:main}では，不等式は多くの素数を必要とする．
+次の素数の上にある素イデアルが単項であることを示す：$k_{3^4}$で完全分解するすべての素数$q < 3 \cdot 10^{10}$，$k_{7^2}$で完全分解するすべての素数$q \le 2.2 \cdot 10^7$，$k_{29}$で完全分解するすべての素数$q < 4 \cdot 10^9$．
+ここでは関係式を一つずつ使う：素数$q$が$\alpha$のノルムをちょうど1回割り，ノルムの他の素因数の上にある素イデアルが単項であるとすでに分かっているならば，$q$の上にある素イデアルは単項である．
+各素数$q$に対して，このような元を格子の基底の簡約によって見つける．
+この形の関係式は，体$k_{23}$に対して\cite{Ch26}でも使われている；そこでは，係数が$\{-1, 0, 1\}$に属する元をすべて調べることで元を見つけている．
+
+\cref{thm:grh}では，不等式は少数の素数しか必要としない．
+しかし，これらの体では係数の小さい元のノルムが大きく，一つずつ使える関係式を計算することができなかった．
+その代わりに，数千個の元の素イデアル分解を環$\mathbb{Z}[e^{2\pi i/p}]$上のベクトルとみなし，これらのベクトルが自由加群の全体を生成することを線形代数によって示す．
+これにより，$k_{37}$，$k_{41}$，$k_{43}$，$k_{47}$でそれぞれ$3832$個，$4434$個，$3528$個，$9154$個の素数の上にある素イデアルが単項であることが，仮説なしで分かる．
+
+元の一覧についての主張はすべて，厳密な整数演算を行うプログラムで検証してあり，どの一覧も独立なプログラムでもう一度検証してある．
+一覧は大きく，印刷することはできない．
+一覧はプログラムとともに次の場所にある．
+\begin{center}
+\url{https://github.com/uekijun46/Weber_class_number}
+\end{center}
+
+本稿の構成は次のとおりである．
+\cref{sec:field}で記号を定め，\cref{sec:known}で使用する既知の結果をまとめる．
+\cref{sec:relations}，\cref{sec:data}，\cref{sec:bound}で\cref{thm:main}を証明し，\cref{sec:remarks}でこの証明についての注意を述べる．
+\cref{sec:grh}で\cref{thm:grh}を証明する．
+
+\section{体} \label{sec:field}
+
+$p$を奇素数，$n$を正整数とする．
+$N = p^n$，$M = p^{n+1}$とおき，複素数$e^{2\pi i/M}$を$\zeta$で表す．
+群$(\mathbb{Z}/M\mathbb{Z})^\times$は位数$(p-1)N$の巡回群である．
+その位数$p - 1$の部分群を$H$で表す．すなわち
+\[
+H = \{a \in (\mathbb{Z}/M\mathbb{Z})^\times \mid a^{p-1} = 1\}
+\]
+である．
+$\mathbb{Q}(\zeta)$の部分体で$H$によって固定されるものを$K$で表す．ここで$a \in H$は$\zeta \mapsto \zeta^a$によって作用する．
+このとき$K = k_{p^n}$である．
+$-1 \in H$であるから$K$は総実であり，$K$は$\mathbb{Q}$上$N$次の巡回拡大である．
+$K$の部分体は，$0 \le j \le n$に対する体$k_{p^j}$である．ここで$k_1 = \mathbb{Q}$である．
+
+$g$を$(\mathbb{Z}/M\mathbb{Z})^\times$の生成元とする．
+$i \in \mathbb{Z}/N\mathbb{Z}$に対して，Gauss周期を
+\[
+\eta_i = \sum_{a \in H} \zeta^{g^i a}
+\]
+で定義する．
+$g^N \in H$であるから，これは$i$の代表元のとり方によらない．
+各$\eta_i$は$K$の整数環$O_K$の元である．
+$\mathbb{Q}(\zeta)$の自己同型$\zeta \mapsto \zeta^g$の$K$への制限を$\sigma$で表す．
+このとき$\sigma$は$\operatorname{Gal}(K/\mathbb{Q})$を生成し，すべての$i \in \mathbb{Z}/N\mathbb{Z}$に対して$\sigma(\eta_i) = \eta_{i+1}$が成り立つ．
+
+\begin{example} \label{ex:fields}
+$p^n = 3^4$ならば，$M = 243$かつ$H = \{\pm 1\}$である．$g = 2$をとる．したがって$\eta_i = 2\cos(2\pi \cdot 2^i/243)$である．
+$p^n = 7^2$ならば，$M = 343$かつ$H = \{\pm 1, \pm 18, \pm 19\}$である．$g = 3$をとる．
+$p^n = 29$ならば，$M = 841$であり，$H$の位数は$28$である．$g = 2$をとる．
+\cref{sec:grh}の体に対する生成元$g$は\cref{tab:grh}にある．
+\end{example}
+
+\begin{lemma} \label{lem:field}
+\begin{enumerate}
+\item $K$の判別式は$p^e$である．ここで$e = \sum_{j=1}^{n} (j+1)(p-1)p^{j-1}$である．
+\item 素数$q \ne p$が$K$で完全分解するのは，$q^{p-1} \equiv 1 \pmod{M}$のとき，かつそのときに限る．
+\item $p$の上にある$K$の素イデアルはちょうど1個であり，それは単項である．
+\item $c$を整数，$(a_i)_{i \in \mathbb{Z}/N\mathbb{Z}}$を整数の族とし，$\alpha = c + \sum_i a_i \eta_i$とおく．このとき$\alpha \in O_K$であり，
+\[
+N_{K/\mathbb{Q}}(\alpha) = \prod_{j \in \mathbb{Z}/N\mathbb{Z}} \Bigl( c + \sum_{i} a_i \eta_{i+j} \Bigr)
+\]
+が成り立つ．
+さらに，$b = |c| + (p-1) \sum_i |a_i|$とおくと，$|N_{K/\mathbb{Q}}(\alpha)| \le b^N$である．
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) $K$に対応するDirichlet指標の群は位数$N$の巡回群である．
+$1 \le j \le n$に対して，この群は導手$p^{j+1}$の指標をちょうど$(p-1)p^{j-1}$個含む．
+主張は導手判別式公式から従う．
+
+(2) 素数$q$が$K$で完全分解するのは，$\operatorname{Gal}(\mathbb{Q}(\zeta)/\mathbb{Q}) = (\mathbb{Z}/M\mathbb{Z})^\times$における$q$のFrobenius元，すなわち$q$の類が，$H$に属するとき，かつそのときに限る．
+
+(3) 素数$p$は$\mathbb{Q}(\zeta)$で完全分岐するから，$K$でも完全分岐する．
+$\pi = \prod_{a \in H} (1 - \zeta^a)$とおく．
+このとき$\pi \in O_K$であり，$N_{K/\mathbb{Q}}(\pi) = N_{\mathbb{Q}(\zeta)/\mathbb{Q}}(1 - \zeta) = p$である．
+よって$\pi O_K$は$p$の上にある$K$の素イデアルである．
+
+(4) 最初の二つの主張は，上で述べた$\sigma$の性質から従う．
+すべての$i$に対して$|\eta_i| \le p - 1$であるから，積の各因子の絶対値は$b$以下である．
+\end{proof}
+
+\cref{lem:field}により，$k_{3^4}$，$k_{7^2}$，$k_{29}$の判別式はそれぞれ$3^{364}$，$7^{138}$，$29^{56}$である．
+数体$L$に対して，$L$の根判別式，すなわち判別式の絶対値の$[L : \mathbb{Q}]$乗根を$\operatorname{rd}(L)$で表す．
+このとき
+\begin{align*}
+\log \operatorname{rd}(k_{3^4}) &= \tfrac{364}{81} \log 3 = 4.9369737416\ldots, \\
+\log \operatorname{rd}(k_{7^2}) &= \tfrac{138}{49} \log 7 = 5.4803183789\ldots, \\
+\log \operatorname{rd}(k_{29}) &= \tfrac{56}{29} \log 29 = 6.5023643613\ldots
+\end{align*}
+であるから，$\operatorname{rd}(k_{3^4}) < 139.35$，$\operatorname{rd}(k_{7^2}) < 239.93$，$\operatorname{rd}(k_{29}) < 666.73$である．
+
+素数$p$は$K$で分岐するから，$K$で完全分解する素数は$p$と異なる．
+たとえば，素数$q \ne 3$が$k_{3^4}$で完全分解するのは，$q \equiv \pm 1 \pmod{243}$のとき，かつそのときに限る．
+
+\section{既知の結果} \label{sec:known}
+
+\subsection{類数の上界}
+
+Eulerの定数を$\gamma$で表す．
+次は\cite[Lemma 5.1]{Mi14}である；\cite[Lemma 1]{Mi15b}も見よ．
+
+\begin{proposition}[Miller] \label{prop:miller}
+$L$を$N$次の総実な数体とし，$c$を正の実数とする．
+$\mathbb{R}$上の関数$F$を
+\[
+F(x) = \frac{e^{-(x/c)^2}}{\cosh(x/2)}
+\]
+で定義する．
+$S$を素数の集合とし，$S$の各元は$L$で完全分解して，その上にある素イデアルがすべて単項であるとする．
+\[
+I(c) = \int_0^\infty \frac{1 - F(x)}{2} \left( \frac{1}{\sinh(x/2)} + \frac{1}{\cosh(x/2)} \right) dx
+\]
+および
+\[
+B = \frac{\pi}{2} + \gamma + \log 8\pi - \log \operatorname{rd}(L) - I(c) + 2 \sum_{q \in S} \sum_{m=1}^{\infty} \frac{\log q}{q^{m/2}} F(m \log q)
+\]
+とおく．
+$B > 0$ならば，$L$の類数$h$は
+\[
+h < \frac{2c\sqrt{\pi}}{N B}
+\]
+をみたす．
+\end{proposition}
+
+集合$S$は，上の性質をもつ素数の集合であれば何でもよく，空集合でもよい．
+二重和の各項は正であるから，和を部分和で置き換えれば$B$の下界が得られる．
+$\cosh((m \log q)/2) = (q^{m/2} + q^{-m/2})/2$であるから，二重和の項は
+\begin{equation} \label{eq:term}
+2 \cdot \frac{\log q}{q^{m/2}} F(m \log q) = \frac{4 \log q}{q^m + 1} \, e^{-(m \log q/c)^2}
+\end{equation}
+をみたす．
+
+一般Riemann予想のもとでは，より強い不等式が成り立つ．
+次は\cite[Lemma 5.2]{Mi14}である．
+
+\begin{proposition}[Miller] \label{prop:millergrh}
+$L$を$N$次の総実な数体とし，$c$を正の実数とする．
+$S$を素数の集合とし，$S$の各元は$L$で完全分解して，その上にある素イデアルがすべて単項であるとする．
+\[
+G(c) = \int_0^\infty \frac{1 - e^{-(x/c)^2}}{2} \left( \frac{1}{\sinh(x/2)} + \frac{1}{\cosh(x/2)} \right) dx
+\]
+および
+\[
+B' = \frac{\pi}{2} + \gamma + \log 8\pi - \log \operatorname{rd}(L) - G(c) + 2 \sum_{q \in S} \sum_{m=1}^{\infty} \frac{\log q}{q^{m/2}} \, e^{-(m \log q/c)^2}
+\]
+とおく．
+$L$のHilbert類体のDedekindゼータ関数の非自明な零点の実部がすべて$1/2$であると仮定する．
+$B' > 0$ならば，$L$の類数$h$は
+\[
+h < \frac{2c\sqrt{\pi} \, e^{(c/4)^2}}{N B'}
+\]
+をみたす．
+\end{proposition}
+
+\cref{prop:millergrh}では，因子$e^{(c/4)^2}$のために$c$を小さくとらなければならない．しかし，二重和の項は\cref{prop:miller}の項より$q$についてゆっくり減少するので，少数の素数で足りる．
+
+\subsection{可除性についての結果}
+
+次は\cite[Theorems 6 and 8]{vdL82}の帰結であり，Masleyの階数についての系\cite[Corollary 2.15]{Ma78}の一般的な形である．
+読者の便宜のために証明をつける．
+
+\begin{proposition}[Masley，van der Linden] \label{prop:masley}
+$E/F$を数体の$n$次巡回拡大とし，$\ell$を$n$を割らない素数とする．
+$F \subseteq L \subsetneq E$をみたすどの体$L$の類数も$\ell$で割れないと仮定する．
+$(\mathbb{Z}/n\mathbb{Z})^\times$における$\ell$の位数を$f$で表す．
+$\ell$が$E$の類数を割るならば，$\ell^f$が$E$の類数を割る．
+\end{proposition}
+
+\begin{proof}
+$E/F$のGalois群を$G$で表し，$\tau$を$G$の生成元とし，$E$のイデアル類群の$\ell$部分を$A$で表す．
+$\ell$は$n$を割らないから，環$\mathbb{Z}_\ell[G]$は環$\mathbb{Z}_\ell[x]/(\Phi_d(x))$の直積である．ここで$d$は$n$の正の約数を動き，$\Phi_d$は$d$番目の円分多項式を表す．
+これに応じて，$A$は部分加群$A_d$の直和であり，$\tau$は$A_d$に$\mathbb{Z}_\ell[x]/(\Phi_d(x))$を通じて作用する．
+
+$d$を$n$の正の約数で$d < n$をみたすものとし，$\tau^d$で固定される$E$の部分体を$L$で表す．
+このとき$F \subseteq L \subsetneq E$である．
+$\mathbb{Z}_\ell[G]$の元$\nu = \sum_{j=0}^{n/d-1} \tau^{dj}$は，$L$の類群の$\ell$部分へのノルム写像と，イデアルの拡大から誘導される写像との合成として$A$に作用する．
+仮定により$L$の類群の$\ell$部分は自明であるから，$\nu$は$A$に零として作用する．
+一方，$\tau^d$は$A_d$に恒等写像として作用するから，$\nu$は$A_d$に$n/d$倍として作用する．$n/d$は$\mathbb{Z}_\ell$の単数である．
+よって$A_d = 0$である．
+
+したがって$A = A_n$は$\mathbb{Z}_\ell[x]/(\Phi_n(x))$上の加群である．
+この環は，$\mathbb{Q}_\ell$の$f$次不分岐拡大の整数環の何個かの直積である．
+この環上の有限加群の位数は，つねに$\ell^f$の冪である．
+\end{proof}
+
+\subsection{部分体の類数と下界}
+
+\begin{proposition}[岩澤] \label{prop:iwasawa}
+$p$を素数，$n$を正整数とする．このとき$p$は$h(k_{p^n})$を割らない．
+\end{proposition}
+
+\begin{proof}
+拡大$k_{p^n}/\mathbb{Q}$は次数が$p$の冪であるGalois拡大であり，この拡大で分岐する$\mathbb{Q}$の素点は$p$のみである．
+よって主張は岩澤の定理\cite{Iw56}から従う；\cite[Theorem 10.4]{Wa97}を見よ．
+\end{proof}
+
+\begin{proposition} \label{prop:sub}
+体$k_3$，$k_{3^2}$，$k_{3^3}$，$k_7$の類数は$1$である．
+\end{proposition}
+
+\begin{proof}
+これらの体の導手は$9$，$27$，$81$，$49$である．
+van der Lindenの定理\cite[Theorem 1]{vdL82}により，導手が素数冪$q$で$\varphi(q) \le 66$をみたす実アーベル体の類数はすべて$1$である．
+これで主張が証明された．
+
+主張は\cref{prop:miller}，\cref{prop:masley}，\cref{prop:iwasawa}からも従う．これを以下で説明する．
+\cref{prop:miller}を，空集合$S$と，\cref{tab:sub}に示した$c$の値に対して適用する．
+判別式は\cref{lem:field}で与えられ，$I(c)$の上界は\cref{sec:bound}と同じ方法で得られる．
+これにより，\cref{tab:sub}の最後の列にある類数の上界が得られる．
+
+$h(k_3) < 2$かつ$h(k_{3^2}) < 2$であるから，この二つの類数は$1$である．
+$\ell$を$h(k_{3^3})$を割る素数とする．
+\cref{prop:iwasawa}により$\ell \ne 3$である．
+\cref{prop:masley}を$E = k_{3^3}$と$F = \mathbb{Q}$に適用すると，$\ell^f$が$h(k_{3^3})$を割る．ここで$f$は$27$を法とする$\ell$の位数を表す．
+ここで$k_3$と$k_{3^2}$の類数が$1$であることを使った．
+$h(k_{3^3}) < 6$であるから$\ell^f \le 5$であり，したがって$\ell \in \{2, 5\}$かつ$f \le 2$である．
+これは不可能である．$2$と$5$の$27$を法とする位数は$18$だからである．
+よって$h(k_{3^3}) = 1$である．
+同様に，$h(k_7)$を割る素数$\ell$は$\ell \ne 7$と$\ell^f \le 4$をみたす．ここで$f$は$7$を法とする$\ell$の位数を表す．
+このとき$\ell \in \{2, 3\}$かつ$f \le 2$となるが，$2$と$3$の$7$を法とする位数は$3$と$6$であるから，これは不可能である．
+よって$h(k_7) = 1$である．
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrcrccc}
+\toprule
+体 & 次数 & $\log \operatorname{rd} \le$ & $c$ & $I(c) \le$ & $B \ge$ & $h <$ \\
+\midrule
+$k_3$ & $3$ & $1.4648164$ & $2$ & $2.1508333$ & $1.7565338$ & $1.3455$ \\
+$k_{3^2}$ & $9$ & $2.6854968$ & $3$ & $1.7991266$ & $0.8875601$ & $1.3314$ \\
+$k_{3^3}$ & $27$ & $3.8247984$ & $8$ & $1.3711535$ & $0.1762316$ & $5.9601$ \\
+$k_7$ & $7$ & $3.3358460$ & $5$ & $1.5090534$ & $0.5272841$ & $4.8022$ \\
+\bottomrule
+\end{tabular}
+\caption{空集合$S$に対して\cref{prop:miller}から得られる評価．各欄は安全な向きに丸めてある（上界は切り上げ，下界は切り捨て）．最後の2列は丸める前の値から計算してある．}
+\label{tab:sub}
+\end{table}
+
+\begin{corollary} \label{cor:threshold}
+$p^n$と$t$を\cref{tab:threshold}の一つの行にあるものとする．
+$h(k_{p^n}) > 1$ならば，$h(k_{p^n}) \ge t$である．
+\end{corollary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{crll}
+\toprule
+$p^n$ & $t$ & $\ell^2 < t$をみたす素数$\ell \ne p$ & $p^n$を法とするそれらの位数 \\
+\midrule
+$3^4$ & $163$ & $2$, $5$, $7$, $11$ & $54$, $54$, $27$, $54$ \\
+$7^2$ & $197$ & $2$, $3$, $5$, $11$, $13$ & $21$, $42$, $42$, $21$, $14$ \\
+$29$ & $59$ & $2$, $3$, $5$, $7$ & $28$, $28$, $14$, $7$ \\
+$37$ & $149$ & $2$, $3$, $5$, $7$, $11$ & $36$, $18$, $36$, $9$, $6$ \\
+$41$ & $83$ & $2$, $3$, $5$, $7$ & $20$, $8$, $20$, $40$ \\
+$43$ & $173$ & $2$, $3$, $5$, $7$, $11$, $13$ & $14$, $42$, $42$, $6$, $7$, $21$ \\
+$47$ & $283$ & $2$, $3$, $5$, $7$, $11$, $13$ & $23$, $23$, $46$, $23$, $46$, $46$ \\
+\bottomrule
+\end{tabular}
+\caption{数$t$は，$\ell \equiv 1 \pmod{p^n}$をみたす最小の素数$\ell$である．}
+\label{tab:threshold}
+\end{table}
+
+\begin{proof}
+$\ell$を$h(k_{p^n})$を割る素数とする．
+\cref{prop:iwasawa}により$\ell \ne p$である．
+$\mathbb{Q} \subseteq L \subsetneq k_{p^n}$をみたす体$L$の類数はすべて$1$である：$p^n$が$3^4$または$7^2$のときは\cref{prop:sub}により成り立ち，$n = 1$のときはこのような体は$\mathbb{Q}$のみである．
+\cref{prop:masley}を$E = k_{p^n}$と$F = \mathbb{Q}$に適用すると，$\ell^f$が$h(k_{p^n})$を割る．ここで$f$は$p^n$を法とする$\ell$の位数を表す．
+$\ell^f \ge t$を示せば十分である．
+$f = 1$ならば，$\ell \equiv 1 \pmod{p^n}$であるから$\ell \ge t$である．
+$f \ge 2$かつ$\ell^f < t$と仮定する．
+このとき$\ell^2 < t$であるから，$\ell$は\cref{tab:threshold}の第3列にある素数の一つである．
+これらの素数の位数$f$は最後の列にあり，どの場合も$\ell^f > t$である．
+これは矛盾である．
+\end{proof}
+
+\section{ノルムから得られる単項素イデアル} \label{sec:relations}
+
+この節を通じて，$K = k_{p^n}$は\cref{sec:field}のとおりとし，$0 \le j < n$に対する体$k_{p^j}$の類数がすべて$1$であると仮定する．
+\cref{prop:sub}により，この仮定は$p^n = 3^4$と$p^n = 7^2$に対して成り立つ；$p^n = 29$に対しては，$k_1 = \mathbb{Q}$であるから成り立つ．
+素数$r$の上にある$K$の素イデアルがすべて単項であるとき，$r$は\textbf{解決済み}であるという．
+\cref{lem:field}により，素数$p$は解決済みである．
+
+\begin{lemma} \label{lem:nonsplit}
+$r \ne p$を$K$で完全分解しない素数とする．このとき$r$は解決済みである．
+\end{lemma}
+
+\begin{proof}
+$K$における$r$の分解体を$D$で表す．
+このとき，ある$j < n$に対して$D = k_{p^j}$であるから，$h(D) = 1$である．
+$\mathfrak{r}$を$r$の上にある$D$の素イデアルとする．
+拡大$K/D$は巡回拡大であり，素イデアル$\mathfrak{r}$はこの拡大で不分岐であり，$\mathfrak{r}$の上にある$K$の素イデアルの分解群は$\operatorname{Gal}(K/D)$である．
+よって$\mathfrak{r} O_K$は$K$の素イデアルである．
+$\mathfrak{r}$が単項であるから，これは単項である．
+$r$の上にある$K$の素イデアルはすべてこの形である．
+\end{proof}
+
+\begin{definition} \label{def:relation}
+$q$を$K$で完全分解する素数とする．
+\textbf{$q$の関係式}とは，元$\alpha \in O_K$であって，$q$が整数$N_{K/\mathbb{Q}}(\alpha)$を割り，$q^2$がそれを割らないものをいう．
+\end{definition}
+
+\begin{lemma} \label{lem:relation}
+$q$を$K$で完全分解する素数とし，$\alpha$を$q$の関係式とする．
+$N_{K/\mathbb{Q}}(\alpha)$を割る素数$r \ne q$がすべて解決済みであると仮定する．
+このとき$q$は解決済みである．
+\end{lemma}
+
+\begin{proof}
+$q$の上にある$K$の素イデアルのノルムはすべて$q$である．
+$q$は$N_{K/\mathbb{Q}}(\alpha)$をちょうど1回割るから，$q$の上にある$K$の素イデアルで$\alpha$を含むものはちょうど1個である．これを$\mathfrak{q}$とすると，$\alpha O_K = \mathfrak{q} \mathfrak{a}$と書ける．ここで$\mathfrak{a}$は，$N_{K/\mathbb{Q}}(\alpha)$を割る素数$r \ne q$の上にある素イデアルの積である．
+仮定により，イデアル$\mathfrak{a}$は単項である．
+よって$\mathfrak{q}$は単項である．
+拡大$K/\mathbb{Q}$はGalois拡大であるから，$q$の上にある$K$の素イデアルはすべて，$\tau \in \operatorname{Gal}(K/\mathbb{Q})$によって$\tau(\mathfrak{q})$の形に書ける．
+\end{proof}
+
+\cref{lem:nonsplit}により，\cref{lem:relation}の仮定は，ノルムを割る素数$r \ne q$のうち$K$で完全分解するものだけについての条件である．
+\cref{lem:relation}を二通りの形で使う．
+
+\begin{proposition} \label{prop:list}
+$q_1, \ldots, q_t$を$K$で完全分解する素数とし，$T$を解決済みの素数の集合とする．
+$1 \le i \le t$に対して，$\alpha_i$を$q_i$の関係式とする．
+すべての$i$に対して，$N_{K/\mathbb{Q}}(\alpha_i)$を割り$K$で完全分解する素数$r \ne q_i$がすべて$T \cup \{q_1, \ldots, q_{i-1}\}$に属すると仮定する．
+このとき$q_1, \ldots, q_t$は解決済みである．
+\end{proposition}
+
+\begin{proof}
+\cref{lem:nonsplit}と\cref{lem:relation}から，$i$についての帰納法によって従う．
+\end{proof}
+
+\begin{proposition} \label{prop:range}
+$A < X$を正の実数とする．
+$K$で完全分解する素数$q < A$がすべて解決済みであると仮定する．
+さらに，$K$で完全分解し$A \le q < X$をみたす各素数$q$に対して，$q$の関係式$\alpha_q$であって，$N_{K/\mathbb{Q}}(\alpha_q)$を割り$K$で完全分解する素数$r \ne q$がすべて$r < q$をみたすものが存在すると仮定する．
+このとき，$K$で完全分解する素数$q < X$はすべて解決済みである．
+\end{proposition}
+
+\begin{proof}
+主張が成り立たないと仮定し，$K$で完全分解し解決済みでない素数$q < X$のうち最小のものを改めて$q$とする．
+このとき$q \ge A$である．
+$N_{K/\mathbb{Q}}(\alpha_q)$を割る素数$r \ne q$は，$K$で完全分解しないか，$p$に等しいか，$K$で完全分解して$r < q$をみたすかのいずれかである．
+どの場合も$r$は解決済みである．これはそれぞれ，\cref{lem:nonsplit}，\cref{lem:field}，$q$のとり方による．
+よって\cref{lem:relation}により$q$は解決済みであり，これは矛盾である．
+\end{proof}
+
+\cref{prop:range}では，$q$についての条件は他の関係式を参照しない．
+したがって，素数$q$の互いに交わらない区間ごとに別々に検証できる．
+
+$k_{7^2}$では，完全分解する最小の素数は$19$であり，これは係数の小さい元の大部分のノルムを割る．
+この素数に対しては次の補題を使う．
+
+\begin{lemma} \label{lem:block}
+$q_0$を$K$で完全分解する素数とし，$q_0$の上にある$K$の素イデアルを$\mathfrak{q}_1, \ldots, \mathfrak{q}_N$で表す．
+$\beta_1, \ldots, \beta_s$を$O_K$の元とし，すべての$i$に対して次の二つの性質をもつとする．
+\begin{enumerate}
+\item 整数$a_i \ge 0$と$k_i \ge 1$によって$|N_{K/\mathbb{Q}}(\beta_i)| = p^{a_i} q_0^{k_i}$と書ける．
+\item 素イデアル$\mathfrak{q}_1, \ldots, \mathfrak{q}_N$のうちちょうど$k_i$個が$\beta_i$を含む．
+\end{enumerate}
+$\beta \in O_K$に対して，$\beta \in \mathfrak{q}_j$のとき，かつそのときに限り第$j$成分が$1$であるベクトルを$v(\beta) \in \{0,1\}^N$で表す．
+$1 \le i \le s$と$\tau \in \operatorname{Gal}(K/\mathbb{Q})$に対するベクトル$v(\tau(\beta_i))$が群$\mathbb{Z}^N$を生成するならば，$q_0$は解決済みである．
+\end{lemma}
+
+\begin{proof}
+$\beta$を元$\tau(\beta_i)$の一つとする．
+(1)と(2)により，$\mathfrak{q}_j$における$\beta$の付値は$v(\beta)$の第$j$成分であり，$\beta O_K$は，$\beta \in \mathfrak{q}_j$をみたすイデアル$\mathfrak{q}_j$の積と，$p$の上にある素イデアルの冪との積である．
+後者は\cref{lem:field}により単項である．
+よって$v(\beta)$は，第$j$標準基底ベクトルを$\mathfrak{q}_j$の類に送る$\mathbb{Z}^N$から$K$のイデアル類群への準同型の核に属する．
+これらのベクトルが$\mathbb{Z}^N$を生成するならば，この準同型は自明である．
+\end{proof}
+
+\begin{remark} \label{rem:blockcheck}
+\cref{lem:block}の条件は次のように検証する．
+$\Phi_M$が$q_0$を法として$N$個の相異なる既約多項式$g_1, \ldots, g_N$の積であるとする．
+このとき，イデアル$(q_0, g_j(\zeta))$が$q_0$の上にある$\mathbb{Z}[\zeta]$の素イデアルである．
+これらは$N$個あるから，各素イデアル$\mathfrak{q}_i$はこれらのうちちょうど1個の下にある．
+$\beta \in O_K$を，$b(\zeta) = \beta$をみたす多項式$b \in \mathbb{Z}[x]$で表す．
+番号をつけ替えれば，$\beta \in \mathfrak{q}_j$であるのは，$g_j$が$q_0$を法として$b$を割るとき，かつそのときに限る．
+\end{remark}
+
+\section{関係式の一覧} \label{sec:data}
+
+元はすべて\cref{lem:field}の$c + \sum_i a_i \eta_i$の形で与える．生成元$g$は\cref{ex:fields}のものである．
+
+\subsection{体$k_{3^4}$}
+
+$K = k_{3^4}$とする．
+$q \equiv \pm 1 \pmod{243}$をみたす素数$q < 3 \cdot 10^{10}$の集合を$S_3$で表す．
+集合$S_3$は$16049777$個の元をもつ．
+その最小の元は$487$，$971$，$1459$，$2917$であり，最大の元は$29999999969$である．
+
+\begin{proposition} \label{prop:data3}
+$S_3$に属する素数はすべて解決済みである．すなわち，$S_3$に属する素数の上にある$k_{3^4}$の素イデアルはすべて単項である．
+\end{proposition}
+
+\begin{proof}
+付属のデータは二つの部分からなる．
+
+第一の部分は，$8699$個の関係式を，$T$を空集合として\cref{prop:list}が要求する順序に並べた一覧である．
+この一覧の素数$q_i$は，$10^7$より小さい$S_3$の元$8160$個をすべて含む．
+残りの$539$個の素数$q_i$は，$10^7$より大きく$K$で完全分解する素数であり，一覧の後のほうの関係式のノルムに現れる．
+\cref{prop:list}により，$10^7$より小さい$S_3$の元はすべて解決済みである．
+
+第二の部分は，$q \ge 10^7$をみたす$S_3$の$16041617$個の元$q$のそれぞれに対して，$q$の関係式$\alpha_q$であって，$N_{K/\mathbb{Q}}(\alpha_q)$を割り$K$で完全分解する素数$r \ne q$がすべて$r < q$をみたすものを与える．
+\cref{prop:range}を$A = 10^7$と$X = 3 \cdot 10^{10}$に適用すると，$S_3$の元はすべて解決済みである．
+データの検証は\cref{subsec:verification}で説明する．
+\end{proof}
+
+\begin{example} \label{ex:relations}
+$S_3$の最大の元$q = 29999999969$の関係式は
+\[
+\alpha = \eta_1 + \eta_3 - \eta_8 + \eta_{10} - \eta_{17} + \eta_{20} - \eta_{22} - \eta_{23} - \eta_{29} + \eta_{37}
+\]
+であり，$|N_{K/\mathbb{Q}}(\alpha)| = 3^2 \cdot 487 \cdot 1459 \cdot 2917 \cdot 23849479 \cdot q$である．
+第一の部分にある$q = 8742169$の関係式は$\alpha = -1 - \eta_{11} - \eta_{14} - \eta_{23} + \eta_{29}$であり，$|N_{K/\mathbb{Q}}(\alpha)| = q$である．
+\end{example}
+
+\subsection{体$k_{7^2}$}
+
+$K = k_{7^2}$とする．
+$K$で完全分解する最小の素数は$19$，$1373$，$1697$，$1733$であり，$K$で完全分解する素数$q \le 2.2 \cdot 10^7$は$28381$個ある．
+
+\begin{proposition} \label{prop:data7}
+$k_{7^2}$で完全分解する$29835$個の素数からなる集合$S_7$であって，$k_{7^2}$で完全分解する素数$q \le 2.2 \cdot 10^7$をすべて含み，その元がすべて解決済みであるものが存在する．
+\end{proposition}
+
+\begin{proof}
+素数$19$は解決済みである．これは，\cref{lem:block}を$q_0 = 19$と8個の元
+\begin{gather*}
+\pm(2 + \eta_0 + \eta_{24}), \quad \pm(\eta_0 - \eta_{26}), \quad \eta_0 - \eta_{21}, \\
+\eta_{23} - \eta_0, \quad \eta_{28} - \eta_0, \quad \eta_{46} - \eta_0 - 1
+\end{gather*}
+に適用して得られる．これらのノルムの絶対値は，上に並べた順にそれぞれ$7 \cdot 19^4$，$7^2 \cdot 19^4$，$7^9 \cdot 19^2$，$7^2 \cdot 19^4$，$7^9 \cdot 19^2$，$19^3$である（符号だけが異なる二つの元のノルムの絶対値は等しい）．
+$343$を法とする$19$の位数は$6$であるから，$\Phi_{343}$は$19$を法として$49$個の$6$次既約多項式の積であり，条件は\cref{rem:blockcheck}のように検証される．
+$8 \cdot 49$個のベクトルは$\mathbb{Z}^{49}$を生成する；これは，これらのベクトルを並べた行列のHermite標準形を計算して検証する．
+
+付属のデータは次に，$29834$個の関係式を，$T = \{19\}$として\cref{prop:list}が要求する順序に並べた一覧を与える．
+この一覧の素数$q_i$と$19$を合わせたものが集合$S_7$である．
+$S_7$の最大の元は$59529496693$である．
+\end{proof}
+
+\subsection{体$k_{29}$}
+
+$K = k_{29}$とする．
+$q^{28} \equiv 1 \pmod{841}$をみたす素数$q < 4 \cdot 10^9$の集合を$S_{29}$で表す．
+集合$S_{29}$は$6549261$個の元をもつ．
+その最小の元は$41$，$137$，$467$，$571$であり，最大の元は$3999999659$である．
+
+\begin{proposition} \label{prop:data29}
+$S_{29}$に属する素数はすべて解決済みである．
+\end{proposition}
+
+\begin{proof}
+付属のデータは二つの部分からなる．
+第一の部分は，$10^5$より小さい$S_{29}$の$327$個の元$q$のそれぞれに対して，$|N_{K/\mathbb{Q}}(\alpha_q)| = q$をみたす元$\alpha_q \in O_K$を与える．
+このような元は，ノルムが他の素因数をもたない$q$の関係式であるから，\cref{lem:relation}により$q$は解決済みである．
+第二の部分は，$q \ge 10^5$をみたす$S_{29}$の$6548934$個の元$q$のそれぞれに対して，$q$の関係式$\alpha_q$であって，$N_{K/\mathbb{Q}}(\alpha_q)$を割り$K$で完全分解する素数$r \ne q$がすべて$r < q$をみたすものを与える．
+\cref{prop:range}を$A = 10^5$と$X = 4 \cdot 10^9$に適用すると，$S_{29}$の元はすべて解決済みである．
+\end{proof}
+
+\begin{remark} \label{rem:41}
+$k_{29}$では，$q_0 = 41$に対して\cref{lem:block}を適用できる元は見つからなかった．
+第一の部分の元$\alpha_q$は，PARI/GP \cite{PARI}の関数\texttt{bnfinit}と\texttt{bnfisprincipal}で計算し，そのあと$c + \sum_i a_i \eta_i$の形に書き直した．
+整数$c$と$a_i$は他の関係式のものより大きい：$327$個の素数のうち$234$個では高々4桁であり，すべての場合に高々$24$桁である．
+関数\texttt{bnfinit}は一般Riemann予想を仮定する．
+しかし，証明は元$\alpha_q$そのものだけを使い，そのノルムは以下で説明するように検証するので，このことは証明に影響しない．
+たとえば，第二の部分にある$q = 499979$の関係式は$\alpha = 1 + \eta_1 + \eta_3 + \eta_4 + \eta_7 - \eta_{11} + \eta_{12}$であり，$|N_{K/\mathbb{Q}}(\alpha)| = 41^3 \cdot 202621 \cdot 271879 \cdot q$である．
+\end{remark}
+
+\subsection{検証} \label{subsec:verification}
+
+関係式は，素数$q$，整数$c$と$a_i$，および$|N_{K/\mathbb{Q}}(\alpha)|$の素因数分解として保存してある．
+検証のプログラムはこれらのデータを読み，次の主張を厳密な整数演算で確かめる．
+\begin{enumerate}
+\item 記された素因数分解に現れる数はすべて素数である．
+\item 記された素因数分解の積は$|N_{K/\mathbb{Q}}(\alpha)|$に等しい．
+\item 素数$q$は$K$で完全分解し，素因数分解における$q$の指数は$1$である．
+\item 素因数分解に現れ$K$で完全分解する素数$r \ne q$は，\cref{prop:list}または\cref{prop:range}の条件をみたす．
+\item 考えている区間にあり$K$で完全分解する素数はすべて，ある関係式の素数$q$として現れる．
+\end{enumerate}
+(1)と(5)では，素数であることをFLINT \cite{FLINT}の関数\texttt{fmpz\_is\_prime}で証明する；現れる素数はすべて$2^{36}$より小さい．
+(5)では，プログラムは区間にある整数のうち\cref{lem:field}の合同式をみたすものをすべて調べる．
+
+(2)では，ノルムを次のように計算する．
+$l$を$l \equiv 1 \pmod{M}$をみたす素数とし，$z \in \mathbb{F}_l$を位数$M$の元とする．
+$\zeta$を$z$に送る$\mathbb{Z}[\zeta]$から$\mathbb{F}_l$への環準同型が存在する．
+\cref{lem:field}により，この準同型による$N_{K/\mathbb{Q}}(\alpha)$の像は
+\[
+\prod_{j \in \mathbb{Z}/N\mathbb{Z}} \Bigl( c + \sum_i a_i \rho_{i+j} \Bigr), \quad \text{ただし} \quad \rho_i = \sum_{a \in H} z^{g^i a}
+\]
+である．
+プログラムはこのような素数$l > 2^{61}$を12個使い，下の条件のために必要ならばさらに追加する．
+\cref{lem:field}により，整数$N_{K/\mathbb{Q}}(\alpha)$の絶対値は$b^N$以下である．ここで$b = |c| + (p-1)\sum_i |a_i|$である．
+したがってこの整数は，積が$2b^N + 1$を超えるような素数$l$を法とする剰余によって決まる．プログラムはこの条件が成り立つことを確かめる．
+
+\begin{remark} \label{rem:search}
+関係式は次のように見つけた；これは証明の一部ではない．
+$q$を$K$で完全分解する素数とする．
+$q$の上にある素イデアルを一つ固定すると，それに属する元$c + \sum_i a_i \eta_i$は，指数$q$のある格子のベクトル$(c, (a_i)_i)$に対応する．この格子は，Gauss周期の$\mathbb{F}_q$における像によって記述される．
+この格子の基底をLLLアルゴリズムで簡約し，短いベクトルとそれらの和と差のノルムを計算し，要求される性質をもつ関係式が見つかるまで，これらのノルムをPARI/GP \cite{PARI}で素因数分解する．
+これには1コアで素数1個あたり約$20$から$35$ミリ秒かかる．
+$k_{7^2}$では，探索全体に2コアで約$20$分かかり，検証は$15$秒未満で終わる．
+$k_{3^4}$では，$10^7$から$3 \cdot 10^{10}$までの区間を$82$個の区間に分け，探索と検証には4コアの計算機で1区間あたり$16$分から$41$分かかった．
+$k_{29}$では，$5 \cdot 10^5$から$4 \cdot 10^9$までの区間を$80$個の区間に分け，探索と検証には1区間あたり$2$分から$7$分かかった．
+係数の小さい元のノルムの大きさは体によって異なる．
+$|c| \le 2$であり，零でない係数$a_i \in \{\pm 1\}$が高々5個である元を標本として調べたところ，典型的なノルムは$k_{3^4}$で$10^{12}$程度，$k_{7^2}$で$10^{18}$程度，$k_{29}$で$10^{20}$程度であった；これらの数字は標本に依存し，目安にすぎない．
+\end{remark}
+
+\begin{remark} \label{rem:second}
+すべての関係式を，独立なプログラムでもう一度検証した．
+このプログラムは，素数であることをPARI/GPの関数\texttt{isprime}で証明する．
+$k_{3^4}$と$k_{7^2}$に対しては，$\Phi_M$と多項式$c + \sum_i a_i \sum_{a \in H} x^{g^i a \bmod M}$の終結式をPARI/GPで計算する；その絶対値は$|N_{K/\mathbb{Q}}(\alpha)|^{p-1}$である．
+$k_{29}$に対しては，この終結式の計算が遅いので，$K$の$\mathbb{Q}$上の基底$1, \eta_0, \ldots, \eta_{27}$に関する$\alpha$倍写像の行列の行列式としてノルムを計算する；終結式は関係式およそ$800$個につき1個の割合で使う．
+\end{remark}
+
+\section{上界} \label{sec:bound}
+
+\begin{lemma} \label{lem:integral}
+$c$，$\varepsilon$，$R$を$\varepsilon < R$をみたす正の実数とし，$I(c)$の定義にある被積分関数を$u$で表す．
+このとき
+\[
+I(c) \le \int_\varepsilon^R u(x)\, dx + \left( \frac{1}{c^2} + \frac{1}{8} \right) \left( \frac{\varepsilon^2}{2} + \frac{\varepsilon^3}{6} \right) + 2 e^{-R/2} \left( 1 + \frac{1}{1 - e^{-R}} \right)
+\]
+が成り立つ．
+\end{lemma}
+
+\begin{proof}
+$x$を正の実数とする．
+$\cosh(y) \le e^{y^2/2}$と$e^{-t} \ge 1 - t$から
+\[
+F(x) \ge e^{-x^2/c^2 - x^2/8} \ge 1 - \frac{x^2}{c^2} - \frac{x^2}{8}
+\]
+を得る．
+これと$1/\sinh(x/2) \le 2/x$および$1/\cosh(x/2) \le 1$を合わせると
+\[
+u(x) \le \left( \frac{1}{c^2} + \frac{1}{8} \right) \left( x + \frac{x^2}{2} \right)
+\]
+となり，右辺の$0$から$\varepsilon$までの積分が主張の第2項である．
+
+$x \ge R$と仮定する．
+このとき$0 \le 1 - F(x) \le 1$，$1/\sinh(x/2) = 2e^{-x/2}/(1 - e^{-x}) \le 2e^{-x/2}/(1 - e^{-R})$，$1/\cosh(x/2) \le 2e^{-x/2}$である．
+よって
+\[
+u(x) \le e^{-x/2} \left( 1 + \frac{1}{1 - e^{-R}} \right)
+\]
+であり，右辺の$R$から$\infty$までの積分が主張の第3項である．
+\end{proof}
+
+素数の集合$S$と正の実数$c$に対して，\cref{prop:miller}の二重和を$\Sigma(S, c)$で表す．
+
+\begin{proposition} \label{prop:bound}
+\begin{enumerate}
+\item $c = 100$とする．このとき$I(c) \le 1.2646927462$かつ$\Sigma(S_3, c) \ge 0.8733014006$である．$L = k_{3^4}$と$S = S_3$に対して，\cref{prop:miller}の数$B$は$B \ge 0.0438183$をみたし，$h(k_{3^4}) < 99.8767$である．
+\item $c = 80$とする．このとき$I(c) \le 1.2651137825$かつ$\Sigma(S_7, c) \ge 1.4113091085$である．$L = k_{7^2}$と$S = S_7$に対して，\cref{prop:miller}の数$B$は$B \ge 0.0380603$をみたし，$h(k_{7^2}) < 152.0639$である．
+\item $c = 80$とする．このとき$\Sigma(S_{29}, c) \ge 2.6238431599$である．$L = k_{29}$と$S = S_{29}$に対して，\cref{prop:miller}の数$B$は$B \ge 0.2285484$をみたし，$h(k_{29}) < 42.7877$である．
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+集合$S_3$，$S_7$，$S_{29}$についての\cref{prop:miller}の仮定は，\cref{prop:data3}，\cref{prop:data7}，\cref{prop:data29}により成り立つ．
+不等式は，誤差の範囲を保証する区間演算（ball arithmetic）で得られる．これにはライブラリArb \cite{Jo17}を使う．Arbは現在FLINT \cite{FLINT}の一部である．
+積分には\cref{lem:integral}を$\varepsilon = 10^{-3}$と$R = 200$に対して使い，$\varepsilon$から$R$までの区間上の積分は，\cite{Jo18}の厳密な積分アルゴリズムによって誤差の保証つきで計算する．
+和には部分和を使う．各項が正であるから，部分和は下界である．
+(2)では，部分和は$m \le 8$の項からなる．
+(1)と(3)では，項を\eqref{eq:term}によって計算し，部分和は$m \le 8$かつ$q^{m-1} \le 10^{16}$の項からなる．
+集合$S_3$と$S_{29}$はこの段階でもう一度計算し，その元が素数であることを証明する．
+
+$\pi/2 + \gamma + \log 8\pi = 5.3721834192\ldots$である．
+\cref{sec:field}の$\log \operatorname{rd}$の値を使うと，(1)では
+\begin{align*}
+B &\ge 5.3721834192 - 4.9369737417 - 1.2646927462 + 0.8733014006 \\
+&> 0.0438183,
+\end{align*}
+(2)では
+\begin{align*}
+B &\ge 5.3721834192 - 5.4803183790 - 1.2651137825 + 1.4113091085 \\
+&> 0.0380603,
+\end{align*}
+(3)では
+\begin{align*}
+B &\ge 5.3721834192 - 6.5023643614 - 1.2651137825 + 2.6238431599 \\
+&> 0.2285484
+\end{align*}
+を得る．
+類数の上界は，$N = 81$，$N = 49$，$N = 29$に対する\cref{prop:miller}から従う；これらは丸める前の$B$の値から計算してある．
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrcccc}
+\toprule
+体 & $c$ & $I(c) \le$ & $\Sigma \ge$ & $B \ge$ & $h <$ \\
+\midrule
+$k_{3^4}$ & $60$ & $1.2660224223$ & $0.8355826772$ & $0.0047699$ & $550.5021$ \\
+ & $80$ & $1.2651137825$ & $0.8611113518$ & $0.0312072$ & $112.1901$ \\
+ & $100$ & $1.2646927462$ & $0.8733014006$ & $0.0438183$ & $99.8767$ \\
+ & $150$ & $1.2642766179$ & $0.8855807997$ & $0.0565138$ & $116.1599$ \\
+\midrule
+$k_{7^2}$ & $60$ & $1.2660224223$ & $1.3962035757$ & $0.0220461$ & $196.8913$ \\
+ & $80$ & $1.2651137825$ & $1.4113091085$ & $0.0380603$ & $152.0639$ \\
+ & $100$ & $1.2646927462$ & $1.4184096767$ & $0.0455819$ & $158.7142$ \\
+ & $150$ & $1.2642766179$ & $1.4254912948$ & $0.0530797$ & $204.4427$ \\
+\midrule
+$k_{29}$ & $60$ & $1.2660224223$ & $2.5675506639$ & $0.1713472$ & $42.8037$ \\
+ & $80$ & $1.2651137825$ & $2.6238431599$ & $0.2285484$ & $42.7877$ \\
+ & $100$ & $1.2646927462$ & $2.6505824088$ & $0.2557087$ & $47.8037$ \\
+ & $150$ & $1.2642766179$ & $2.6774279523$ & $0.2829703$ & $64.7974$ \\
+\bottomrule
+\end{tabular}
+\caption{集合$S_3$，$S_7$，$S_{29}$に対して\cref{prop:miller}から得られる評価．$\Sigma$の列は二重和の部分和である．各欄は安全な向きに丸めてあり，最後の2列は丸める前の値から計算してある．}
+\label{tab:bounds}
+\end{table}
+
+\begin{proof}[\cref{thm:main}の証明]
+\cref{prop:bound}により，$h(k_{3^4}) < 99.8767$，$h(k_{7^2}) < 152.0639$，$h(k_{29}) < 42.7877$である．
+\cref{cor:threshold}により，これらの類数は$1$であるか，それぞれ$163$，$197$，$59$以上である．
+よって3個の類数は$1$である．
+\end{proof}
+
+\section{仮説なしの結果についての注意} \label{sec:remarks}
+
+\begin{remark} \label{rem:first}
+$k_{7^2}$に対しては，\cite{Mi15b}の方法をそのまま実行することも行った．
+$K$で完全分解する$28381$個の素数$q \le 2.2 \cdot 10^7$のそれぞれに対して，$|N_{K/\mathbb{Q}}(\alpha_q)| = q$をみたす元$\alpha_q \in O_K$をPARI/GPの関数\texttt{bnfinit}と\texttt{bnfisprincipal}で計算し，そのあと独立に検証した．
+これらの素数だけを使うと，\cref{prop:miller}は$c = 80$で$h(k_{7^2}) < 160.7121$を与える．
+この計算には1コアで約$100$時間かかり，元$\alpha_q$のデータは$187$メガバイトである；\cref{prop:data7}の関係式の一覧は$2.4$メガバイトである．
+\end{remark}
+
+\begin{remark} \label{rem:19}
+$k_{7^2}$では，素数$19$だけで$\Sigma(S_7, 80)$に$0.6222$より大きく寄与するのに対し，次に完全分解する素数$1373$の寄与は$0.0209$より小さい．
+$k_{3^4}$では，完全分解する最小の素数は$487$である．
+$k_{3^4}$の根判別式のほうが小さいにもかかわらず，集合$S_3$を集合$S_7$よりずっと大きくとらなければならないのは，このためである．
+\end{remark}
+
+\begin{remark} \label{rem:ramified}
+\cref{prop:miller}は，\cite{Mi14}において恒等式\cite[(4.1)]{Mi14}から導かれている．この恒等式は$L$のHilbert類体のすべての素イデアルにわたる和を含み，この和の各項は正である．
+したがって，$L$の他の単項素イデアルに属する項も残してよい；\cite[Section 6]{Mi14}では，分岐する素イデアルに対してこれが行われている．
+$L = k_{p^n}$に対しては，\cref{lem:field}により，$p$の上にある素イデアルはノルム$p$の単項イデアルであるから，Hilbert類体で完全分解する．
+その項を残すと，数$B$に
+\[
+\frac{2}{N} \sum_{m=1}^{\infty} \frac{\log p}{p^{m/2}} F(m \log p)
+\]
+が加わる．
+この項を使うと，\cref{prop:bound}の上界は，$c = 80$で$h(k_{3^4}) < 65.9166$，$c = 80$で$h(k_{7^2}) < 93.9394$，$c = 60$で$h(k_{29}) < 39.1488$に改良される．
+\cref{thm:main}の証明はこの改良を使わない．
+\end{remark}
+
+\begin{remark} \label{rem:fkm}
+福田・小松・森澤 \cite{FKM14}は，$10^9$より小さい素数はどの$n$に対しても$h(k_{3^n})$を割らないことを証明した；\cite[Theorem 5]{Mi15b}を見よ．
+\cref{thm:main}の証明はこの結果を使わない．
+\end{remark}
+
+\begin{remark} \label{rem:23}
+等式$h(k_{23}) = 1$は\cite{Ch26}で主張されている．
+そこでは，$5 \cdot 10^7$より小さく$k_{23}$で完全分解する素数のうち$99167$個と，それより大きく完全分解する$55$個の素数に対する関係式が，係数が$\{-1, 0, 1\}$に属する元をすべて調べることで得られており，$c = 50$に対する\cref{prop:miller}が$h(k_{23}) < 37.72$を与える；\cite{Ch26}によれば，探索には約$25$コア時間かかった．
+本稿の方法でこの等式を確認した．
+$p^n = 23$に対しては，$M = 529$であり，群$H$の位数は$22$であり，$g = 5$をとる．
+$5 \cdot 10^7$より小さく$k_{23}$で完全分解する素数は$130425$個あり，そのすべてが解決済みである：$3 \cdot 10^4$より小さい$150$個に対しては，ノルムの絶対値が$q$である元を使い（これは\cref{rem:41}のように計算した），残りに対しては$A = 3 \cdot 10^4$として\cref{prop:range}を使う．
+$c = 60$で，\cref{prop:miller}は$B \ge 0.3068684$と$h(k_{23}) < 30.1354$を与える．
+\cref{cor:threshold}の議論により，$h(k_{23})$は$1$であるか$47$以上である：$\ell \equiv 1 \pmod{23}$をみたす最小の素数$\ell$は$47$であり，$23$を法とする$2$，$3$，$5$の位数は$11$，$11$，$22$である．
+本稿の探索には2コアで約$4$分かかった．
+\end{remark}
+
+\begin{remark} \label{rem:limit}
+\cref{prop:miller}では，不等式$B > 0$が成り立つためには，$S$にわたる和が$\log \operatorname{rd}(L) + I(c) - \pi/2 - \gamma - \log 8\pi$を超えなければならない．$L$で完全分解する素数$q \le X$は，この和におよそ$(4/N) \log X$だけ寄与する．
+したがって，必要な素数の個数は，次数と根判別式とともに急速に増える．
+数値的な見積もりでは，体$k_{31}$は少なくとも$10^{11}$までの完全分解する素数を必要とする．
+一般Riemann予想のもとでは，\cref{prop:millergrh}は小さい集合$S$しか必要としない；これを\cref{sec:grh}で使う．
+\end{remark}
+
+\section{一般Riemann予想のもとでの4個の体} \label{sec:grh}
+
+この節を通じて$n = 1$とする．したがって$K = k_p$，$N = p$，$M = p^2$である．
+$K$の真の部分体は$\mathbb{Q}$のみであるから，\cref{sec:relations}の仮定は成り立つ．
+\cref{lem:nonsplit}により，$K$で完全分解しない素数$r \ne p$はすべて解決済みである；このような素数は$K$の素イデアルを生成する．
+
+\cref{sec:relations}では，関係式を一つずつ順に使う．そのため，最初に使う関係式は，まだ解決済みでない完全分解する素数をノルムに含まない元でなければならない．
+この節の体に対しては，係数の小さい元のノルムが大きいため，このような元を計算することができなかった；\cref{rem:searchgrh}を見よ．
+その代わりに，多くの元を同時に使う：それらが生成するイデアルの素イデアル分解を円分体の整数環上のベクトルとみなし，これらのベクトルが自由加群の全体を生成することを線形代数によって示す．
+
+$s = \sigma^{-1}$および
+\[
+A = \mathbb{Z}[x]/(1 + x + \dots + x^{p-1})
+\]
+とおく．
+複素数$e^{2\pi i/p}$を$\omega$で表す．
+$x$を$\omega$に送る環準同型$A \to \mathbb{Z}[\omega]$は同型である．
+$a \in A$に対して，$a$の像の$\mathbb{Q}(\omega)/\mathbb{Q}$に関するノルムを$\operatorname{Nm}(a)$で表す；これは整数である．
+有限集合$T$に対して，基底$(e_q)_{q \in T}$をもつ自由$A$加群を$A^T$で表す．
+
+\subsection{加群としての類群}
+
+$K$のイデアル類群を加法的に書いて$\operatorname{Cl}$で表し，$O_K$の零でないイデアル$\mathfrak{a}$の類を$[\mathfrak{a}]$で表す．
+
+\begin{lemma} \label{lem:module}
+$\operatorname{Cl}$上の$A$加群の構造であって，$O_K$のすべての零でないイデアル$\mathfrak{a}$に対して$x \cdot [\mathfrak{a}] = [s(\mathfrak{a})]$をみたすものが，ただ一つ存在する．
+\end{lemma}
+
+\begin{proof}
+群$\operatorname{Gal}(K/\mathbb{Q})$は位数$p$の巡回群で$s$によって生成されるから，$x$が$s$として作用することにより，$\operatorname{Cl}$は$\mathbb{Z}[x]/(x^p - 1)$上の加群である．
+$O_K$の零でない各イデアル$\mathfrak{a}$に対して，イデアル$\prod_{j=0}^{p-1} s^j(\mathfrak{a})$は正整数$N_{K/\mathbb{Q}}(\mathfrak{a})$で生成される．
+よって$1 + x + \dots + x^{p-1}$は$\operatorname{Cl}$に零として作用する．
+\end{proof}
+
+$K$で完全分解する各素数$q$に対して，$q$の上にある$K$の素イデアル$\mathfrak{q}_q$を一つ固定する．
+$q$の上にある$K$の素イデアルは，$j \in \mathbb{Z}/p\mathbb{Z}$に対するイデアル$s^j(\mathfrak{q}_q)$であり，これらは互いに異なる．
+$p$の上にある$K$の素イデアルを$\mathfrak{p}$で表す．
+
+\begin{lemma} \label{lem:vector}
+$\alpha$を$O_K$の零でない元とする．
+\[
+|N_{K/\mathbb{Q}}(\alpha)| = p^a \prod_{q \in Q} q^{k_q}
+\]
+と仮定する．ここで$a$は非負整数，$Q$は$K$で完全分解する素数の有限集合，$k_q$は正整数である．
+$q \in Q$に対して
+\[
+J_q = \{ j \in \mathbb{Z}/p\mathbb{Z} \mid \alpha \in s^j(\mathfrak{q}_q) \}
+\]
+とおく．
+すべての$q \in Q$に対して集合$J_q$がちょうど$k_q$個の元をもつならば，
+\[
+\alpha O_K = \mathfrak{p}^a \prod_{q \in Q} \prod_{j \in J_q} s^j(\mathfrak{q}_q)
+\]
+が成り立ち，$\operatorname{Cl}$において
+\[
+\sum_{q \in Q} \Bigl( \sum_{j \in J_q} x^j \Bigr) \cdot [\mathfrak{q}_q] = 0
+\]
+が成り立つ．
+\end{lemma}
+
+\begin{proof}
+$q \in Q$とし，$j \in \mathbb{Z}/p\mathbb{Z}$に対して，$\alpha O_K$の素イデアル分解における$s^j(\mathfrak{q}_q)$の指数を$v_j$で表す．
+$q$の上にある素イデアルのノルムはすべて$q$であるから，$\sum_j v_j = k_q$である．
+$j \in J_q$ならば$v_j \ge 1$であり，そうでなければ$v_j = 0$である．
+$J_q$は$k_q$個の元をもつから，すべての$j \in J_q$に対して$v_j = 1$である．
+$\alpha$を含む素イデアルは，$a \ge 1$のときの$\mathfrak{p}$と，$Q$に属する素数の上にある素イデアルのみである．
+これで第一の等式が証明された．
+第二の等式は，$\alpha O_K$と$\mathfrak{p}$が単項イデアルであるから，\cref{lem:module}から従う；\cref{lem:field}を見よ．
+\end{proof}
+
+\begin{definition} \label{def:vector}
+$T$を$K$で完全分解する素数の有限集合とする．
+元$\alpha \in O_K$が，ある集合$Q \subseteq T$に対して\cref{lem:vector}の仮定をみたすとき，$\alpha$は\textbf{$T$に対して許容的}であるという．
+このとき，$A^T$の元
+\[
+v(\alpha) = \sum_{q \in Q} \Bigl( \sum_{j \in J_q} x^j \Bigr) e_q
+\]
+を\textbf{$\alpha$のベクトル}とよぶ．
+\end{definition}
+
+\begin{proposition} \label{prop:span}
+$T$を$K$で完全分解する素数の有限集合とし，$\alpha_1, \dots, \alpha_r$を$T$に対して許容的な$O_K$の元とする．
+ベクトル$v(\alpha_1), \dots, v(\alpha_r)$が$A$加群$A^T$を生成するならば，$T$に属する素数はすべて解決済みである．
+\end{proposition}
+
+\begin{proof}
+すべての$q \in T$に対して$e_q$を$[\mathfrak{q}_q]$に送る$A$加群の準同型を$\varphi \colon A^T \to \operatorname{Cl}$で表す．
+\cref{lem:vector}により，すべての$i$に対して$\varphi(v(\alpha_i)) = 0$である．
+これらのベクトルが$A^T$を生成するならば$\varphi = 0$であり，したがってすべての$q \in T$に対して$\mathfrak{q}_q$は単項である．
+このとき$\mathfrak{q}_q$の共役も単項である．
+\end{proof}
+
+\subsection{部分加群についての二つの補題}
+
+\begin{lemma} \label{lem:pivot}
+$T$を有限集合，$V$を$A^T$の有限部分集合とし，$q_0 \in T$と$v_0 \in V$をとる．
+$v_0$における$e_{q_0}$の係数$u$が$A$の単数であると仮定する．
+$v \ne v_0$をみたす各$v \in V$に対して，$v$における$e_{q_0}$の係数を$b_v$で表し，$v' = v - b_v u^{-1} v_0$とおく；$v'$における$e_{q_0}$の係数は零であるから，$v'$を$A^{T \setminus \{q_0\}}$の元とみなす．
+$V$で生成される$A^T$の部分加群を$\Lambda$で表し，元$v'$で生成される$A^{T \setminus \{q_0\}}$の部分加群を$\Lambda'$で表す．
+このとき，$A$加群$A^T/\Lambda$と$A^{T \setminus \{q_0\}}/\Lambda'$は同型である．
+\end{lemma}
+
+\begin{proof}
+包含写像から誘導される準同型$A^{T \setminus \{q_0\}} \to A^T/\Lambda$を考える．
+これは全射である：$u$が単数で$v_0 \in \Lambda$であるから，$e_{q_0}$の類は，$q \ne q_0$に対する元$e_q$の類の一次結合である．
+加群$\Lambda$は$v_0$と元$v'$で生成される．
+$y = a v_0 + \sum_{v} a_v v'$を$\Lambda$の元とする．ここで$a, a_v \in A$である．
+$y$における$e_{q_0}$の係数は$au$であるから，$y$が$A^{T \setminus \{q_0\}}$に属するのは，$a = 0$のとき，かつそのときに限る．
+よってこの準同型の核は$\Lambda'$である．
+\end{proof}
+
+$A$の元$\pm x^j$は単数であり，\cref{lem:pivot}は$u$がこの形のときにだけ適用する．
+$V$の部分集合が$A^T$の指数有限の部分加群を生成するならば，$V$で生成される部分加群の指数はこの指数を割る；したがって，どの段階でも$V$の元を捨ててよい．
+
+\begin{lemma} \label{lem:det}
+$n$を正整数，$\Lambda$を$A^n$の部分加群とし，$C_1, \dots, C_k$を，成分が$A$に属し行が$\Lambda$に属する$n$次正方行列とする．
+整数$\operatorname{Nm}(\det C_1), \dots, \operatorname{Nm}(\det C_k)$の最大公約数を$d$で表す．
+$d \ne 0$ならば，$A^n$における$\Lambda$の指数は有限であり，$d$を割る．
+特に，$d = 1$ならば$\Lambda = A^n$である．
+\end{lemma}
+
+\begin{proof}
+群$A^n$は階数$n(p-1)$の自由$\mathbb{Z}$加群である．
+$C$を行列$C_i$の一つとし，$A^n$から$A^n$への$\mathbb{Z}$線形写像$y \mapsto yC$を考える．
+係数を$\mathbb{C}$に拡大すると，この写像は行列$\tau(C)$で与えられる写像の直和になる．ここで$\tau$は$\mathbb{Q}(\omega)$の$\mathbb{C}$への$p - 1$個の埋め込みを動く．
+よってその行列式は$\prod_\tau \det \tau(C) = \operatorname{Nm}(\det C)$である．
+この整数が零でなければ，写像の像の$A^n$における指数は$|\operatorname{Nm}(\det C)|$である．
+像は$\Lambda$に含まれるから，$A^n$における$\Lambda$の指数は有限であり，$\operatorname{Nm}(\det C)$を割る．
+$d \ne 0$ならば，整数$\operatorname{Nm}(\det C_i)$のうち少なくとも1個は零でなく，$\Lambda$の指数は零でないもののそれぞれを割る．
+よって指数は$d$を割る．
+\end{proof}
+
+整数$\operatorname{Nm}(\det C)$は，素数を法とする剰余から計算する．
+そのために上界が必要である．
+$a \in A$に対して，$a$の$\mathbb{Z}[\omega]$における像を整数$a_j$によって$\sum_{j=0}^{p-1} a_j \omega^j$と書き，$t(a) = p \sum_j a_j^2 - (\sum_j a_j)^2$とおく．
+この整数は$\mathbb{Q}(\omega)/\mathbb{Q}$に関する$|a|^2$のトレースであるから，整数$a_j$のとり方によらない．
+
+\begin{lemma} \label{lem:hadamard}
+$C = (c_{ij})$を成分が$A$に属する$n$次正方行列とし，$1 \le i \le n$に対して$t_i = \sum_{j} t(c_{ij})$とおく．
+このとき
+\[
+\operatorname{Nm}(\det C)^2 \le \prod_{i=1}^{n} \Bigl( \frac{t_i}{p-1} \Bigr)^{p-1}
+\]
+が成り立つ．
+\end{lemma}
+
+\begin{proof}
+$\tau$は$\mathbb{Q}(\omega)$の$\mathbb{C}$への埋め込みを動くとする．
+Hadamardの不等式により，$|\det \tau(C)|^2 \le \prod_i \sum_j |\tau(c_{ij})|^2$である．
+$\tau$にわたる積をとり，各$i$に対して相加平均と相乗平均の不等式を適用する．
+$\sum_\tau \sum_j |\tau(c_{ij})|^2 = t_i$であるから，主張が従う．
+\end{proof}
+
+\subsection{元の一覧}
+
+$q$を$K$で完全分解する素数とする．
+素イデアル$\mathfrak{q}_q$と，条件$\alpha \in s^j(\mathfrak{q}_q)$の判定法を説明する．
+$(\mathbb{Z}/M\mathbb{Z})^\times$における$q$の位数を$f$で表す；これは$p - 1$を割る．
+$m \in \mathbb{F}_q[t]$を$f$次のモニック既約多項式とし，$z$を体$\mathbb{F}_q[t]/(m)$の位数$M$の元とする．
+$\zeta$を$z$に送る環準同型$\mathbb{Z}[\zeta] \to \mathbb{F}_q[t]/(m)$が存在する．
+その核は$q$の上にある$\mathbb{Z}[\zeta]$の素イデアルであり，この核と$O_K$の共通部分を$\mathfrak{q}_q$とする．
+$q$は$K$で完全分解するから，Gauss周期の像
+\[
+\rho_i = \sum_{a \in H} z^{g^i a} \qquad (i \in \mathbb{Z}/p\mathbb{Z})
+\]
+は$\mathbb{F}_q$に属する．
+$\alpha = c + \sum_i a_i \eta_i$とする．ここで$c$と$a_i$は整数である．
+$s^j(\mathfrak{q}_q) = \sigma^{-j}(\mathfrak{q}_q)$かつ$\sigma^j(\alpha) = c + \sum_i a_i \eta_{i+j}$であるから，
+\begin{equation} \label{eq:test}
+\alpha \in s^j(\mathfrak{q}_q) \iff \text{$\mathbb{F}_q$において}\ c + \sum_i a_i \rho_{i+j} = 0
+\end{equation}
+が成り立つ．
+
+\begin{proposition} \label{prop:datagrh}
+$p \in \{37, 41, 43, 47\}$とし，$g$，$r$，$w$を\cref{tab:grh}のとおりとする．
+$c + \sum_i a_i \eta_i$の形の$O_K$の元$r$個であって，$c \in \{-2, -1, 0, 1, 2\}$かつ$a_i \in \{-1, 0, 1\}$であり，$a_i \ne 0$である添字$i$の個数が$3$以上$w$以下であり，次の性質をもつものが存在する．
+これらの元の少なくとも1個のノルムを割り$K$で完全分解する素数の集合を$T$で表す．
+このとき，$r$個の元は$T$に対して許容的であり，それらのベクトルは$A$加群$A^T$を生成する．
+集合$T$の元の個数は\cref{tab:grh}に記したとおりである；$p = 47$に対しては，$T$は$10^6$より小さく$K$で完全分解する素数をすべて含む．
+したがって，$T$に属する素数はすべて解決済みである．
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccccc}
+\toprule
+$p$ & $g$ & $r$ & $w$ & $|T|$ & $|\{q \in T \mid q < 10^6\}|$ & $T$の最小の元 \\
+\midrule
+$37$ & $2$ & $6039$ & $7$ & $3832$ & $2049$ & $691$, $787$, $1013$ \\
+$41$ & $6$ & $7800$ & $8$ & $4434$ & $1865$ & $313$, $487$, $509$ \\
+$43$ & $3$ & $5371$ & $8$ & $3528$ & $1832$ & $19$, $367$, $641$ \\
+$47$ & $5$ & $13107$ & $8$ & $9154$ & $1671$ & $53$, $67$, $71$ \\
+\bottomrule
+\end{tabular}
+\caption{\cref{prop:datagrh}の元の一覧．}
+\label{tab:grh}
+\end{table}
+
+\begin{proof}
+最後の主張は\cref{prop:span}から従う．
+他の主張は，厳密な整数演算を行うプログラムで次のように検証する．
+
+各元のノルムとその素因数分解は\cref{subsec:verification}と同じ方法で検証する；素因数はどれも，$p$であるか，$K$で完全分解する素数である．
+各$q \in T$に対して，プログラムは$f$次のモニック多項式$m$を選び，それが既約であることをRabinの判定法\cite{Ra80}で証明する：多項式$m$が既約であるのは，$m$が$t^{q^f} - t$を割り，$f$を割るすべての素数$\ell$に対して$m$が$t^{q^{f/\ell}} - t$と互いに素であるとき，かつそのときに限る．
+プログラムは$\mathbb{F}_q[t]/(m)$の元$z$で$z^M = 1$かつ$z^p \ne 1$をみたすものを選び，元$\rho_i$を計算し，それらが$\mathbb{F}_q$に属することを確かめる．
+一覧の各元$\alpha$と，そのノルムを割り$K$で完全分解する各素数$q$に対して，プログラムは\eqref{eq:test}によって集合$J_q$を求め，その元の個数がノルムにおける$q$の指数であることを確かめる．
+よって$\alpha$は$T$に対して許容的である．
+
+ベクトルが$A^T$を生成することを証明するために，プログラムは\cref{lem:pivot}を繰り返し適用し（毎回$\pm x^j$の形の単数に対して適用する），ベクトルの一部を捨てる．
+$p = 37$では$3712$回，$p = 41$では$4314$回，$p = 43$では$3408$回の適用のあと，$T$の元$120$個と$A^{120}$のベクトル$883$個が残る．
+$p = 47$では$9028$回の適用のあと，$T$の元$126$個と$A^{126}$のベクトル$904$個が残る．
+次にプログラムは，これらのベクトルの互いに交わらない集合から$120$次（$p = 47$では$126$次）の正方行列を作り，\cref{lem:det}を適用する．
+$p = 37$では3個の行列を使う：整数$\operatorname{Nm}(\det C_i)$は，$0$，$2916$桁の数，$3168$桁の数である．
+$p = 41$では4個の行列を使い，整数は$3094$桁，$3591$桁，$3821$桁，$3959$桁である；最初の2個の最大公約数と，最初の3個の最大公約数は，どちらも$83$である．
+$p = 43$では2個の行列を使い，整数は$3858$桁と$4236$桁である．
+$p = 47$では2個の行列を使い，整数は$5444$桁と$5841$桁である．
+どの場合も，すべての整数の最大公約数は$1$である．
+$p = 41$での途中の値$83$は，$\ell \equiv 1 \pmod{41}$をみたす最小の素数$\ell$である；これは$A$のある素イデアルのノルムであり，最初の3個の行列式は$83$の上にある$A$の素イデアルで割り切れる．
+
+整数$\operatorname{Nm}(\det C)$は次のように計算する．
+$l < 2^{62}$を$l \equiv 1 \pmod{p}$をみたす素数とし，$\theta \in \mathbb{F}_l$を位数$p$の元とする．
+$l$を法とする$\operatorname{Nm}(\det C)$の剰余は$\prod_{k=1}^{p-1} \det C(\theta^k)$である．ここで$C(\theta^k)$は，$C$に$x \mapsto \theta^k$を代入して得られる$\mathbb{F}_l$上の行列を表す．
+プログラムは，このような素数$l$を，その積が\cref{lem:hadamard}から得られる$|\operatorname{Nm}(\det C)|$の上界の2倍を超えるまで使う．
+\end{proof}
+
+\subsection{上界}
+
+ここで\cref{prop:millergrh}を適用する．
+\cref{lem:field}により$k_p$の判別式は$p^{2(p-1)}$であるから，
+\begin{align*}
+\log \operatorname{rd}(k_{37}) &= \tfrac{72}{37} \log 37 = 7.0266510732\ldots, \\
+\log \operatorname{rd}(k_{41}) &= \tfrac{80}{41} \log 41 = 7.2459942764\ldots, \\
+\log \operatorname{rd}(k_{43}) &= \tfrac{84}{43} \log 43 = 7.3474606911\ldots, \\
+\log \operatorname{rd}(k_{47}) &= \tfrac{92}{47} \log 47 = 7.5364591352\ldots
+\end{align*}
+である．
+
+\begin{proposition} \label{prop:boundgrh}
+$p \in \{37, 41, 43, 47\}$とし，$T$を\cref{prop:datagrh}の集合とする．
+このとき$G(7) \le 0.4709674869$かつ$G(6.5) \le 0.5253785835$である．
+$L = k_p$，$S = T$，および\cref{tab:boundgrh}の数$c$に対して，\cref{prop:millergrh}の二重和$\Sigma'$と数$B'$は\cref{tab:boundgrh}の不等式をみたす．
+したがって，$k_p$のHilbert類体のDedekindゼータ関数の非自明な零点の実部がすべて$1/2$であるならば，$h(k_p)$は\cref{tab:boundgrh}の最後の列の数より小さい．
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+$p$ & $c$ & $\Sigma'$ & $B'$ & $h(k_p)$の上界 \\
+\midrule
+$37$ & $7$ & $\ge 8.0800417860$ & $\ge 5.9546066$ & $2.4082$ \\
+$41$ & $7$ & $\ge 7.7893310695$ & $\ge 5.4445527$ & $2.3768$ \\
+$43$ & $7$ & $\ge 7.9288497530$ & $\ge 5.4826049$ & $2.2505$ \\
+$47$ & $6.5$ & $\ge 6.3555360239$ & $\ge 3.6658817$ & $1.8753$ \\
+\bottomrule
+\end{tabular}
+\caption{\cref{prop:boundgrh}の評価；ここで$\Sigma'$は因子$2$を含めた二重和を表す．}
+\label{tab:boundgrh}
+\end{table}
+
+\begin{proof}
+数値は，\cref{sec:bound}と同様に，Arb \cite{Jo17, Jo18}の区間演算で計算する．
+積分には次の評価を使う．
+$\varepsilon = 10^{-3}$として，区間$[0, \varepsilon]$上では被積分関数は$(x^2/(2c^2))(2/x + 1)$以下であるから，この区間上の積分は$(\varepsilon^2/2 + \varepsilon^3/6)/c^2$以下である．
+$R = 200$として，区間$[R, \infty)$上では被積分関数は$e^{-x/2}(1/(1 - e^{-R}) + 1)$以下であるから，この区間上の積分は$2e^{-R/2}(1/(1 - e^{-R}) + 1)$以下である．
+$[\varepsilon, R]$上の積分は，Arbの厳密な積分によって誤差の保証つきで計算する．
+二重和は，すべての$q \in T$と$m \le 40$にわたる部分和で置き換える；項はすべて正である．
+\end{proof}
+
+\begin{proof}[\cref{thm:grh}の証明]
+\cref{prop:boundgrh}により，定理の仮定のもとで$h(k_p) < 3$である．
+\cref{cor:threshold}により，$h(k_p) = 1$が従う．
+$p = 47$では上界が$2$より小さいので，この場合は\cref{cor:threshold}を必要としない．
+\end{proof}
+
+\begin{remark} \label{rem:standard}
+この節の議論は，関係式から類群を計算するアルゴリズムの標準的な段階の特別な場合である；Hafner--McCurley \cite{HM89}とBuchmann \cite{Bu90}を見よ．
+これらのアルゴリズムでは，関係式から作った行列式は，関係式に現れる素イデアルで生成される類群の部分群の位数の倍数である．この倍数が位数そのものであるかを判定するために，単数群と単数規準が必要になる．
+ここでは倍数が$1$であるから，単数も素イデアルの生成元も必要ない．
+類群が少数の素イデアルで生成されるという事実の代わりに，\cref{prop:millergrh}の不等式を使う．
+行列の成分が$\mathbb{Z}$ではなく$A$に属するので，行列の大きさは$p - 1$分の1になる．
+\end{remark}
+
+\begin{remark} \label{rem:entries}
+\cref{prop:datagrh}の集合$T$についての主張は，どの仮説にもよらない．
+\cref{sec:relations}と異なり，その証明はノルムの素因数分解だけでなく集合$J_q$も使う．すなわち，$q$の上にあるどの素イデアルが与えられた元を含むかという情報を使う．
+これらの集合の一つに誤りがあると，誤った結論が導かれるおそれがある．
+このため，4個の一覧のすべての集合$J_q$を，独立なプログラムでさらに2回計算した：1回は，体$\mathbb{Q}(\zeta)$を使わずに，$O_K$の基底$1, \eta_0, \dots, \eta_{p-2}$の乗積表から構成した環準同型$O_K \to \mathbb{F}_q$によって計算し，もう1回はPARI/GP \cite{PARI}のイデアルの演算によって計算した．
+結果は一致する．
+$A^T$が生成されることも，\cref{lem:pivot}を適用する順序と\cref{lem:det}の行列を変えた第二のプログラムで検証した．
+\end{remark}
+
+\begin{remark} \label{rem:index}
+$p = 47$では，最初の一覧はさらに2個の元を含んでおり，それらのノルムは，一覧の他のどのノルムも割らない2個の素数$6453089$と$184398551$で割り切れた．
+この2個の素数における2個のベクトルの係数は，行列式がある$j$に対して$\pm x^j (1 - x^{18})$である行列をなし，$\operatorname{Nm}(1 - x^{18}) = 47$である．
+これに応じて，最初の一覧のベクトルは指数$47$の部分加群を生成し，\cref{lem:det}の最大公約数は$47$であった．
+この2個の元を取り除いた．
+別の方法として，これらを残すこともできる：指数が$p$の冪ならば，素イデアルの類は位数が$p$の冪である群を生成し，この群は\cref{prop:iwasawa}により自明である．
+\end{remark}
+
+\begin{remark} \label{rem:control}
+同じプログラムを，類群がPARI/GP \cite{PARI}によって分かっている，素数次数$d$で素数導手$\ell$の巡回体に対して実行した；この場合は$A = \mathbb{Z}[x]/(1 + \dots + x^{d-1})$である．
+$(\ell, d) = (13, 3)$，$(577, 3)$，$(401, 5)$，$(71, 7)$では類数は$1$であり，\cref{lem:det}の最大公約数は$1$であった．
+$(\ell, d) = (163, 3)$，$(349, 3)$，$(313, 3)$，$(941, 5)$，$(491, 7)$では類数は$4$，$4$，$7$，$16$，$8$であり，今回の実行では最大公約数は類数に等しかった．
+\end{remark}
+
+\begin{remark} \label{rem:searchgrh}
+\cref{prop:datagrh}の元は次のように見つけた；これは証明の一部ではない．
+$c \in \{-2, \dots, 2\}$かつ$a_i \in \{-1, 0, 1\}$であり，零でない係数$a_i$の個数が与えられた値である元$c + \sum_i a_i \eta_i$のノルムを，Galois群と符号による軌道ごとに1個の元について計算した．
+ノルムが，$p$の冪と，$10^6$より小さく$K$で完全分解する素数と，$10^9$より小さい高々1個の別の素数との積である元を残し，そのあと，他のどの元にも現れない素因数をもつ元を取り除いた．
+$p = 37$では，零でない係数が高々$7$個である元を約$1.0 \cdot 10^8$個調べた；これには2コアで約$6$分かかった．
+$p = 41$と$p = 43$では，零でない係数が高々$8$個である元を約$1.05 \cdot 10^9$個と約$7.4 \cdot 10^8$個調べた．
+$p = 47$では，零でない係数が高々$8$個である元を約$2.5 \cdot 10^9$個調べ，ノルムが$10^9$より小さい別の素数を2個含む元も残した．
+検証には，$p \le 43$では1コアで$10$分から$35$分，$p = 47$では約$75$分かかる．
+$p = 37$に対して，PARI/GPの関数\texttt{bnfinit}は，今回の試行では$355$分以内に終了しなかった．
+$p = 53$では，零でない係数が高々$8$個である約$1.2 \cdot 10^{10}$個の元に対する同じ探索で$1408$個の元しか得られず，これは必要な個数よりはるかに少ない；この体では完全分解する最小の素数は$521$，$1009$，$1153$であり，ノルムはより大きい．
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{Ba69} H.~Bauer, Numerische Bestimmung von Klassenzahlen reeller zyklischer Zahlk\"orper, J. Number Theory \textbf{1} (1969), 161--162.
+
+\bibitem{Bu90} J.~Buchmann, A subexponential algorithm for the determination of class groups and regulators of algebraic number fields, in: S\'eminaire de Th\'eorie des Nombres, Paris 1988--1989, Progr. Math. \textbf{91}, Birkh\"auser Boston, Boston, MA, 1990, pp.~27--41.
+
+\bibitem{Ch26} J.~Chakkour, \texttt{b23-class-number}, software repository, 2026, \url{https://github.com/johnchakkour/b23-class-number}.
+
+\bibitem{Co12} J.~Coates, The enigmatic Tate--Shafarevich group, in: Fifth International Congress of Chinese Mathematicians, AMS/IP Stud. Adv. Math. \textbf{51}, Amer. Math. Soc., Providence, RI, 2012, pp.~43--50.
+
+\bibitem{Co60} H.~Cohn, A numerical study of Weber's real class number of calculation. I, Numer. Math. \textbf{2} (1960), 347--362.
+
+\bibitem{FK11} T.~Fukuda and K.~Komatsu, Weber's class number problem in the cyclotomic $\mathbb{Z}_2$-extension of $\mathbb{Q}$, III, Int. J. Number Theory \textbf{7} (2011), 1627--1635.
+
+\bibitem{FKM14} T.~Fukuda, K.~Komatsu, and T.~Morisawa, Weber's class number one problem, in: Iwasawa Theory 2012, Contrib. Math. Comput. Sci. \textbf{7}, Springer, Heidelberg, 2014, pp.~221--226.
+
+\bibitem{FLINT} The FLINT team, FLINT: Fast Library for Number Theory, \url{https://flintlib.org}.
+
+\bibitem{HM89} J.~L.~Hafner and K.~S.~McCurley, A rigorous subexponential algorithm for computation of class groups, J. Amer. Math. Soc. \textbf{2} (1989), 837--850.
+
+\bibitem{HH09} K.~Horie and M.~Horie, The ideal class group of the $\mathbb{Z}_p$-extension over the rationals, Tohoku Math. J. \textbf{61} (2009), 551--570.
+
+\bibitem{Iw56} K.~Iwasawa, A note on class numbers of algebraic number fields, Abh. Math. Sem. Univ. Hamburg \textbf{20} (1956), 257--258.
+
+\bibitem{Jo17} F.~Johansson, Arb: efficient arbitrary-precision midpoint-radius interval arithmetic, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
+
+\bibitem{Jo18} F.~Johansson, Numerical integration in arbitrary-precision ball arithmetic, in: Mathematical Software -- ICMS 2018, Lecture Notes in Comput. Sci. \textbf{10931}, Springer, Cham, 2018, pp.~255--263.
+
+\bibitem{Ma78} J.~M.~Masley, Class numbers of real cyclic number fields with small conductor, Compositio Math. \textbf{37} (1978), 297--319.
+
+\bibitem{Mi14} J.~C.~Miller, Class numbers of totally real fields and applications to the Weber class number problem, Acta Arith. \textbf{164} (2014), 381--398.
+
+\bibitem{Mi14b} J.~C.~Miller, Class numbers of real cyclotomic fields of composite conductor, LMS J. Comput. Math. \textbf{17} (2014), suppl. A, 404--417.
+
+\bibitem{Mi15b} J.~C.~Miller, Class numbers in cyclotomic $\mathbb{Z}_p$-extensions, J. Number Theory \textbf{150} (2015), 47--73.
+
+\bibitem{MO13} T.~Morisawa and R.~Okazaki, Mahler measure and Weber's class number problem in the cyclotomic $\mathbb{Z}_p$-extension of $\mathbb{Q}$ for odd prime number $p$, Tohoku Math. J. \textbf{65} (2013), 253--272.
+
+\bibitem{PARI} The PARI~Group, PARI/GP, Univ. Bordeaux, \url{https://pari.math.u-bordeaux.fr}.
+
+\bibitem{Ra80} M.~O.~Rabin, Probabilistic algorithms in finite fields, SIAM J. Comput. \textbf{9} (1980), 273--280.
+
+\bibitem{vdL82} F.~J.~van der Linden, Class number computations of real abelian number fields, Math. Comp. \textbf{39} (1982), 693--707.
+
+\bibitem{Wa97} L.~C.~Washington, Introduction to Cyclotomic Fields, 2nd ed., Grad. Texts in Math. \textbf{83}, Springer, New York, 1997.
+
+\bibitem{We86} H.~Weber, Theorie der Abel'schen Zahlk\"orper, Acta Math. \textbf{8} (1886), 193--263.
+
+\end{thebibliography}
+
+\end{document}
